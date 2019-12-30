@@ -1,0 +1,53 @@
+//It's a .txt so it will not show up in the AddOns menu. Use only with AddOn_WeaponAmmo and Weapon_Bow.
+
+AddDamageType("FArrowDirect",   '<bitmap:add-ons/ci/arrow> %1',    '%2 <bitmap:add-ons/ci/arrow> %1',1,1);
+datablock ProjectileData(firearrowProjectile)
+{
+   projectileShapeName = "./shapes/arrow.dts";
+
+   directDamage        = 10;
+   directDamageType    = $DamageType::FArrowDirect;
+
+   radiusDamage        = 0;
+   damageRadius        = 0;
+   radiusDamageType    = $DamageType::FArrowDirect;
+
+   explosion           = adminwandExplosion;
+   particleEmitter     = adminwandEmitterA;
+
+   muzzleVelocity      = 65;
+   velInheritFactor    = 1;
+
+   armingDelay         = 0;
+   lifetime            = 4000;
+   fadeDelay           = 3500;
+   bounceElasticity    = 0;
+   bounceFriction      = 0;
+   isBallistic         = true;
+   gravityMod = 0.25;
+
+   hasLight    = false;
+   lightRadius = 3.0;
+   lightColor  = "0 0 0.5";
+};
+
+
+$FireSpeed = 100; //Higher = Slower
+$FireAmount = 5; //Higher = More Damage
+$FireDamageTime = 1000;
+function firearrowProjectile::onCollision(%this,%obj,%col,%fade,%pos,%normal)
+{
+if(%col.getClassName() $= "Player" && %col.getState() !$= "Dead" && isObject(%col.client.minigame)){
+%col.psn=schedule($FireSpeed,0,"timedmg",%col,$FireAmount,$DamageType::FArrowDirect,$FireSpeed,$FireDamageTime);}
+%col.psnamount = 0;
+} 
+
+function timedmg(%col,%amount,%type,%timer,%maxtime)
+{
+ if(%col.getClassName() $= "Player" && %col.getState() !$= "Dead" && isObject(%col.client.minigame)){
+ %col.damage(%col, "Head", %amount, %type);
+ %col.burn(1000);
+ %col.psnamount = %col.psnamount + $FireSpeed;
+ if(%col.psnamount < %maxtime){
+%col.psn=schedule($FireSpeed,0,"timedmg",%col,%amount,%type,%timer,%maxtime);}}
+}
