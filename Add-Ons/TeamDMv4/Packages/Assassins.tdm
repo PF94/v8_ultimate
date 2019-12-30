@@ -1,0 +1,199 @@
+//Assassins
+//2
+//Kill the selected team's leader for extra points.
+//No special spawns are needed to start a game.
+//as
+//0
+
+function AsctrlSO::tdmStart()
+{
+ if((%a = $TeamDM::packagemanager.tdmcheck()) !$= "1")
+ {
+  servercmdStartPackage(-1,"Assassins");
+  messageall('',"(" @ %a @ ")");
+  return;
+ }
+ selectAssassinsLeader();
+ tdmAssassinsCheck();
+}
+function AsctrlSO::tdmCheck(%this)
+{
+ return 1;
+}
+function AsctrlSO::tdmSettings(%client)
+{
+}
+function AsctrlSO::tdmEnd()
+{
+ $TeamDM::Assassins::SelectedTeam = "";
+ $TeamDM::Assassins::ChangingTeams = 0;
+}
+
+function AsctrlSO::respawn(%obj,%this)
+{
+ tdmAssassinsCheck();
+}
+function AsctrlSO::OnDeath(%ctrl,%this, %sourceObject, %sourceClient, %damageType, %damLoc)
+{
+}
+
+function makeAssassinsLeader(%sourceClient)
+{
+  %sourceClient.tdmteam.leader = %sourceClient;
+  %sourceClient.isLeader = %sourceClient.tdmTeam;
+  //tdmmessageall('',"\c0(Assassination: +10pts)");
+  tdmmessageall('',"<color:" @ $TeamDM::Color[%sourceClient.tdmteam.color,1] @ ">" @ %sourceClient.name @ "\c5 is now the Target!");
+  respawn(%sourceClient);
+  schedule(500,0,itemset,%sourceclient);
+}
+
+function AsctrlSO::onClientLeaveGame(%obj,%client)
+{
+ tdmAssassinsCheck();
+}
+
+function tdmAssassinsCheck()
+{
+ if(!isObject($TeamDM::Assassins::selectedTeam)){selectAssassinsLeader();}
+ if(!isObject($TeamDM::Assassins::selectedTeam)){return;}
+ %team = $teamDM::Assassins::selectedteam;
+ if(!isObject(%team.leader))
+ {
+  %count = -1;
+  for(%i=0;%i<clientgroup.getCount();%i++)
+  {
+   itemSet(%this);
+   %c = clientgroup.getobject(%i);
+   if(%c.tdmteam $= %team && isObject(%c.minigame))
+   {
+    %select[%count++] = %c;
+   }
+  }
+  if(!isObject(%select[0]))
+  {
+   $TeamDM::Assassins::selectedTeam = "";
+   %team.leader.isLeader = "";
+   %team.leader = "";
+   return;
+  }
+  %team.leader = %select[getRandom(0,%count)];
+  %team.leader.isLeader = %team;
+  tdmmessageall('',"<color:" @ $TeamDM::Color[%team.color,1] @ ">" @ %team.leader.name @ "\c5 is now the Target!");
+  respawn(%team.leader);
+  schedule(500,0,itemset,%team.leader);
+ }
+}
+
+function selectAssassinsLeader()
+{
+ %count = -1;
+ for(%i=0;%i<clientgroup.getCount();%i++)
+ {
+  %c = clientgroup.getobject(%i);
+  if(isObject(%c.tdmteam) && isObject(%c.minigame))
+  {
+   %teams[%count++] = %c.tdmteam;
+  }
+ }
+ $TeamDM::Assassins::SelectedTeam = %teams[getRandom(0,%count)];
+}
+
+package Assassins
+{
+ function gameConnection::createPlayer(%this,%a)
+ {
+  Parent::createPlayer(%this,%a);
+  if($TeamDM::TeamsOn && $TeamDM::PackageOn $= "Assassins")
+  {
+   tdmAssassinsCheck();
+  }
+ }
+ function servercmdSetLeadGUI(%client,%team,%player)
+ {
+  if($TeamDM::PackageOn !$= "Assassins")
+  {
+   Parent::servercmdSetLeadGUI(%client,%team,%player);
+   return;
+  }
+  %cl = clientgroup.getObject(%player);
+  %teamID = (%team $= "-1" ? 0 : $TeamDM::TeamManager.team[%team-1]);
+  if(%team $= "0" && %cl.tdmteam $= $TeamDM::Assassins::SelectedTeam){return;}
+  if(%team !$= "0" && %cl.tdmteam !$= $TeamDM::Assassins::SelectedTeam && !$TeamDM::Assassins::ChangingTeams){return;}
+  $TeamDM::Assassins::ChangingTeams = 0;
+  Parent::servercmdSetLeadGUI(%client,%team,%player);
+ }
+ function servercmdsuicide(%client)
+ {
+  if($TeamDM::TeamsOn && isObject(%client.minigame) && $TeamDM::PackageOn $= "Assassins" && isObject(%client.isLeader))
+  {
+   return;
+  }
+  Parent::servercmdsuicide(%client);
+ }
+ function itemSet(%this)
+ {
+  if($TeamDM::PackageOn !$= "Assassins")
+  {
+   Parent::itemSet(%this);
+   return;
+  }
+  if(!isObject(%this.player)){return;}
+  if(isObject(%this.minigame) && isObject(%this.tdmTeam) && $TeamDM::TeamsOn)
+  {
+   for(%i=0;%i<4;%i++)
+   {
+    %this.player.tool[%i] = (isObject(%this.tdmTeam.tool[%i]) ? %this.tdmTeam.tool[%i] : 0);
+    messageClient(%this, 'MsgItemPickup', '', %i, nametoID((isObject(%this.tdmTeam.tool[%i]) ? %this.tdmTeam.tool[%i] : 0)));
+   }
+   %this.player.tool[%i] = 0;
+   messageClient(%this, 'MsgItemPickup', '', %i, -1);
+   if(isObject(%this.isLeader) && %this.isleader.leader $= %this)
+   {
+    %this.player.tool[4] = (isObject(%this.tdmTeam.tool[4]) ? %this.tdmTeam.tool[4] : 0);
+    messageClient(%this, 'MsgItemPickup', '', 4, nametoID(%this.tdmTeam.tool[4]));
+   }
+   if(isObject(%this.tdmTeam.data))
+    %this.player.setDatablock(%this.tdmTeam.data);
+   else
+    %this.player.setDatablock(PlayerStandardArmor);
+   %this.applyBodyParts();
+   %this.applyBodyColors();
+    %this.player.setShapeNameColor($TeamDM::Color[%this.tdmTeam.color,0]);
+  }
+  if(isObject(%this.minigame) && !isObject(%this.tdmteam))
+  {
+   for(%i=0;%i<5;%i++)
+   {
+    %this.player.tool[%i] = (isObject(%this.minigame.startEquip[%i]) ? %this.minigame.startEquip[%i] : 0);
+    messageClient(%this, 'MsgItemPickup', '', %i, nametoID(%this.minigame.startEquip[%i]));
+   }
+   if(isObject(%this.minigame.playerDatablock))
+    %this.player.setDatablock(%this.minigame.playerDatablock);
+   else
+    %this.player.setDatablock(PlayerStandardArmor);
+   %this.applyBodyParts();
+   %this.applyBodyColors();
+  }
+ }
+ function GameConnection::onDeath(%this, %sourceObject, %sourceClient, %damageType, %damLoc)
+ {
+  if($TeamDM::TeamsOn && $TeamDM::PackageOn $= "Assassins")
+  {
+  if(!isObject(%this.tdmTeam) || !isObject(%sourceClient.tdmTeam)){  Parent::onDeath(%this, %sourceObject, %sourceClient, %damageType, %damLoc);return;}
+  if(%this.tdmTeam !$= $TeamDM::Assassins::SelectedTeam || %this.tdmTeam.leader !$= %this){  Parent::onDeath(%this, %sourceObject, %sourceClient, %damageType, %damLoc);return;}
+  %team1 = %this.tdmteam;%team2 = %sourceclient.tdmteam;
+  if($TeamDM::TeamsOn && %team1 $= %team2 && isObject(%team1) && $Pref::TeamDM::FFire) //You killed your own leader
+  {
+     Parent::onDeath(%this, %sourceObject, %sourceClient, %damageType, %damLoc);return;
+  }
+  $teamDM::Assassins::selectedteam = %sourceClient.tdmTeam;
+  %this.tdmteam.leader = "";
+  %this.isleader = "";
+  %sourceClient.incScore(10);
+  schedule(10,0,makeAssassinsLeader,%sourceClient);
+  %damagetype = $DamageType::AssassinateKill;
+  }
+  Parent::onDeath(%this, %sourceObject, %sourceClient, %damageType, %damLoc);
+ }
+};activatepackage(Assassins);
+AddDamageType("AssassinateKill",   '<bitmap:add-ons/ci/generic> %1',    '%2 <bitmap:add-ons/ci/generic> %1 (Assassinate: +10pts)',0.5,1);
