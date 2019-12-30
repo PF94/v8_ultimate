@@ -1,0 +1,49 @@
+//Function called every 10ms for controlling Space Guy's mods. They all run off the same control to reduce lag. For comparison, download the old Trap Bricks v3 and place 5-10 Arrow traps, (one schedule for
+//each running every 100ms which creates more lag than a single 10ms schedule) or Wrench Events and do the same with Shoot (Bow).
+//$wrenchItem is a wrench which is suspended at 0 0 -10000, used in these mods for creating projectiles which have no 'owner'.
+
+package SpaceTick
+{
+ function SpaceTick(%ticknum)
+ {
+  if(!$Game::Running) 
+  {
+   if(isObject($wrenchItem)){$wrenchItem.delete();}
+   if(isObject($BotCtrl)){$BotCtrl.delete();}
+   return;
+  }
+  //Controller Ticks
+  if(isObject($wrenchCtrl)){$wrenchCtrl.tick();}
+  if(isObject($pGunCtrl)){$pgunCtrl.tick();}
+  if(isObject($BotCtrl)){$BotCtrl.tick();}
+  if(isObject($TwoDCtrl)){$TwoDCtrl.tick();}
+
+  //$wrenchItem (see line 3 of file)
+  if(!isObject($wrenchItem) && $Game::Running){$wrenchItem = new Item(){position = "0 0 -10000";datablock = WrenchItem;};}
+  if(isObject($wrenchItem)){$wrenchItem.setTransform("0 0 -10000 1 0 0 0");}
+
+  //Use the ticknum if you only want an event running every X milliseconds
+  %ticknum++;
+  if(%ticknum >= 1000){%ticknum = 0;}
+  $spaceTick = schedule(10,0,spacetick,%ticknum);
+ }
+ function endGame()
+ {
+  Parent::endGame();
+ }
+ function onmissionended(%a,%b,%c,%d)
+ {
+  Parent::onmissionended(%a,%b,%c,%d);
+ }
+ function GameConnection::onConnect(%this,%a,%b,%c,%d,%e,%f,%g,%j,%i)
+ {
+  if(!isEventPending($spaceTick)){$spaceTick = schedule(10,0,spacetick,0);}
+  Parent::onConnect(%this,%a,%b,%c,%d,%e,%f,%g,%j,%i);
+ }
+ function GameConnection::onClientEnterGame(%this,%a,%b,%c,%d,%e,%f,%g,%j,%i)
+ {
+  if(!isEventPending($spaceTick)){$spaceTick = schedule(10,0,spacetick,0);}
+  Parent::onClientEnterGame(%this,%a,%b,%c,%d,%e,%f,%g,%j,%i);
+ }
+};activatepackage(SpaceTick);
+if(!isEventPending($spaceTick)){$spaceTick = schedule(10,0,spacetick,0);}
