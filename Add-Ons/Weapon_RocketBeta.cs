@@ -313,7 +313,7 @@ datablock ItemData(rocketLauncherItem)
 	emap = true;
 
 	//gui stuff
-	uiName = "Rocket L.";
+	uiName = "Rocket L. (BETA)";
 	iconName = "./ItemIcons/rocketLauncher";
 	doColorShift = false;
 	colorShiftColor = "0.100 0.500 0.250 1.000";
