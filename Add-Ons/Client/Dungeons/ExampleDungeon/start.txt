@@ -1,0 +1,7 @@
+You walk into the creepy dungeon, you see a lit torch on the wall.
+look go.east go.west leave grab.torch
+msg You look around but you find nothing in the room.
+goRoom2 You walk to the east.
+X(1 You walk to the west and a storm of arrows tears you to pieces.
+X(0 Quitter!
+I+ltorch You grab the lit torch to lead the way.

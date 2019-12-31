@@ -1,0 +1,5 @@
+You enter a pitch black room. You hear a dripping noise 'drip, drip'.
+light.room(lit_torch) go.north investigate.drip
+I?ltorchmsYou.see.that.there.is.a.pond.to.the.south You attempt to light the room
+goRoom3
+X(2 You walk to the drip and suddenly plunge into a deep waterhole filled with electric eels.

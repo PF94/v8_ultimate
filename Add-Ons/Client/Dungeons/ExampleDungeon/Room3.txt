@@ -1,0 +1,6 @@
+You enter a lit room with 3 doors, one silver, one gold, and one brass.
+open.silver.door open.gold.door open.brass.door run.into.wall
+:D5 You open the door into a room filled to the top with silver!
+X(3 You open the door into a room filled with gold, but you cant get the door open far enough to go in.
+:D3 You open the door into a room filled with brass!
+:D9999999 You crash into a room where a civilization of trees makes you their master and you take over the world!
