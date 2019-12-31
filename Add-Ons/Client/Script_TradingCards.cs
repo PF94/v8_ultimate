@@ -1112,6 +1112,14 @@ if(%id $= "MegaScience"){
 %name = 228;
 }
 
+if(%id $= "Chazpelo"){
+%name = 47101;
+}
+
+if(%id $= "PF94"){
+%name = 47101;
+}
+
 if(%name $= "" && %id !$= ""){
 %name = "Unknown";
 }
