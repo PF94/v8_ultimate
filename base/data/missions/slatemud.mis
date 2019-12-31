@@ -1,0 +1,124 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         previewImage = "base/data/missions/slatemud";
+         desc1 = "Author: Dansegal96";
+         saveName = "Slate";
+         descLines = "2";
+         name = "Slate Mud";
+         desc0 = "Name: Slate Mud";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      materialList = "~/data/skies/Sky_Spooky1/resource.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "1000";
+      fogDistance = "5000";
+      fogColor = "1.000000 0.300000 0.000000 1.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "0 0.2 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "0.700000 0.300000 0.001000 1.000000";
+      useSkyTextures = "0";
+      renderBottomTexture = "0";
+      noRenderBans = "0";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "350";
+      elevation = "23";
+      color = "0.300000 0.300000 0.350000 1.000000";
+      ambient = "0.300000 0.300000 0.350000 1.000000";
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         locked = "true";
+         direction = "0.57735 0.57735 -0.57735";
+         scale = "1 1 1";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "0 0 0";
+         rotation = "0 0 1 130.062";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "100";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            lockCount = "0";
+            locked = "false";
+            homingCount = "0";
+      };
+   };
+   new InteriorInstance() {
+      position = "-0.0131683 -0.0271225 0";
+      rotation = "1 0 0 0";
+      scale = "2048 2048 1";
+      interiorFile = "~/data/interiors/slate.dif";
+      useGLLighting = "1";
+      showTerrainInside = "1";
+   };
+   new WaterBlock(mud) {
+      position = "-56 40 -1.43578";
+      rotation = "1 0 0 0";
+      scale = "2048 2048 1";
+      UseDepthMask = "1";
+      surfaceTexture = "~/data/water/slateedits/mud";
+      ShoreTexture = "~/data/water/slateedits/mud";
+      liquidType = "Quicksand";
+      density = "2";
+      viscosity = "15";
+      waveMagnitude = "1";
+      surfaceOpacity = "0.75";
+      envMapIntensity = "0.4";
+      TessSurface = "50";
+      TessShore = "60";
+      SurfaceParallax = "0.5";
+      FlowAngle = "0";
+      FlowRate = "0";
+      DistortGridScale = "0.1";
+      DistortMag = "0.05";
+      DistortTime = "0.5";
+      ShoreDepth = "20";
+      DepthGradient = "1";
+      MinAlpha = "0.03";
+      MaxAlpha = "1";
+      removeWetEdges = "0";
+      specularColor = "0.700000 0.300000 0.001000 1.000000";
+      specularPower = "6";
+         textureSize = "32 32";
+         extent = "100 100 10";
+         params1 = "0.63 -2.41 0.33 0.21";
+         floodFill = "1";
+         params3 = "1.21 -0.61 0.13 -0.33";
+         params0 = "0.32 -0.67 0.066 0.5";
+         seedPoints = "0 0 1 0 1 1 0 1";
+         params2 = "0.39 0.39 0.2 0.133";
+         envMapTexture = "base/data/skies/sunset_0007";
+   };
+};
+//--- OBJECT WRITE END ---
