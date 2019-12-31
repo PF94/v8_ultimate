@@ -68,7 +68,7 @@ datablock WheeledVehicleData(CrimeVanVehicle)
 	massCenter = "0 0 -1";
    //massBox = "2 5 1";
 
-	maxSteeringAngle = 0.7785;  // Maximum steering angle, should match animation
+	maxSteeringAngle = 0.9785;  // Maximum steering angle, should match animation
 	integration = 4;           // Force integration time: TickSec/Rate
 	tireEmitter = CrimeVanTireEmitter; // All the tires use the same dust emitter
 

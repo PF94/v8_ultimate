@@ -18,7 +18,7 @@ datablock WheeledVehicleTire(PoliceCarTire)
    // forces to move the vehicle. These distortion/spring forces
    // are what convert wheel angular velocity into forces that
    // act on the rigid body.
-   shapeFile = "./shapes/PoliceCartire.dts";
+   shapeFile = "./shapes/PoliceCartire2.dts";
 	
 	mass = 10;
     radius = 1;
@@ -41,7 +41,7 @@ datablock WheeledVehicleData(PoliceCarVehicle)
 {
 	category = "Vehicles";
 	displayName = " ";
-	shapeFile = "./shapes/PoliceCar.dts"; //"~/data/shapes/skivehicle.dts"; //
+	shapeFile = "./shapes/PoliceCar2.dts"; //"~/data/shapes/skivehicle.dts"; //
 	emap = true;
 	minMountDist = 3;
    
@@ -65,7 +65,7 @@ datablock WheeledVehicleData(PoliceCarVehicle)
 	massCenter = "0 0 -1";
    //massBox = "2 5 1";
 
-	maxSteeringAngle = 0.7785;  // Maximum steering angle, should match animation
+	maxSteeringAngle = 0.9785;  // Maximum steering angle, should match animation
 	integration = 4;           // Force integration time: TickSec/Rate
 	tireEmitter = PoliceCarTireEmitter; // All the tires use the same dust emitter
 
@@ -103,7 +103,7 @@ datablock WheeledVehicleData(PoliceCarVehicle)
 	engineTorque = 4000; //4000;       // Engine power
 	engineBrake = 8000;         // Braking when throttle is 0
 	brakeTorque = 80000;        // When brakes are applied
-	maxWheelSpeed = 40;        // Engine scale by current speed / max speed
+	maxWheelSpeed = 53;        // Engine scale by current speed / max speed
 
 
 	rollForce		= 0;

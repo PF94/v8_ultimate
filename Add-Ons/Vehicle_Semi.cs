@@ -11,14 +11,37 @@ datablock AudioProfile(slowImpactSound)
    description = AudioDefault3d;
    preload = true;
 };
-
-datablock WheeledVehicleTire(SedanTire)
+datablock WheeledVehicleTire(SemittruckfrontTire)
 {
    // Tires act as springs and generate lateral and longitudinal
    // forces to move the vehicle. These distortion/spring forces
    // are what convert wheel angular velocity into forces that
    // act on the rigid body.
-   shapeFile = "./shapes/PoliceCartire2.dts";
+   shapeFile = "./shapes/truckfronttire.dts";
+	
+	mass = 10;
+    radius = 1;
+    staticFriction = 8;
+   kineticFriction = 18;
+   restitution = 0.5;	
+
+   // Spring that generates lateral tire forces
+   lateralForce = 18000;
+   lateralDamping = 4000;
+   lateralRelaxation = 0.01;
+
+   // Spring that generates longitudinal tire forces
+   longitudinalForce = 14000;
+   longitudinalDamping = 2000;
+   longitudinalRelaxation = 0.01;
+};
+datablock WheeledVehicleTire(semitruckBackTire)
+{
+   // Tires act as springs and generate lateral and longitudinal
+   // forces to move the vehicle. These distortion/spring forces
+   // are what convert wheel angular velocity into forces that
+   // act on the rigid body.
+   shapeFile = "./shapes/truckreartire.dts";
 	
 	mass = 10;
     radius = 1;
@@ -37,20 +60,16 @@ datablock WheeledVehicleTire(SedanTire)
    longitudinalRelaxation = 0.01;
 };
 
-datablock WheeledVehicleData(SedanVehicle)
+datablock WheeledVehicleData(SemitruckVehicle)
 {
 	category = "Vehicles";
 	displayName = " ";
-	shapeFile = "./shapes/Sedan2.dts"; //"~/data/shapes/skivehicle.dts"; //
+	shapeFile = "./shapes/Optimus2.dts"; //"~/data/shapes/skivehicle.dts"; //
 	emap = true;
 	minMountDist = 3;
    
-   numMountPoints = 4;
+   numMountPoints = 1;
    mountThread[0] = "sit";
-   mountThread[1] = "sit";
-   mountThread[2] = "sit";
-   mountThread[3] = "sit";
-
 
 
 
@@ -62,12 +81,12 @@ datablock WheeledVehicleData(SedanVehicle)
 	collDamageThresholdVel = 20.0;
 	collDamageMultiplier   = 0.02;
 
-	massCenter = "0 0 -1";
+	massCenter = "0 0 -0.7";
    //massBox = "2 5 1";
 
 	maxSteeringAngle = 0.9785;  // Maximum steering angle, should match animation
 	integration = 4;           // Force integration time: TickSec/Rate
-	tireEmitter = SedanTireEmitter; // All the tires use the same dust emitter
+	tireEmitter = SemitruckTireEmitter; // All the tires use the same dust emitter
 
 	// 3rd person camera settings
 	cameraRoll = false;         // Roll the camera with the vehicle
@@ -81,12 +100,12 @@ datablock WheeledVehicleData(SedanVehicle)
 
 	useEyePoint = false;	
 
-	defaultTire	= SedanTire;
-	defaultSpring	= SedanSpring;
-	flatTire	= SedanFlatTire;
-	flatSpring	= SedanFlatSpring;
+	defaultTire	= SemitruckTire;
+	defaultSpring	= SemitruckSpring;
+	flatTire	= SemitruckFlatTire;
+	flatSpring	= SemitruckFlatSpring;
 
-   numWheels = 4;
+   numWheels = 6;
 
 	// Rigid Body
 	mass = 600;
@@ -101,9 +120,9 @@ datablock WheeledVehicleData(SedanVehicle)
 
 	// Engine
 	engineTorque = 4000; //4000;       // Engine power
-	engineBrake = 8000;         // Braking when throttle is 0
-	brakeTorque = 80000;        // When brakes are applied
-	maxWheelSpeed = 47;        // Engine scale by current speed / max speed
+	engineBrake = 800;         // Braking when throttle is 0
+	brakeTorque = 4000;        // When brakes are applied
+	maxWheelSpeed = 45;        // Engine scale by current speed / max speed
 
 
 	rollForce		= 0;
@@ -119,15 +138,15 @@ datablock WheeledVehicleData(SedanVehicle)
    isSled = false;
 
 
-	splash = SedanSplash;
+	splash = SemitruckSplash;
 	splashVelocity = 4.0;
 	splashAngle = 67.0;
 	splashFreqMod = 300.0;
 	splashVelEpsilon = 0.60;
 	bubbleEmitTime = 1.4;
-	splashEmitter[0] = SedanFoamDropletsEmitter;
-	splashEmitter[1] = SedanFoamEmitter;
-	splashEmitter[2] = SedanBubbleEmitter;
+	splashEmitter[0] = SemitruckFoamDropletsEmitter;
+	splashEmitter[1] = SemitruckFoamEmitter;
+	splashEmitter[2] = SemitruckBubbleEmitter;
 	mediumSplashSoundVelocity = 10.0;   
 	hardSplashSoundVelocity = 20.0;   
 	exitSplashSoundVelocity = 5.0;
@@ -136,40 +155,40 @@ datablock WheeledVehicleData(SedanVehicle)
 	hardImpactSound = fastImpactSound;
 	justcollided = 0;
 
-   uiName = "Sedan";
+   uiName = "Semi Truck";
 	rideable = true;
 		lookUpLimit = 0.65;
 		lookDownLimit = 0.45;
 
 	paintable = true;
    
-   damageEmitter[0] = SedanBurnEmitter;
+   damageEmitter[0] = SemitruckBurnEmitter;
 	damageEmitterOffset[0] = "0.0 0.0 0.0 ";
 	damageLevelTolerance[0] = 0.99;
 
-   damageEmitter[1] = SedanBurnEmitter;
+   damageEmitter[1] = SemitruckBurnEmitter;
 	damageEmitterOffset[1] = "0.0 0.0 0.0 ";
 	damageLevelTolerance[1] = 1.0;
 
    numDmgEmitterAreas = 1;
 
-   initialExplosionProjectile = SedanExplosionProjectile;
+   initialExplosionProjectile = SemitruckExplosionProjectile;
    initialExplosionOffset = 0;         //offset only uses a z value for now
 
    burnTime = 4000;
 
-   finalExplosionProjectile = SedanFinalExplosionProjectile;
+   finalExplosionProjectile = SemitruckFinalExplosionProjectile;
    finalExplosionOffset = 0.5;          //offset only uses a z value for now
 
 
    minRunOverSpeed    = 10;   //how fast you need to be going to run someone over (do damage)
-   runOverDamageScale = 5;   //when you run over someone, speed * runoverdamagescale = damage amt
+   runOverDamageScale = 25;   //when you run over someone, speed * runoverdamagescale = damage amt
    runOverPushScale   = 1.2; //how hard a person you're running over gets pushed
 
    minContrailSpeed = 30;
 };
 
-datablock AudioProfile(SedanExplosionSound)
+datablock AudioProfile(SemitruckExplosionSound)
 {
    filename    = "./sound/jeepExplosion.wav";
    description = AudioDefault3d;
@@ -178,7 +197,7 @@ datablock AudioProfile(SedanExplosionSound)
 //----------------------------------------------------------------------------
 // Splash
 //----------------------------------------------------------------------------
-datablock ParticleData(SedanSplashMist)
+datablock ParticleData(SemitruckSplashMist)
 {
    dragCoefficient      = 2.0;
    gravityCoefficient   = -0.05;
@@ -201,7 +220,7 @@ datablock ParticleData(SedanSplashMist)
    times[2]      = 1.0;
 };
 
-datablock ParticleEmitterData(SedanSplashMistEmitter)
+datablock ParticleEmitterData(SemitruckSplashMistEmitter)
 {
    ejectionPeriodMS = 5;
    periodVarianceMS = 0;
@@ -214,14 +233,14 @@ datablock ParticleEmitterData(SedanSplashMistEmitter)
    phiVariance      = 360;
    overrideAdvances = false;
    lifetimeMS       = 250;
-   particles = "SedanSplashMist";
+   particles = "SemitruckSplashMist";
 
-   uiName = "Sedan Splash Mist";
+   uiName = "Semitruck Splash Mist";
    emitterNode = FifthEmitterNode;
 };
 
 
-datablock ParticleData(SedanBubbleParticle)
+datablock ParticleData(SemitruckBubbleParticle)
 {
    dragCoefficient      = 0.0;
    gravityCoefficient   = -0.50;
@@ -242,7 +261,7 @@ datablock ParticleData(SedanBubbleParticle)
    times[2]      = 1.0;
 };
 
-datablock ParticleEmitterData(SedanBubbleEmitter)
+datablock ParticleEmitterData(SemitruckBubbleEmitter)
 {
    ejectionPeriodMS = 1;
    periodVarianceMS = 0;
@@ -254,13 +273,13 @@ datablock ParticleEmitterData(SedanBubbleEmitter)
    phiReferenceVel  = 0;
    phiVariance      = 360;
    overrideAdvances = false;
-   particles = "SedanBubbleParticle";
+   particles = "SemitruckBubbleParticle";
 
-   uiName = "Sedan Bubbles";
+   uiName = "Semitruck Bubbles";
    emitterNode = FifthEmitterNode;
 };
 
-datablock ParticleData(SedanFoamParticle)
+datablock ParticleData(SemitruckFoamParticle)
 {
    dragCoefficient      = 2.0;
    gravityCoefficient   = -0.05;
@@ -283,7 +302,7 @@ datablock ParticleData(SedanFoamParticle)
    times[2]      = 1.0;
 };
 
-datablock ParticleEmitterData(SedanFoamEmitter)
+datablock ParticleEmitterData(SemitruckFoamEmitter)
 {
    ejectionPeriodMS = 20;
    periodVarianceMS = 0;
@@ -295,14 +314,14 @@ datablock ParticleEmitterData(SedanFoamEmitter)
    phiReferenceVel  = 0;
    phiVariance      = 360;
    overrideAdvances = false;
-   particles = "SedanFoamParticle";
+   particles = "SemitruckFoamParticle";
 
-   uiName = "Sedan Foam";
+   uiName = "Semitruck Foam";
    emitterNode = GenericEmitterNode;
 };
 
 
-datablock ParticleData( SedanFoamDropletsParticle )
+datablock ParticleData( SemitruckFoamDropletsParticle )
 {
    dragCoefficient      = 1;
    gravityCoefficient   = 0.2;
@@ -322,7 +341,7 @@ datablock ParticleData( SedanFoamDropletsParticle )
    times[2]      = 1.0;
 };
 
-datablock ParticleEmitterData( SedanFoamDropletsEmitter )
+datablock ParticleEmitterData( SemitruckFoamDropletsEmitter )
 {
    ejectionPeriodMS = 7;
    periodVarianceMS = 0;
@@ -335,14 +354,14 @@ datablock ParticleEmitterData( SedanFoamDropletsEmitter )
    phiVariance      = 360;
    overrideAdvances = false;
    orientParticles  = true;
-   particles = "SedanFoamDropletsParticle";
+   particles = "SemitruckFoamDropletsParticle";
 
-   uiName = "Sedan Foam Droplets";
+   uiName = "Semitruck Foam Droplets";
    emitterNode = GenericEmitterNode;
 };
 
 
-datablock ParticleData( SedanSplashParticle )
+datablock ParticleData( SemitruckSplashParticle )
 {
    dragCoefficient      = 1;
    gravityCoefficient   = 0.2;
@@ -362,7 +381,7 @@ datablock ParticleData( SedanSplashParticle )
    times[2]      = 1.0;
 };
 
-datablock ParticleEmitterData( SedanSplashEmitter )
+datablock ParticleEmitterData( SemitruckSplashEmitter )
 {
    ejectionPeriodMS = 1;
    periodVarianceMS = 0;
@@ -376,9 +395,9 @@ datablock ParticleEmitterData( SedanSplashEmitter )
    overrideAdvances = false;
    orientParticles  = true;
    lifetimeMS       = 100;
-   particles = "SedanSplashParticle";
+   particles = "SemitruckSplashParticle";
 
-   uiName = "Sedan Splash";
+   uiName = "Semitruck Splash";
    emitterNode = TenthEmitterNode;
 };
 
@@ -386,7 +405,7 @@ datablock ParticleEmitterData( SedanSplashEmitter )
 ///////////////////////////////////////////////////////////////////
 
 
-datablock ParticleData(SedanTireParticle)
+datablock ParticleData(SemitruckTireParticle)
 {
    textureName          = "base/data/particles/chunk";
 
@@ -408,7 +427,7 @@ datablock ParticleData(SedanTireParticle)
    useInvAlpha = true;
 };
 
-datablock ParticleEmitterData(SedanTireEmitter)
+datablock ParticleEmitterData(SemitruckTireEmitter)
 {
    ejectionPeriodMS = 3;
    periodVarianceMS = 0;
@@ -423,11 +442,11 @@ datablock ParticleEmitterData(SedanTireEmitter)
    phiVariance      = 360;
 
    overrideAdvances = false;
-   particles = "SedanTireParticle";
+   particles = "SemitruckTireParticle";
 };
 
 
-datablock ParticleData(SedanBurnParticle)
+datablock ParticleData(SemitruckBurnParticle)
 {
 	textureName          = "base/data/particles/cloud";
 	dragCoefficient      = 0.0;
@@ -455,7 +474,7 @@ datablock ParticleData(SedanBurnParticle)
 	times[2]	= 1.0;
 };
 
-datablock ParticleEmitterData(SedanBurnEmitter)
+datablock ParticleEmitterData(SemitruckBurnEmitter)
 {
    ejectionPeriodMS = 14;
    periodVarianceMS = 4;
@@ -469,13 +488,13 @@ datablock ParticleEmitterData(SedanBurnEmitter)
    overrideAdvance = false;
 
    //lifetimeMS = 5000;
-   particles = SedanBurnParticle;   
+   particles = SemitruckBurnParticle;   
 
-   uiName = "Sedan Fire";
+   uiName = "Semitruck Fire";
 };
 
 
-datablock ParticleData(SedanTireDebrisTrailParticle)
+datablock ParticleData(SemitruckTireDebrisTrailParticle)
 {
 	dragCoefficient		= 3.0;
 	windCoefficient		= 0.0;
@@ -508,7 +527,7 @@ datablock ParticleData(SedanTireDebrisTrailParticle)
    times[2]	= 1.0;
 };
 
-datablock ParticleEmitterData(SedanTireDebrisTrailEmitter)
+datablock ParticleEmitterData(SemitruckTireDebrisTrailEmitter)
 {
    ejectionPeriodMS = 90;
    periodVarianceMS = 0;
@@ -520,14 +539,14 @@ datablock ParticleEmitterData(SedanTireDebrisTrailEmitter)
    phiReferenceVel  = 0;
    phiVariance      = 360;
    overrideAdvance = false;
-   particles = "SedanTireDebrisTrailParticle";
+   particles = "SemitruckTireDebrisTrailParticle";
 };
 
-datablock DebrisData(SedanTireDebris)
+datablock DebrisData(SemitruckTireDebris)
 {
-   emitters = "SedanTireDebrisTrailEmitter";
+   emitters = "SemitruckTireDebrisTrailEmitter";
 
-	shapeFile = "./shapes/policecartire.dts";
+	shapeFile = "./shapes/truckreartire.dts";
 	lifetime = 2.0;
 	minSpinSpeed = -400.0;
 	maxSpinSpeed = 200.0;
@@ -541,7 +560,7 @@ datablock DebrisData(SedanTireDebris)
 	gravModifier = 2;
 };
 
-datablock ParticleData(SedanExplosionParticle)
+datablock ParticleData(SemitruckExplosionParticle)
 {
 	dragCoefficient		= 3.0;
 	windCoefficient		= 0.0;
@@ -569,7 +588,7 @@ datablock ParticleData(SedanExplosionParticle)
 	times[1]	= 1.0;
 };
 
-datablock ParticleEmitterData(SedanExplosionEmitter)
+datablock ParticleEmitterData(SemitruckExplosionEmitter)
 {
    ejectionPeriodMS = 7;
    periodVarianceMS = 0;
@@ -582,13 +601,13 @@ datablock ParticleEmitterData(SedanExplosionEmitter)
    phiReferenceVel  = 0;
    phiVariance      = 360;
    overrideAdvance = false;
-   particles = "SedanExplosionParticle";
+   particles = "SemitruckExplosionParticle";
 
-   uiName = "Sedan Explosion";
+   uiName = "Semitruck Explosion";
    emitterNode = TenthEmitterNode;
 };
 
-datablock ParticleData(SedanExplosionParticle2)
+datablock ParticleData(SemitruckExplosionParticle2)
 {
 	dragCoefficient		= 0.1;
 	windCoefficient		= 0.0;
@@ -616,7 +635,7 @@ datablock ParticleData(SedanExplosionParticle2)
 	times[1]	= 1.0;
 };
 
-datablock ParticleEmitterData(SedanExplosionEmitter2)
+datablock ParticleEmitterData(SemitruckExplosionEmitter2)
 {
    ejectionPeriodMS = 1;
    periodVarianceMS = 0;
@@ -629,14 +648,14 @@ datablock ParticleEmitterData(SedanExplosionEmitter2)
    phiReferenceVel  = 0;
    phiVariance      = 360;
    overrideAdvance = false;
-   particles = "SedanExplosionParticle2";
+   particles = "SemitruckExplosionParticle2";
 
-   uiName = "Sedan Explosion 2";
+   uiName = "Semitruck Explosion 2";
    emitterNode = TenthEmitterNode;
 };
 
 
-datablock ParticleData(SedanExplosionParticle3)
+datablock ParticleData(SemitruckExplosionParticle3)
 {
 	dragCoefficient		= 0.1;
 	windCoefficient		= 0.0;
@@ -664,7 +683,7 @@ datablock ParticleData(SedanExplosionParticle3)
 	times[1]	= 1.0;
 };
 
-datablock ParticleEmitterData(SedanExplosionEmitter3)
+datablock ParticleEmitterData(SemitruckExplosionEmitter3)
 {
    ejectionPeriodMS = 1;
    periodVarianceMS = 0;
@@ -677,25 +696,25 @@ datablock ParticleEmitterData(SedanExplosionEmitter3)
    phiReferenceVel  = 0;
    phiVariance      = 360;
    overrideAdvance = false;
-   particles = "SedanExplosionParticle3";
+   particles = "SemitruckExplosionParticle3";
 
-   uiName = "Sedan Explosion 3";
+   uiName = "Semitruck Explosion 3";
    emitterNode = FourtiethEmitterNode;
 };
 
-datablock ExplosionData(SedanExplosion)
+datablock ExplosionData(SemitruckExplosion)
 {
    //explosionShape = "";
    lifeTimeMS = 150;
 
-   soundProfile = SedanExplosionSound;
+   soundProfile = SemitruckExplosionSound;
 
-   emitter[0] = SedanExplosionEmitter;
-   emitter[1] = SedanExplosionEmitter2;
+   emitter[0] = SemitruckExplosionEmitter;
+   emitter[1] = SemitruckExplosionEmitter2;
    //particleDensity = 30;
    //particleRadius = 1.0;
 
-   debris = SedanTireDebris;
+   debris = SemitruckTireDebris;
    debrisNum = 3;
    debrisNumVariance = 0;
    debrisPhiMin = 0;
@@ -729,7 +748,7 @@ datablock ExplosionData(SedanExplosion)
    damageRadius        = 3.5;
 };
 
-datablock ParticleData(SedanDebrisTrailParticle)
+datablock ParticleData(SemitruckDebrisTrailParticle)
 {
 	dragCoefficient		= 3.0;
 	windCoefficient		= 0.0;
@@ -762,7 +781,7 @@ datablock ParticleData(SedanDebrisTrailParticle)
    times[2]	= 1.0;
 };
 
-datablock ParticleEmitterData(SedanDebrisTrailEmitter)
+datablock ParticleEmitterData(SemitruckDebrisTrailEmitter)
 {
    ejectionPeriodMS = 15;
    periodVarianceMS = 0;
@@ -774,14 +793,14 @@ datablock ParticleEmitterData(SedanDebrisTrailEmitter)
    phiReferenceVel  = 0;
    phiVariance      = 360;
    overrideAdvance = false;
-   particles = "SedanDebrisTrailParticle";
+   particles = "SemitruckDebrisTrailParticle";
 
-   uiName = "Sedan Debris Trail";
+   uiName = "Semitruck Debris Trail";
    emitterNode = FifthEmitterNode;
 };
 
 
-datablock ParticleData(SedanFinalExplosionParticle)
+datablock ParticleData(SemitruckFinalExplosionParticle)
 {
 	dragCoefficient		= 1.0;
 	windCoefficient		= 0.0;
@@ -814,7 +833,7 @@ datablock ParticleData(SedanFinalExplosionParticle)
    times[2]	= 1.0;
 };
 
-datablock ParticleEmitterData(SedanFinalExplosionEmitter)
+datablock ParticleEmitterData(SemitruckFinalExplosionEmitter)
 {
    ejectionPeriodMS = 7;
    periodVarianceMS = 0;
@@ -827,13 +846,13 @@ datablock ParticleEmitterData(SedanFinalExplosionEmitter)
    phiReferenceVel  = 0;
    phiVariance      = 360;
    overrideAdvance = false;
-   particles = "SedanFinalExplosionParticle";
+   particles = "SemitruckFinalExplosionParticle";
 
-   uiName = "Sedan Final Explosion";
+   uiName = "Semitruck Final Explosion";
    emitterNode = TwentiethEmitterNode;
 };
 
-datablock ParticleData(SedanFinalExplosionParticle2)
+datablock ParticleData(SemitruckFinalExplosionParticle2)
 {
 	dragCoefficient		= 3.0;
 	windCoefficient		= 0.0;
@@ -861,7 +880,7 @@ datablock ParticleData(SedanFinalExplosionParticle2)
 	times[1]	= 1.0;
 };
 
-datablock ParticleEmitterData(SedanFinalExplosionEmitter2)
+datablock ParticleEmitterData(SemitruckFinalExplosionEmitter2)
 {
    ejectionPeriodMS = 1;
    periodVarianceMS = 0;
@@ -874,15 +893,15 @@ datablock ParticleEmitterData(SedanFinalExplosionEmitter2)
    phiReferenceVel  = 0;
    phiVariance      = 360;
    overrideAdvance = false;
-   particles = "SedanFinalExplosionParticle2";
+   particles = "SemitruckFinalExplosionParticle2";
 
-   uiName = "Sedan Final Explosion 2";
+   uiName = "Semitruck Final Explosion 2";
    emitterNode = TenthEmitterNode;
 };
 
 
 
-datablock ParticleData(SedanFinalExplosionParticle3)
+datablock ParticleData(SemitruckFinalExplosionParticle3)
 {
 	dragCoefficient		= 13.0;
 	windCoefficient		= 0.0;
@@ -911,7 +930,7 @@ datablock ParticleData(SedanFinalExplosionParticle3)
 	times[1]	= 1.0;
 };
 
-datablock ParticleEmitterData(SedanFinalExplosionEmitter3)
+datablock ParticleEmitterData(SemitruckFinalExplosionEmitter3)
 {
    ejectionPeriodMS = 1;
    periodVarianceMS = 0;
@@ -924,16 +943,16 @@ datablock ParticleEmitterData(SedanFinalExplosionEmitter3)
    phiReferenceVel  = 0;
    phiVariance      = 360;
    overrideAdvance = false;
-   particles = "SedanFinalExplosionParticle3";   
+   particles = "SemitruckFinalExplosionParticle3";   
 
-   uiName = "Sedan Final Explosion 3";
+   uiName = "Semitruck Final Explosion 3";
    emitterNode = TenthEmitterNode;
 };
 
 
 
 
-datablock WheeledVehicleSpring(SedanSpring)
+datablock WheeledVehicleSpring(SemitruckSpring)
 {
    // Wheel suspension properties
    length = 0.2;			 // Suspension travel
@@ -942,16 +961,16 @@ datablock WheeledVehicleSpring(SedanSpring)
    antiSwayForce = 6; //3;		 // Lateral anti-sway force
 };
 
-AddDamageType("SedanExplosion",   '<bitmap:add-ons/ci/carExplosion> %1',    '%2 <bitmap:add-ons/ci/carExplosion> %1');
-datablock ProjectileData(SedanExplosionProjectile)
+AddDamageType("SemitruckExplosion",   '<bitmap:add-ons/ci/carExplosion> %1',    '%2 <bitmap:add-ons/ci/carExplosion> %1');
+datablock ProjectileData(SemitruckExplosionProjectile)
 {
    directDamage        = 0;
    radiusDamage        = 0;
    damageRadius        = 0;
-   explosion           = SedanExplosion;
+   explosion           = SemitruckExplosion;
 
-   directDamageType  = $DamageType::SedanExplosion;
-   radiusDamageType  = $DamageType::SedanExplosion;
+   directDamageType  = $DamageType::SemitruckExplosion;
+   radiusDamageType  = $DamageType::SemitruckExplosion;
 
    explodeOnDeath		= 1;
 
@@ -959,11 +978,11 @@ datablock ProjectileData(SedanExplosionProjectile)
    lifetime            = 10;
 };
 
-datablock DebrisData(SedanDebris)
+datablock DebrisData(SemitruckDebris)
 {
-   emitters = "SedanDebrisTrailEmitter";
+   emitters = "SemitruckDebrisTrailEmitter";
 
-	shapeFile = "./shapes/Sedan.dts";
+	shapeFile = "./shapes/Optimus.dts";
 	lifetime = 3.0;
 	minSpinSpeed = -500.0;
 	maxSpinSpeed = 500.0;
@@ -983,21 +1002,21 @@ datablock DebrisData(SedanDebris)
 
 
 
-datablock ExplosionData(SedanFinalExplosion)
+datablock ExplosionData(SemitruckFinalExplosion)
 {
    //explosionShape = "";
    lifeTimeMS = 150;
 
-   soundProfile = SedanExplosionSound;
+   soundProfile = SemitruckExplosionSound;
    
-   emitter[0] = SedanFinalExplosionEmitter3;
-   emitter[1] = SedanFinalExplosionEmitter2;
+   emitter[0] = SemitruckFinalExplosionEmitter3;
+   emitter[1] = SemitruckFinalExplosionEmitter2;
 
-   particleEmitter = SedanFinalExplosionEmitter;
+   particleEmitter = SemitruckFinalExplosionEmitter;
    particleDensity = 20;
    particleRadius = 1.0;
 
-   debris = SedanDebris;
+   debris = SemitruckDebris;
    debrisNum = 1;
    debrisNumVariance = 0;
    debrisPhiMin = 0;
@@ -1036,15 +1055,15 @@ datablock ExplosionData(SedanFinalExplosion)
 
 };
 
-datablock ProjectileData(SedanFinalExplosionProjectile)
+datablock ProjectileData(SemitruckFinalExplosionProjectile)
 {
    directDamage        = 0;
    radiusDamage        = 0;
    damageRadius        = 0;
-   explosion           = SedanFinalExplosion;
+   explosion           = SemitruckFinalExplosion;
 
-   directDamageType  = $DamageType::SedanExplosion;
-   radiusDamageType  = $DamageType::SedanExplosion;
+   directDamageType  = $DamageType::SemitruckExplosion;
+   radiusDamageType  = $DamageType::SemitruckExplosion;
 
    explodeOnDeath		= 1;
 
@@ -1052,7 +1071,7 @@ datablock ProjectileData(SedanFinalExplosionProjectile)
    lifetime            = 10;
 };
 
-datablock ParticleData(SedanSmokeParticle)
+datablock ParticleData(SemitruckSmokeParticle)
 {
 	dragCoefficient      = 3;
 	gravityCoefficient   = -0.5;
@@ -1071,7 +1090,7 @@ datablock ParticleData(SedanSmokeParticle)
 
 	useInvAlpha = false;
 };
-datablock ParticleEmitterData(SedanSmokeEmitter)
+datablock ParticleEmitterData(SemitruckSmokeEmitter)
 {
    ejectionPeriodMS = 3;
    periodVarianceMS = 0;
@@ -1083,26 +1102,28 @@ datablock ParticleEmitterData(SedanSmokeEmitter)
    phiReferenceVel  = 0;
    phiVariance      = 360;
    overrideAdvance = false;
-   particles = "SedanSmokeParticle";
+   particles = "SemitruckSmokeParticle";
 };
-activatepackage(SedanFire);
-function Sedanvehicle::onadd(%this,%obj)
+activatepackage(SemitruckFire);
+function semitruckvehicle::onadd(%this,%obj)
 { 
 	parent::onadd(%this,%obj);
 		
-	%obj.setWheelTire(0, SedanTire);
-	%obj.setWheelTire(1, SedanTire);
-	%obj.setWheelTire(2, Sedantire);
-	%obj.setWheelTire(3, Sedantire);
+	%obj.setWheelTire(0, SemittruckfrontTire);
+	%obj.setWheelTire(1, SemittruckfrontTire);
+	%obj.setWheelTire(2, semitruckbacktire);
+	%obj.setWheelTire(3, semitruckbacktire);
+	%obj.setWheelTire(4, semitruckbacktire);
+	%obj.setWheelTire(5, semitruckbacktire);
 
 
 
-
-	%obj.setWheelSpring(0, SedanSpring);
-	%obj.setWheelSpring(1, SedanSpring);
-	%obj.setWheelSpring(2, SedanSpring);
-	%obj.setWheelSpring(3, SedanSpring);
-
+	%obj.setWheelSpring(0, SemitruckSpring);
+	%obj.setWheelSpring(1, SemitruckSpring);
+	%obj.setWheelSpring(2, SemitruckSpring);
+	%obj.setWheelSpring(3, SemitruckSpring);
+	%obj.setWheelSpring(4, SemitruckSpring);
+	%obj.setWheelSpring(5, SemitruckSpring);
 
 
 	
@@ -1110,12 +1131,15 @@ function Sedanvehicle::onadd(%this,%obj)
 	%obj.setWheelSteering(1,1);
 	%obj.setWheelSteering(2,0);
 	%obj.setWheelSteering(3,0);
-
+	%obj.setWheelSteering(4,0);
+	%obj.setWheelSteering(5,0);
 
 	%obj.setWheelPowered(0,true);
       %obj.setWheelPowered(1,true);
 	%obj.setWheelPowered(2,true);
 	%obj.setWheelPowered(3,true);
+	%obj.setWheelPowered(4,true);
+	%obj.setWheelPowered(5,true);
 
 	
 
