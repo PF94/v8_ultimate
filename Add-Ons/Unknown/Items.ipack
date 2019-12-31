@@ -1,0 +1,48 @@
+#Typefile
+
+TYPEFILE Types.e
+
+#Item definitions
+
+NEWITEM RedPotion
+NAME Red Potion
+TYPE PotionHP
+DESC A red potion that recovers 50 HP.
+HEAL 50
+
+NEWITEM Wrench
+NAME Wrench
+TYPE Weapon
+DESC A wrench :D
+IMAGE WrenchImage
+
+NEWITEM KillScroll
+NAME KillScroll
+TYPE KScroll
+DESC This will kill everyone!
+
+NEWITEM MessageScroll
+NAME MessageScroll
+TYPE MScroll
+DESC This scroll will send a message to someone!
+A1 Target
+A2 Message
+
+NEWITEM TeleportScroll
+NAME TeleportScroll
+TYPE TScroll
+DESC This scroll will teleport you to someone.
+A1 Name
+
+NEWITEM TeleKillScroll
+NAME TeleKillScroll
+TYPE TKScroll
+DESC Teleports to someone, and then kills him.
+A1 Name
+
+#Combination Definitions
+
+NEWCOMBO TeleKill
+IN KillScroll 1
+IN TeleportScroll 1
+OUT TeleKillScroll
