@@ -873,7 +873,7 @@ datablock DebrisData(UteDebris)
 {
    emitters = "UteDebrisTrailEmitter";
 
-	shapeFile = "./shapes/ute.dts";
+	shapeFile = "./shapes/utebeta.dts";
 	lifetime = 3.0;
 	minSpinSpeed = -500.0;
 	maxSpinSpeed = 500.0;

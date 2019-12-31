@@ -1,0 +1,16 @@
+Credits
+--------------------------------
+
+
+Kaje:
+
+	Providing 10 wonderful models, as well as extensive testing services.
+
+Space Guy:
+
+	Tip in fixing projectile collisions with Doors.
+	Providing his color-matching method.
+
+Badspot:
+
+	Creating the game for which this add-on was made (obviously).

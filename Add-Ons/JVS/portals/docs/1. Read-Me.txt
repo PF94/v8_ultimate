@@ -1,0 +1,106 @@
+Read-Me
+--------------------------------
+
+
+Installation (It is recommended that you delete all your old Portal System files first.)
+--------------------------------
+
+1. Extract JVS_PortalSystem.rar in the root directory of your Blockland installation.
+
+2. Run Blockland and enable 'Mod_JVS_Client' & 'Mod_JVS_Server' in the Add-Ons menu of the Start Mission GUI.
+
+3. Add key binds for 'Toggle JVS Wrench' and 'Toggle JVS GUI' in the 'Controls' section of the 'Options' menu.
+
+
+Making Portals
+--------------------------------
+
+1. Plant two bricks. Use key bind or /togjvswrench to change your wrench mode.  Hit each brick with the wrench.
+
+2. Use the 'Description' field to describe your Portal:*
+
+     A. Portal Pairs: Two Portals with the same description.
+     B. Portal Selector: Choose from a list of all portals that aren't restricted to you.
+
+3. Choose a modifier:
+
+     A. None: No modifier.
+     B. Admins: Setup this Portal to allow access to Admins and SuperAdmins only.
+     C. SuperAdmins: Setup this Portal to allow access to SuperAdmins only.
+     D. Minigame: Setup this Portal to allow access to you and people in your minigame.
+     E. Personal: Setup this Door to allow access to you plus Admins and SuperAdmins.
+
+4. Click the 'Set / Modify' button.**
+
+*    You may not use a description already in use by another player or use the same description more than twice.
+**   Please note that clients' (e.g. not an Admin or SuperAdmin) ability to make Portals can be disabled by an Admin or SuperAdmin.
+
+
+Using Portals*
+--------------------------------
+
+1. Portal Pairs: Walk into the Portal and it will send you to its mate.
+
+2. Portal Selector: Walk into the Portal and choose your destination from a list.
+
+3. Restricted Portals (Modifiers B,C,D,E from above): If access is not restricted to you, these Portals behave normally.  See 1 and 2 of this list.
+
+4. Random Mode Portals (Red for non-mini-game; Green for mini-game): Walk into the Portal and it will choose your destination for you.
+
+*    Please note that clients' (e.g. not an Admin or SuperAdmin) ability to use Portals can be disabled by an admin or superadmin.
+
+
+Loading Portals*
+--------------------------------
+
+1. Type '/loadportals' into the chat HUD.
+2. Click the save you wish to load.
+
+*  Please note that clients' (e.g. not an Admin or SuperAdmin) ability to load Portal saves can be disabled by an admin or superadmin.
+
+Saving Portals
+--------------------------------
+
+1. Type '/saveportals' into the chat HUD.
+2. Type the name for your save.
+3. Click the 'Save' button.
+
+
+Chat HUD Commands
+--------------------------------
+
+Enable / disable clients making Portals:
+
+     /togMakePortals (Admins / Superadmins Only)
+
+Enable / disable clients using Portals:
+
+     /togUsePortals (Admins / Superadmins Only)
+
+Enable / disable random mode:
+
+     /togRandom (Admins / Superadmins Only)
+
+Enable / disable clients uploading Portal saves:
+
+     /togUploadPortals (Admins / Superadmins Only)
+
+Enable / disable random mode for your minigame:
+
+     /togMGRandom (Mini-Game Owner Only)
+
+Clear All Portals
+
+     /clearAllPortals (Admins / SuperAdmins Only)
+
+Manage Portals
+
+     /managePortals (Admins / SuperAdmins Only)
+
+Manage Your Portals (Change their settings remotely)
+
+     /manageMyPortals
+
+Set Max Portals Per Client
+
+     /setMaxPortals [number] (Without brackets)

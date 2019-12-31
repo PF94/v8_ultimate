@@ -28,7 +28,7 @@ datablock WheeledVehicleData(UteVehicle)
 {
 	category = "Vehicles";
 	displayName = " ";
-	shapeFile = "./shapes/Ute.dts"; //"~/data/shapes/skivehicle.dts"; //
+	shapeFile = "./shapes/Utebeta.dts"; //"~/data/shapes/skivehicle.dts"; //
 	emap = true;
 	minMountDist = 3;
    

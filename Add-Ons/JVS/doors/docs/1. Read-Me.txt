@@ -1,0 +1,102 @@
+Read-Me
+--------------------------------
+
+
+Installation (It is recommended that you delete all your old Door System files first.)
+--------------------------------
+
+1. Extract JVS_DoorSystem.rar in the root directory of your Blockland installation.
+
+2. Run Blockland and enable 'Mod_JVS_Client' & 'Mod_JVS_Server' in the Add-Ons menu of the Start Mission GUI.
+
+3. Add key binds for 'Toggle JVS Wrench' and 'Toggle JVS GUI' in the 'Controls' section of the 'Options' menu.
+
+
+Making Doors
+--------------------------------
+
+1. Build some sort of frame for your Door, with a brick centered at the top.
+
+2. Hit the top brick with your wrench.
+
+3. Use the 'Description' field to describe your Door.*
+
+4. Choose a modifier:
+
+     A. None: No modifier.
+     B. Admins: Setup this Door to allow access to Admins and SuperAdmins only.
+     C. SuperAdmins: Setup this Door to allow access to SuperAdmins only.
+     D. Minigame: Setup this Door to allow access to you and people in your minigame.
+     E. Personal: Setup this Door to allow access to you plus Admins and SuperAdmins.
+
+5. Choose the direction the Door should face.
+
+6. Choose the direction the Door should rotate.
+
+7. Choose the Door type from the drop down menu.
+
+8. Click the 'Set / Modify' button.***
+
+*    You cannot have the same description in use at any time on any of the Doors you make.
+**   Please note that clients' (e.g. not an Admin or SuperAdmin) ability to make Doors can be disabled by an Admin or SuperAdmin.
+
+
+Using Doors
+--------------------------------
+
+1. Walk through the Door.*
+
+2. To get 'unstuck' from a Door, use the /imstuck command.
+
+3. To exit Door Spy Cam, press F7.
+
+*    Bricks and vehicles, as well as Door restrictions, may prevent the Door from opening.
+
+
+Loading Doors*
+--------------------------------
+
+1. Type '/loaddoor' into the chat HUD.
+2. Click the save you wish to load.
+
+* Please note that clients' (e.g. not an admin or superadmin) ability to load Door saves can be disabled by an Admin or SuperAdmin.
+
+
+Saving Doors
+--------------------------------
+
+1. Type '/savedoors' into the chat HUD.
+2. Type the name for your save.
+3. Click the 'Save' button.
+
+
+Chat HUD Commands
+--------------------------------
+
+Enable / disable clients making Doors:
+
+     /togMakeDoors (Admins / Superadmins Only)
+
+Set maximum number of Doors per client.
+
+     /setMaxDoors <#> (Admins / Superadmins Only)
+
+Enable / disable clients uploading Door saves:
+
+     /togUploadDoors (Admins / Superadmins Only)
+
+Clear All Doors
+
+     /clearAllDoors (Admins / SuperAdmins Only)
+
+Manage Your Doors
+
+     /manageMyDoors (Admins / SuperAdmins Only)
+
+Manage All Doors
+
+     /manageDoors (Admins / SuperAdmins Only)
+
+Change Wrench Mode
+
+     /togjvswrench

@@ -769,7 +769,7 @@ datablock ProjectileData(PortalForceExplodeProjectile)
 
    hasLight    = false;
 };
- AddDamageType("ThrowCar",   '<bitmap:add-ons/ci/generic> <bitmap:add-ons/ci/car> %1',    '%2 <bitmap:add-ons/ci/generic> <bitmap:add-ons/ci/car> %1');
+
 package Portals
 {
  function Armor::onRemove(%this,%obj,%a,%b,%c,%d)
@@ -861,7 +861,7 @@ function servercmdLight(%client)
   {
    %client.player.mountImage(PGravGunImage,0);return;
   }
-  else if(%client.player.getMountedImage(0).getName() $= "pGravGunImage")
+  else
   {
    %client.player.mountImage(PGunImage,0);return;
   }

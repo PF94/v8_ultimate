@@ -1,0 +1,1856 @@
+//Server Methods
+
+function portalHalt(%col,%timer)
+{
+	commandtoserver('portalhalt',%col,%timer);
+}
+
+function returnMakePortals()
+{
+	return $JVS::Server::ClientsMakePortals;
+}
+
+function returnMaxPortals()
+{
+	return $JVS::Server::MaxClientPortals;
+}
+
+function returnRandomMode()
+{
+	return $JVS::Server::RandomMode;
+}
+
+function returnUploadPortals()
+{
+	return $JVS::Server::ClientsUploadPortals;
+}
+
+function returnUsePortals()
+{
+	return $JVS::Server::ClientsUsePortals;
+}
+
+//Server Commands
+
+function serverCmdAddTeleportEffect(%client,%brick,%player)
+{
+	if(isObject(%client.telemitter1))
+	{
+		%client.telemitter1.delete();
+	}
+
+	if(isObject(%client.telemitter2))
+	{
+		%client.telemitter2.delete();
+	}
+
+	%emitter1 = new ParticleEmitterNode()
+	{
+		datablock = "GenericEmitterNode";
+		emitter   = "spawnExplosionEmitter1";
+	};
+
+	%emitter2 = new ParticleEmitterNode()
+	{
+		datablock = "GenericEmitterNode";
+		emitter   = "spawnExplosionEmitter2";
+	};
+
+	%emitter1.setTransform(%player.getTransform());
+	%emitter2.setTransform(%player.getTransform());
+
+	MissionCleanup.add(%emitter1);
+	MissionCleanup.add(%emitter2);
+
+	%client.telemitter1 = %emitter1;
+	%client.telemitter2 = %emitter2;
+
+	%emitter1.brick = %brick;
+	%emitter2.brick = %brick;
+
+	schedule(50,0,"serverCmdRemoveTeleportEffect",%client);
+}
+
+function serverCmdClearAllPortals(%client)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		%portals = 0;
+
+		for(%i = 1;%i <= PortalListSO.getCount();%i++)
+		{
+			%brick = PortalListSO.getObject(%i);
+
+			if(%brick.isPortal)
+			{
+				%portals++;
+				schedule(%portals * 25,0,"serverCmdClearThisPortal",%client,%brick);
+			}
+		}
+
+		messageAll('MsgClearDoorsAndPortals','\c3%1 \c0cleared all Portals.',%client.name);
+		schedule(%portals * 25 + 25,0,"serverCmdManagePortalList",%client);
+	}
+}
+
+function serverCmdClearClientPortals(%client,%victim)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		%portals = 0;
+
+		for(%i = 1;%i <= PortalListSO.getCount();%i++)
+		{
+			%brick = PortalListSO.getObject(%i);
+
+			if(%brick.isPortal && %brick.getGroup().client == %victim)
+			{
+				%portals++;
+				schedule(%portals * 25,0,"serverCmdClearThisPortal",%client,%brick);
+			}
+		}
+
+		messageAll('MsgClearDoorsAndPortals','\c3%1 \c2cleared \c3%2\'s \c2Portals.',%client.name,%victim.name);
+		schedule(%portals * 25 + 25,0,"serverCmdManagePortalList",%client);
+	}
+}
+
+function serverCmdClearThisPortal(%client,%brick)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		if(isObject(%brick))
+		{
+			%brick.emitter.delete();
+			%brick.item.delete();
+		}
+	}
+}
+
+function serverCmdClearThisPortal1(%client)
+{
+	serverCmdClearThisPortal(%client,%client.wrenchBrick);
+}
+
+function serverCmdCreatePortal(%client)
+{
+	messageClient(%client,'MsgCreatePortal','');
+}
+
+function serverCmdFixMGRandom(%client,%minigame,%status)
+{
+	if(%status $= "delete" || %status $= "remove" && %client.minigame.owner.MGisRandom)
+	{
+		for(%i = 1;%i <= PortalListSO.getCount();%i++)
+		{
+			%brick = PortalListSO.getObject(%i);
+
+			if(%brick.isPortal && %brick.restrictportal == 3 && %brick.getGroup().client == %client)
+			{
+				if(isObject(%brick.emitter))
+				{
+					%brick.emitter.delete();
+				}
+
+				%emitter = new ParticleEmitterNode()
+				{
+					datablock = "GenericEmitterNode";
+					emitter   = "PortalSystemEmitterGreen";
+				};
+
+				%x = getWord(%brick.getWorldBoxCenter(),0);
+				%y = getWord(%brick.getWorldBoxCenter(),1);
+				%z = getWord(%brick.getWorldBox(),5);
+				%emitter.setTransform(%x SPC %y SPC %z + 0.25);
+				%emitter.setScale("0.01 0.01 0.01");
+				%emitter.brick = %brick;
+				MissionCleanup.add(%emitter);
+				%brick.emitter = %emitter;
+			}
+		}
+
+		%client.MGisRandom = 0;
+	}
+	else if(%status $= "add" && %client.minigame.owner.MGisRandom)
+	{
+		for(%i = 1;%i <= PortalListSO.getCount();%i++)
+		{
+			%brick = PortalListSO.getObject(%i);
+
+			if(%brick.isPortal && %brick.restrictportal == 3 && %brick.getGroup().client == %client)
+			{
+				if(isObject(%brick.emitter))
+				{
+					%brick.emitter.delete();
+				}
+
+				%emitter = new ParticleEmitterNode()
+				{
+					datablock = "GenericEmitterNode";
+					emitter   = "PortalSystemEmitterViolet";
+				};
+
+				%x = getWord(%brick.getWorldBoxCenter(),0);
+				%y = getWord(%brick.getWorldBoxCenter(),1);
+				%z = getWord(%brick.getWorldBox(),5);
+				%emitter.setTransform(%x SPC %y SPC %z + 0.25);
+				%emitter.setScale("0.01 0.01 0.01");
+				%emitter.brick = %brick;
+				MissionCleanup.add(%emitter);
+				%brick.emitter = %emitter;
+			}
+		}
+
+		%client.MGisRandom = 1;
+	}
+}
+
+function serverCmdGetPortalProperties(%client,%brick)
+{
+	if(%brick.isPortal)
+	{
+		%portalrestrict = %brick.restrictportal;
+		%portaldesc = %brick.PortalDesc;
+	}
+	else
+	{
+		%portalrestrict = 0;
+		%portaldesc = "";
+	}
+
+	messageClient(%client,'MsgReturnPortalProperties','',%portalrestrict,%portaldesc);
+}
+
+function serverCmdManageMyPortals(%client)
+{
+	messageClient(%client,'MsgOpenPortalListGui','');
+}
+
+function serverCmdManageMyPortals2(%client)
+{
+	messageClient(%client,'MsgClearPortalListGui','');
+
+	for(%i = 1;%i <= PortalListSO.getCount();%i++)
+	{
+		%brick = PortalListSO.getObject(%i);
+
+		if(%brick.isPortal && (%brick.item.brickgroup.client == %client || %brick.getGroup().client == %client))
+		{
+			messageClient(%client,'MsgUpdatePortalListGui','',%brick,%brick.PortalDesc);
+		}
+	}
+
+	messageClient(%client,'MsgSortPortalListGui','');
+}
+
+function serverCmdLoadPortal(%client,%datablock,%transform,%colorId,%restrict,%desc,%currentLine,%totalLines)
+{
+	if(((%client.isAdmin || %client.isSuperAdmin) || returnUploadPortals()) && %datablock !$= "" && %transform !$= "" && %colorId !$= "" && %restrict !$= "" && %desc !$= "" && %currentLine !$= "" && %totalLines !$= "")
+	{
+		InitContainerBoxSearch(%transform, "0.1 0.1 0.1", $TypeMasks::FxBrickObjectType);
+
+		while((%checkObj = containerSearchNext()) != 0)
+		{
+			if(%checkObj.dataBlock $= %datablock)
+			{
+				%col = %checkObj;
+			}
+		}
+
+		if(isObject(%col))
+		{
+			%client.portalsloaded++;
+
+			if(isObject(%col.emitter))
+			{
+				%col.emitter.delete();
+			}
+
+			if(isObject(%col.item))
+			{
+				%col.item.delete();
+			}
+
+			%col.isPortal = "";
+			%col.PortalDesc = "";
+			%col.restrictportal = "";
+
+			if(%restrict == 0)
+			{
+				if(!returnRandomMode())
+				{
+					%emitter = new ParticleEmitterNode()
+					{
+						datablock = "GenericEmitterNode";
+						emitter   = "PortalSystemEmitterBlue";
+					};
+				}
+				else if(returnRandomMode())
+				{
+					%emitter = new ParticleEmitterNode()
+					{
+						datablock = "GenericEmitterNode";
+						emitter   = "PortalSystemEmitterRed";
+					};
+				}
+			}
+			else if(%restrict == 1)
+			{
+				%emitter = new ParticleEmitterNode()
+				{
+					datablock = "GenericEmitterNode";
+					emitter   = "PortalSystemEmitterYellow";
+				};
+			}
+			else if(%restrict == 2)
+			{
+				%emitter = new ParticleEmitterNode()
+				{
+					datablock = "GenericEmitterNode";
+					emitter   = "PortalSystemEmitterOrange";
+				};
+			}
+			else if(%restrict == 3)
+			{
+				if(%client.MGisRandom != 1)
+				{
+					%emitter = new ParticleEmitterNode()
+					{
+						datablock = "GenericEmitterNode";
+						emitter   = "PortalSystemEmitterGreen";
+					};
+				}
+				else if(%client.MGisRandom == 1)
+				{
+					%emitter = new ParticleEmitterNode()
+					{
+						datablock = "GenericEmitterNode";
+						emitter   = "PortalSystemEmitterViolet";
+					};
+				}
+			}
+			else if(%restrict == 4)
+			{
+				%emitter = new ParticleEmitterNode()
+				{
+					datablock = "GenericEmitterNode";
+					emitter   = "PortalSystemEmitterIndigo";
+				};
+			}
+
+			%x = getWord(%col.getWorldBoxCenter(),0);
+			%y = getWord(%col.getWorldBoxCenter(),1);
+			%z = getWord(%col.getWorldBox(),5);
+			%emitter.setTransform(%x SPC %y SPC %z + 0.25);
+			%emitter.setScale("0.01 0.01 0.01");
+			%emitter.brick = %col;
+			MissionCleanup.add(%emitter);
+
+			%item = new Item()
+			{
+				datablock = "portalSystemItem";
+				static = 1;
+			};
+
+			%item.setScale("1 1 1");
+			%item.setTransform(%x SPC %y SPC %z + 1);
+			%item.spawnBrick = %col;
+			MissionCleanup.add(%item);
+			%col.emitter = %emitter;
+			%col.item = %item;
+			%col.isPortal = 1;
+			%col.PortalDesc = %desc;
+			%col.PortalOwner = %client;
+			%col.restrictportal = %restrict;
+			PortalListSO.add(%col);
+		}
+
+		if(%currentLine < %totalLines)
+		{
+			commandtoclient(%client,'LoadNextPortal',%currentLine++,%totalLines);
+		}
+		else
+		{
+			%x = getWord(%client.returntrans,0);
+			%y = getWord(%client.returntrans,1);
+			%z = getWord(%client.returntrans,2);
+			messageAll('MsgDoorOrPortalLoadComplete','\c3%1 \c0finished loading a Portal save.',%client.name);
+			%startMM = getSubStr(%client.portalloadtime,3,2);
+			%startSS = getSubStr(%client.portalloadtime,6,2);
+			%time = getWord(getDateTime(),1);
+			%endMM = getSubStr(%time,3,2);
+			%endSS = getSubStr(%time,6,2);
+			%start = (%startMM * 60) + %startSS;
+			%end = (%endMM * 60) + %endSS;
+			%seconds = %end - %start;
+
+			if(%seconds > 60)
+			{
+				%minutes = %seconds % 60;
+			}
+			else
+			{
+				%minutes = 0;
+			}
+
+			%seconds = %seconds - (%minutes * 60);
+
+			if(%seconds < 10)
+			{
+				%seconds = "0" @ %seconds;
+			}
+
+			%duration = %minutes @ ":" @ %seconds;
+			messageAll('','\c0%1 / %2 Portals created in %3.',%client.portalsloaded,(%totalLines + 1) / 5,%duration);
+			%client.portalloadtime = "";
+			%client.portalsloaded = "";
+		}
+	}
+}
+
+function serverCmdLoadPortals(%client)
+{
+	if(((%client.isAdmin || %client.isSuperAdmin) || returnUploadPortals()) && isObject(%client.Player))
+	{
+		messageClient(%client,'MsgPortalLoad');
+	}
+	else if(!isObject(%client.Player))
+	{
+		commandtoclient(%client,'centerprint',"\c0You must be spawned in order to load Portals.",2,2,5000);
+	}
+	else
+	{
+		commandtoclient(%client,'centerprint',"\c0Only Admins and SuperAdmins may load Portals at this time.",2,2,5000);
+	}
+}
+
+function serverCmdLoadPortals2(%client,%file)
+{
+	if(((%client.isAdmin || %client.isSuperAdmin) || returnUploadPortals()) && %file !$= "")
+	{
+		%client.portalsloaded = 0;
+		messageAll('MsgDoorOrPortalLoadStart','\c3%1 \c0is loading a Portal save.',%client.name);
+		%client.portalloadtime = getWord(getDateTime(),1);
+		commandtoclient(%client,'LoadPortals',%file);
+	}
+}	
+
+function serverCmdMakePortal(%client,%desc,%r0,%r1,%r2,%r3,%r4,%col)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		%canmakeportals = 1;
+	}
+	else if(returnMakePortals() && returnMaxPortals() > 0)
+	{
+		%canmakeportals = 1;
+	}
+	else
+	{
+		commandtoclient(%client,'centerprint',"\c0Clients are not allowed to make Portals at this time.",2,2,5000);
+	}
+
+	if(%canmakeportals == 1)
+	{
+		%portals = 0;
+
+		for(%i = 1;%i <= PortalListSO.getCount();%i++)
+		{
+			%brick = PortalListSO.getObject(%i);
+
+			if(%brick.isPortal && (%brick.item.brickgroup.client == %client || %brick.getGroup().client == %client))
+			{
+				%portals++;
+			}
+		}
+
+		if(%client.isAdmin || %client.isSuperAdmin)
+		{
+			%withinportallimit = 1;
+		}
+		else if(%portals < returnMaxPortals())
+		{
+			%withinportallimit = 1;
+		}
+		else
+		{
+			commandtoclient(%client,'centerprint',"\c0You are not permitted to make more than " @ returnMaxPortals() @ " Portals(s).",2,2,5000);
+		}
+	}
+
+	if(%withinportallimit == 1)
+	{
+		if(isObject(%col) && %col.getClassName() $= "FxDTSBrick")
+		{
+			%validbrick = 1;
+		}
+	}
+
+	if(%validbrick == 1)
+	{
+		if(%col.isPortal && %col.item.brickgroup.client != %client)
+		{
+			if(getTrustLevel(%client, %col) == 2)
+			{
+				%trusted = 1;
+			}
+			else
+			{
+				commandtoclient(%client,'centerprint',"\c0" @ %col.getGroup().name @ " does not trust you enough to do that.",2,2,5000);
+			}
+		}
+		else
+		{
+			if(getTrustLevel(%client, %col) >= 1)
+			{
+				%trusted = 1;
+			}
+			else
+			{
+				commandtoclient(%client,'centerprint',"\c0" @ %col.getGroup().name @ " does not trust you enough to do that.",2,2,5000);
+			}
+		}
+	}
+
+	if(%trusted == 1)
+	{
+		if(%desc !$= "")
+		{
+			%validdesc = 1;
+		}
+		else
+		{
+			commandtoclient(%client,'centerprint',"\c0A valid description is required to make a Portal.",2,2,5000);
+		}
+	}
+
+	if(%validdesc == 1)
+	{
+		%matches = 0;
+
+		for(%i = 1;%i <= PortalListSO.getCount();%i++)
+		{
+			%brick = PortalListSO.getObject(%i);
+			%desc2 = %brick.portaldesc;
+
+			if(%desc $= %desc2 && %brick != %col)
+			{
+				%matches++;
+				%descmatch[%matches] = %brick;
+			}
+		}
+
+		if(%matches == 2)
+		{
+			if(%descmatch[1].getGroup().client == %client || %descmatch[1].getGroup().client == %col.getGroup().client)
+			{	
+				commandtoclient(%client,'centerprint',"\c0You already have a Portal pair with the description '" @ %desc @ ".",2,2,5000);
+			}
+			else
+			{
+				%uniquedesc = 0;
+				commandtoclient(%client,'centerprint',"\c0The description '" @ %desc @ "' is currently in use by " @ %descmatch[1].getGroup().name @ ".",2,2,5000);
+			}
+		}
+		else if(%matches == 1)
+		{
+			if(%descmatch[1].getGroup().client == %client || %descmatch[1].getGroup().client == %col.getGroup().client)
+			{
+				%uniquedesc = 1;
+			}
+			else
+			{
+				%uniquedesc = 0;
+				commandtoclient(%client,'centerprint',"\c0The description '" @ %desc @ "' is currently in use by " @ %descmatch[1].getGroup().name @ ".",2,2,5000);
+			}
+		}
+		else if(%matches == 0)
+		{
+			%uniquedesc = 1;
+		}
+	}
+
+	if(%uniquedesc == 1)
+	{
+		if(isObject(%col.emitter))
+		{
+			%col.emitter.delete();
+		}
+
+		if(isObject(%col.item))
+		{
+			%col.item.delete();
+		}
+
+		if(%r1 == 1 && %r0 == 0 && %r2 == 0 && %r3 == 0 && %r4 == 0)
+		{
+			%restrict = 1;
+		}
+		else if(%r2 == 1 && %r0 == 0 && %r1 == 0 && %r3 == 0 && %r4 == 0)
+		{
+			%restrict = 2;
+		}
+		else if(%r3 == 1 && %r0 == 0 && %r1 == 0 && %r2 == 0 && %r4 == 0)
+		{
+			%restrict = 3;
+		}
+		else if(%r4 == 1 && %r0 == 0 && %r1 == 0 && %r2 == 0 && %r3 == 0)
+		{
+			%restrict = 4;
+		}
+		else
+		{
+			%restrict = 0;
+		}
+
+		%col.restrictportal = %restrict;
+
+		if(%restrict == 0)
+		{
+			if(!returnRandomMode())
+			{
+				%emitter = new ParticleEmitterNode()
+				{
+					datablock = "GenericEmitterNode";
+					emitter   = "PortalSystemEmitterBlue";
+				};
+			}
+			else if(returnRandomMode())
+			{
+				%emitter = new ParticleEmitterNode()
+				{
+					datablock = "GenericEmitterNode";
+					emitter   = "PortalSystemEmitterRed";
+				};
+			}
+		}
+		else if(%restrict == 1)
+		{
+			%emitter = new ParticleEmitterNode()
+			{
+				datablock = "GenericEmitterNode";
+				emitter   = "PortalSystemEmitterYellow";
+			};
+		}
+		else if(%restrict == 2)
+		{
+			%emitter = new ParticleEmitterNode()
+			{
+				datablock = "GenericEmitterNode";
+				emitter   = "PortalSystemEmitterOrange";
+			};
+		}
+		else if(%restrict == 3)
+		{
+			if(%client.MGisRandom != 1)
+			{
+				%emitter = new ParticleEmitterNode()
+				{
+					datablock = "GenericEmitterNode";
+					emitter   = "PortalSystemEmitterGreen";
+				};
+			}
+			else if(%client.MGisRandom == 1)
+			{
+				%emitter = new ParticleEmitterNode()
+				{
+					datablock = "GenericEmitterNode";
+					emitter   = "PortalSystemEmitterViolet";
+				};
+			}
+		}
+		else if(%restrict == 4)
+		{
+			%emitter = new ParticleEmitterNode()
+			{
+				datablock = "GenericEmitterNode";
+				emitter   = "PortalSystemEmitterIndigo";
+			};
+		}
+
+		%x = getWord(%col.getWorldBoxCenter(),0);
+		%y = getWord(%col.getWorldBoxCenter(),1);
+		%z = getWord(%col.getWorldBox(),5);
+		%emitter.setTransform(%x SPC %y SPC %z + 0.25);
+		%emitter.setScale("0.01 0.01 0.01");
+		%emitter.brick = %col;
+		MissionCleanup.add(%emitter);
+
+		%item = new Item()
+		{
+			datablock = "portalSystemItem";
+			static = 1;
+		};
+
+		%item.setScale("1 1 1");
+		%item.setTransform(%x SPC %y SPC %z + 1);
+		%item.spawnBrick = %col;
+		MissionCleanup.add(%item);
+		%col.emitter = %emitter;
+		%col.item = %item;
+		%col.item.brickgroup = %client.brickGroup;
+		%col.isPortal = 1;
+		%col.PortalDesc = %desc;
+		%col.PortalOwner = %client;
+		PortalListSO.add(%col);
+		messageClient(%client,'MsgCloseWrenchDlg','');
+	}
+}
+
+function serverCmdMakePortal2(%client,%desc,%r0,%r1,%r2,%r3,%r4)
+{
+	%col = %client.wrenchBrick;
+	serverCmdMakePortal(%client,%desc,%r0,%r1,%r2,%r3,%r4,%col);
+}
+
+function serverCmdManagePortalList(%client)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		%clients = 0;
+		messageClient(%client,'MsgClearManageList','');
+
+		for(%i = 0;%i < ClientGroup.getCount();%i++)
+		{
+			%cl = ClientGroup.getObject(%i);
+			%portals = 0;
+
+			for(%j = 1;%j <= PortalListSO.getCount();%j++)
+			{
+				%brick = PortalListSO.getObject(%j);
+
+				if(%brick.isPortal && %brick.getGroup().client == %cl)
+				{
+					%portals++;
+				}
+			}
+
+			messageClient(%client,'MsgUpdateManageList','',%cl,%cl.name,%portals);
+		}
+
+		messageClient(%client,'MsgSortManageList');	
+	}
+}
+
+function serverCmdManagePortals(%client)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		messageClient(%client,'MsgManagePortals');
+	}
+}
+
+function serverCmdPortalHalt(%client,%player,%col,%timer)
+{
+	if(isObject(%col) && isObject(%player))
+	{	
+		%x = getWord(%col.getWorldBoxCenter(),0);
+		%y = getWord(%col.getWorldBoxCenter(),1);
+		%z = getWord(%col.getWorldBox(),5);
+		%player.setVelocity("0 0 0");
+		%player.setTransform(%x SPC %y SPC %z + 0.25);
+		%timer = %timer - 25;
+
+		if(%timer > 0)
+		{
+			schedule(25,0,"portalhalt",%player,%col,%timer);
+		}
+	}
+}
+
+function serverCmdPortalPickup(%client)
+{
+	%client.portalpickup = "";
+}
+
+function serverCmdPortalTeleport(%client)
+{
+	%portals = 0;
+	messageClient(%client,'MsgClearPortalList','');
+
+	for(%i = 1;%i <= PortalListSO.getCount();%i++)
+	{
+		%brick = PortalListSO.getObject(%i);
+
+		if(%brick.isPortal && %brick != %client.portalcol)
+		{
+			%add = 0;
+
+			if(%brick.restrictportal == 0 && %client.portalcol.restrictportal != 3)
+			{
+				%add = 1;
+			}
+			else if(%brick.restrictportal == 1 && (%client.isAdmin || %client.isSuperAdmin) && %client.portalcol.restrictportal != 3)
+			{
+				%add = 1;
+			}
+			else if(%brick.restrictportal == 2 && %client.isSuperAdmin && %client.portalcol.restrictportal != 3)
+			{
+				%add = 1;
+			}
+			else if((%brick.restrictportal == 3 && %client.minigame == %brick.PortalOwner.minigame && %client.minigame != 0 && %client.minigame !$= "") || %client.isAdmin || %client.isSuperAdmin)
+			{
+				%add = 1;
+			}
+			else if(%brick.restrictportal == 4 && (%client == %brick.PortalOwner || (%client.isAdmin || %client.isSuperAdmin)))
+			{
+				%add = 1;
+			}
+
+			if(%add == 1)
+			{
+				%portals++;
+				%desc = %brick.portaldesc;
+				messageClient(%client,'MsgUpdatePortalList','',%brick,%portals,%desc);
+			}
+		}
+	}
+
+	messageClient(%client,'MsgSortPortalList');
+
+	if(%portals > 0)
+	{
+		messageClient(%client,'MsgPortalCollision');
+	}
+	else
+	{
+		commandtoclient(%client,'centerprint',"\c0There are no Portals to which you are allowed to teleport.",2,2,5000);
+		schedule(3000,0,"serverCmdPortalPickup",%client);
+	}			
+}
+
+function serverCmdPortalTeleport2(%client,%brick)
+{
+	if(%brick.isPlanted)
+	{
+		%player = %client.portalobj;
+		%playerX = getWord(%player.getTransform(),0);
+		%playerY = getWord(%player.getTransform(),1);
+		%playerZ = getWord(%player.getTransform(),2);
+		%colX = getWord(%client.portalcol.getTransform(),0);
+		%colY = getWord(%client.portalcol.getTransform(),1);
+		%colZ = getWord(%client.portalcol.getTransform(),2);
+
+		if(%player.getClassName() $= "WheeledVehicle" || %player.getClassName() $= "FlyingVehicle" || %player.getClassName() $= "AIPlayer")
+		{
+			%passed = 1;
+		}
+		else if((%playerX <= %colX + 1 && %playerX >= %colX - 1) && (%playerY <= %colY + 1 && %playerY >= %colY - 1) && (%playerZ <= %colZ + 2 && %playerZ >= %colZ))
+		{
+			%passed = 1;
+		}
+
+		if(%passed == 1)
+		{
+			%passed = 0;
+
+			if(%brick.restrictportal == 0 && (%client.portalcol.restrictportal != 3 || %client.isAdmin || %client.isSuperAdmin))
+			{
+				%passed = 1;
+			}
+			else if(%brick.restrictportal == 1 && (%client.isAdmin || %client.isSuperAdmin))
+			{
+				%passed = 1;
+			}
+			else if(%brick.restrictportal == 2 && %client.isSuperAdmin)
+			{
+				%passed = 1;
+			}
+			else if(%brick.restrictportal == 3)
+			{
+				if(%brick.minigame == 0 || %brick.minigame $= "")
+				{
+					if(%client.isAdmin || %client.isSuperAdmin)
+					{
+						%passed = 1;
+					}
+					else if(%client.minigame != %brick.getGroup().client.minigame)
+					{
+						if(%client.isAdmin || %client.isSuperAdmin)
+						{
+							%passed = 1;
+						}
+					}
+				}
+			}
+			else if(%brick.restrictportal == 4 && (%client == %brick.PortalOwner || (%client.isAdmin || %client.isSuperAdmin)))
+			{
+				%passed = 1;
+			}
+		}
+
+		if(%passed == 1)
+		{
+			%client.portalpickup = %brick;
+			%trans = %brick.getTransform();
+			%x = getWord(%trans,0);
+			%y = getWord(%trans,1);
+			%z = getWord(%brick.getWorldBox(),5) + 0.25;
+			messageClient(%client,'MsgPortalAudio','');
+			ServerPlay3D(printFireSound,%player.getTransform());
+			%player.setTransform(%x SPC %y SPC %z);
+			serverCmdAddTeleportEffect(%client,%brick,%player);
+			messageClient(%client,'MsgPortalAudio','');
+			ServerPlay3D(printFireSound,%player.getTransform());
+			%sched = schedule(3000,0,"serverCmdportalpickup",%client);
+			messageClient(%client,'MsgSetSchedule','',%sched);
+		}
+		else
+		{
+			schedule(3000,0,"serverCmdPortalPickup",%client);
+		}
+	}
+	else
+	{
+		schedule(3000,0,"serverCmdPortalPickup",%client);
+		commandtoclient(%client,'centerprint',"\c0The Portal you selected no longer exists.",2,2,5000);
+	}
+
+	%client.portalobj = "";
+}
+
+function serverCmdSavePortals(%client)
+{
+	messageClient(%client,'MsgPortalSave');
+}
+
+function serverCmdSavePortals2(%client,%filename)
+{
+	%portals = 0;
+
+	for(%i = 1;%i <= PortalListSO.getCount();%i++)
+	{
+		%brick = PortalListSO.getObject(%i);
+
+		if(%brick.isPortal)
+		{
+			%portals++;
+			%portal[%portals] = %brick;
+		}
+	}
+
+	if(%portals > 0)
+	{
+		commandtoclient(%client,'SavePortals',"add-ons/jvs/portals/saves/" @ %filename @ ".save");
+
+		for(%i = 1;%i <= %portals;%i++)
+		{
+			%obj = %portal[%i];
+			commandtoclient(%client,'SaveNextPortal',"add-ons/jvs/portals/saves/" @ %filename @ ".save",%obj.dataBlock);
+			commandtoclient(%client,'SaveNextPortal',"add-ons/jvs/portals/saves/" @ %filename @ ".save",getWord(%obj.getTransform(),0) SPC getWord(%obj.getTransform(),1) SPC getWord(%obj.getTransform(),2));
+			commandtoclient(%client,'SaveNextPortal',"add-ons/jvs/portals/saves/" @ %filename @ ".save",%obj.getColorId());
+			commandtoclient(%client,'SaveNextPortal',"add-ons/jvs/portals/saves/" @ %filename @ ".save",%obj.restrictportal);
+			commandtoclient(%client,'SaveNextPortal',"add-ons/jvs/portals/saves/" @ %filename @ ".save",%obj.portaldesc);
+		}
+	}
+}
+
+function serverCmdRemoveTeleportEffect(%client)
+{
+	if(isObject(%client.telemitter1))
+	{
+		%client.telemitter1.delete();
+	}
+
+	if(isObject(%client.telemitter2))
+	{
+		%client.telemitter2.delete();
+	}
+}
+
+function serverCmdSetMaxPortals(%client,%numportals)
+{
+	if(%client.isAdmin || %client.isSuperAdmin && %numportals != returnMaxPortals() && %numportals >=0)
+	{
+		$JVS::Server::MaxClientPortals = %numportals;
+		messageAll('','\c0The maximum number of Portals per client is now %2. [\c3%1\c0]',%client.name,%numportals);
+	}
+}
+
+function serverCmdTogMakePortals(%client)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		if(returnMakePortals())
+		{
+			$JVS::Server::ClientsMakePortals = 0;
+			messageAll('','\c0Clients are no longer able to make Portals. [\c3%1\c0]',%client.name);
+		}
+		else if(!returnMakePortals())
+		{
+			$JVS::Server::ClientsMakePortals = 1;
+			messageAll('','\c0Clients are now able to make Portals. [\c3%1\c0]',%client.name);
+		}
+		else
+		{
+			$JVS::Server::ClientsMakePortals = 1;
+		}
+	}
+}
+
+function serverCmdTogMGRandom(%client)
+{
+	if(%client.minigame.owner == %client)
+	{
+		if(%client.MGisRandom == 1)
+		{
+			for(%i = 1;%i <= PortalListSO.getCount();%i++)
+			{
+				%brick = PortalListSO.getObject(%i);
+
+				if(%brick.isPortal && %brick.restrictportal == 3 && %brick.PortalOwner.minigame == %client.minigame)
+				{
+					if(isObject(%brick.emitter))
+					{
+						%brick.emitter.delete();
+					}
+
+					%emitter = new ParticleEmitterNode()
+					{
+						datablock = "GenericEmitterNode";
+						emitter   = "PortalSystemEmitterGreen";
+					};
+
+					%x = getWord(%brick.getWorldBoxCenter(),0);
+					%y = getWord(%brick.getWorldBoxCenter(),1);
+					%z = getWord(%brick.getWorldBox(),5);
+					%emitter.setTransform(%x SPC %y SPC %z + 0.25);
+					%emitter.setScale("0.01 0.01 0.01");
+					%emitter.brick = %brick;
+					MissionCleanup.add(%emitter);
+					%brick.emitter = %emitter;
+				}
+			}
+
+			%client.MGisRandom = 0;
+
+			for(%i = 0;%i < ClientGroup.getCount();%i++)
+			{
+				%cl = ClientGroup.getObject(%i);
+
+				if(%cl.minigame == %client.minigame)
+				{
+					messageClient(%client,'','\c0Portals belonging your Mini-Game are no longer in Random Mode. [\c3%1\c0]',%client.name);
+				}
+			}
+		}
+		else if(%client.MGisRandom != 1)
+		{
+			for(%i = 1;%i <= PortalListSO.getCount();%i++)
+			{
+				%brick = PortalListSO.getObject(%i);
+
+				if(%brick.isPortal && %brick.restrictportal == 3 && %brick.PortalOwner.minigame == %client.minigame)
+				{
+					if(isObject(%brick.emitter))
+					{
+						%brick.emitter.delete();
+					}
+
+					%emitter = new ParticleEmitterNode()
+					{
+						datablock = "GenericEmitterNode";
+						emitter   = "PortalSystemEmitterViolet";
+					};
+
+					%x = getWord(%brick.getWorldBoxCenter(),0);
+					%y = getWord(%brick.getWorldBoxCenter(),1);
+					%z = getWord(%brick.getWorldBox(),5);
+					%emitter.setTransform(%x SPC %y SPC %z + 0.25);
+					%emitter.setScale("0.01 0.01 0.01");
+					%emitter.brick = %brick;
+					MissionCleanup.add(%emitter);
+					%brick.emitter = %emitter;
+				}
+			}
+
+			%client.MGisRandom = 1;
+
+			for(%i = 0;%i < ClientGroup.getCount();%i++)
+			{
+				%cl = ClientGroup.getObject(%i);
+
+				if(%cl.minigame == %client.minigame)
+				{
+					messageClient(%client,'','\c0Portals belonging your Mini-Game are now in Random Mode. [\c3%1\c0]',%client.name);
+				}
+			}
+		}
+		else
+		{
+			for(%i = 1;%i <= PortalListSO.getCount();%i++)
+			{
+				%brick = PortalListSO.getObject(%i);
+
+				if(%brick.isPortal && %brick.restrictportal == 3 && %brick.PortalOwner.minigame == %client.minigame)
+				{
+					if(isObject(%brick.emitter))
+					{
+						%brick.emitter.delete();
+					}
+
+					%emitter = new ParticleEmitterNode()
+					{
+						datablock = "GenericEmitterNode";
+						emitter   = "PortalSystemEmitterGreen";
+					};
+
+					%x = getWord(%brick.getWorldBoxCenter(),0);
+					%y = getWord(%brick.getWorldBoxCenter(),1);
+					%z = getWord(%brick.getWorldBox(),5);
+					%emitter.setTransform(%x SPC %y SPC %z + 0.25);
+					%emitter.setScale("0.01 0.01 0.01");
+					%emitter.brick = %brick;
+					MissionCleanup.add(%emitter);
+					%brick.emitter = %emitter;
+				}
+			}
+
+			%client.MGisRandom = 0;
+
+			for(%i = 0;%i < ClientGroup.getCount();%i++)
+			{
+				%cl = ClientGroup.getObject(%i);
+
+				if(%cl.minigame == %client.minigame)
+				{
+					messageClient(%client,'','\c0Portals belonging your Mini-Game are no longer in Random Mode. [\c3%1\c0]',%client.name);
+				}
+			}
+		}
+	}
+}
+
+function serverCmdTogRandom(%client)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		if(returnRandomMode())
+		{
+			for(%i = 1;%i <= PortalListSO.getCount();%i++)
+			{
+				%brick = PortalListSO.getObject(%i);
+
+				if(%brick.isPortal && %brick.restrictportal == 0)
+				{
+					if(isObject(%brick.emitter))
+					{
+						%brick.emitter.delete();
+					}
+
+					%emitter = new ParticleEmitterNode()
+					{
+						datablock = "GenericEmitterNode";
+						emitter   = "PortalSystemEmitterBlue";
+					};
+
+					%x = getWord(%brick.getWorldBoxCenter(),0);
+					%y = getWord(%brick.getWorldBoxCenter(),1);
+					%z = getWord(%brick.getWorldBox(),5);
+					%emitter.setTransform(%x SPC %y SPC %z + 0.25);
+					%emitter.setScale("0.01 0.01 0.01");
+					%emitter.brick = %brick;
+					MissionCleanup.add(%emitter);
+					%brick.emitter = %emitter;
+				}
+			}
+
+			$JVS::Server::RandomMode = 0;
+			messageAll('','\c0Non-restricted Portals are no longer in Random Mode! [\c3%1\c0]',%client.name);
+		}
+		else if(!returnRandomMode())
+		{
+			for(%i = 1;%i <= PortalListSO.getCount();%i++)
+			{
+				%brick = PortalListSO.getObject(%i);
+
+				if(%brick.isPortal && %brick.restrictportal == 0)
+				{
+					if(isObject(%brick.emitter))
+					{
+						%brick.emitter.delete();
+					}
+
+					%emitter = new ParticleEmitterNode()
+					{
+						datablock = "GenericEmitterNode";
+						emitter   = "PortalSystemEmitterRed";
+					};
+
+					%x = getWord(%brick.getWorldBoxCenter(),0);
+					%y = getWord(%brick.getWorldBoxCenter(),1);
+					%z = getWord(%brick.getWorldBox(),5);
+					%emitter.setTransform(%x SPC %y SPC %z + 0.25);
+					%emitter.setScale("0.01 0.01 0.01");
+					%emitter.brick = %brick;
+					MissionCleanup.add(%emitter);
+					%brick.emitter = %emitter;
+				}
+			}
+
+			$JVS::Server::RandomMode = 1;
+			messageAll('','\c0Non-restricted Portals are now in Random Mode. [\c3%1\c0]',%client.name);
+		}
+		else
+		{
+			for(%i = 1;%i <= PortalListSO.getCount();%i++)
+			{
+				%brick = PortalListSO.getObject(%i);
+
+				if(%brick.isPortal && %brick.restrictportal == 0)
+				{
+					if(isObject(%brick.emitter))
+					{
+						%brick.emitter.delete();
+					}
+
+					%emitter = new ParticleEmitterNode()
+					{
+						datablock = "GenericEmitterNode";
+						emitter   = "PortalSystemEmitterBlue";
+					};
+
+					%x = getWord(%brick.getWorldBoxCenter(),0);
+					%y = getWord(%brick.getWorldBoxCenter(),1);
+					%z = getWord(%brick.getWorldBox(),5);
+					%emitter.setTransform(%x SPC %y SPC %z + 0.25);
+					%emitter.setScale("0.01 0.01 0.01");
+					%emitter.brick = %brick;
+					MissionCleanup.add(%emitter);
+					%brick.emitter = %emitter;
+				}
+			}
+
+			$JVS::Server::RandomMode = 0;
+			messageAll('','\c0Non-restricted Portals are no longer in Random Mode! [\c3%1\c0]',%client.name);
+		}
+	}
+}
+
+function serverCmdTogUploadPortals(%client)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		if(returnUploadPortals())
+		{
+			$JVS::Server::ClientsUploadPortals = 0;
+			messageAll('','\c0Clients are no longer able to upload Portal saves. [\c3%1\c0]',%client.name);
+		}
+		else if(!returnUploadPortals())
+		{
+			$JVS::Server::ClientsUploadPortals = 1;
+			messageAll('','\c0Clients are now able to upload Portal saves. [\c3%1\c0]',%client.name);
+		}
+		else
+		{
+			$JVS::Server::ClientsUploadPortals = 0;
+			messageAll('','\c0Clients are no longer able to upload Portal saves. [\c3%1\c0]',%client.name);
+		}
+	}
+}
+
+function serverCmdTogUsePortals(%client)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		if(returnUsePortals())
+		{
+			$JVS::Server::ClientsUsePortals = 0;
+			messageAll('','\c0Clients are no longer able to use Portals. [\c3%1\c0]',%client.name);
+		}
+		else if(!returnUsePortals())
+		{
+			$JVS::Server::ClientsUsePortals = 1;
+			messageAll('','\c0Clients are now able to use Portals. [\c3%1\c0]',%client.name);
+		}
+		else
+		{
+			$JVS::Server::ClientsUsePortals = 1;
+			messageAll('','\c0Clients are no longer able to use Portals. [\c3%1\c0]',%client.name);
+		}
+	}
+}
+
+//PortalListSO Code
+
+if(!isObject(PortalListSO))
+{
+	new ScriptObject(PortalListSO)
+	{
+		numPortals = 0;
+	};
+}
+
+function PortalListSO::add(%this,%obj)
+{
+	%this.Portal[%this.numPortals++] = %obj;
+}
+
+function PortalListSO::clear(%this)
+{
+	for(%i = 1;%i <= %this.numPortals;%i++)
+	{
+		%this.Portal[%i] = "";
+	}
+
+	%this.numPortals = 0;
+}
+
+function PortalListSO::getCount(%this)
+{
+	return %this.numPortals;
+}
+
+function PortalListSO::getObject(%this,%obj)
+{
+	return %this.Portal[%obj];
+}
+
+function PortalListSO::listObjects(%this)
+{
+	for(%i = 1;%i <= %this.numPortals;%i++)
+	{
+		echo(%this.Portal[%i]);
+	}
+}
+
+function PortalListSO::remove(%this,%obj)
+{
+	%portals = 0;
+
+	for(%i = 1;%i <= %this.numPortals;%i++)
+	{
+		if(%this.Portal[%i] != %obj)
+		{
+			%portals++;
+			%portal[%portals] = %this.Portal[%i];
+		}
+
+		%this.Portal[%i] = "";
+	}
+
+	if(%portals > 0)
+	{
+		for(%j = 1;%j <= %portals;%j++)
+		{
+			%this.Portal[%j] = %portal[%j];
+		}
+
+		%this.numPortals = %Portals;
+	}
+	else
+	{
+		%this.numPortals = 0;
+	}
+}
+
+//Datablocks
+
+if(!isObject(portalSystemItem))
+{
+	datablock ItemData(portalSystemItem)
+	{
+		category = "Item";
+		equipment = true;
+		shapeFile = "base/data/shapes/empty.dts";
+		mass = 1;
+		density = 0.2;
+		elasticity = 0.2;
+		friction = 0.6;
+		emap = true;
+		doColorShift = false;
+		image = portalSystemImage;
+		canDrop = true;
+	};
+}
+
+if(!isObject(PortalSystemParticleBlue))
+{
+	datablock ParticleData(PortalSystemParticleBlue)
+	{
+		textureName          = "base/data/particles/thinring";
+		dragCoefficient      = 0.0;
+		gravityCoefficient   = 0.0;
+		inheritedVelFactor   = 0.0;
+		windCoefficient      = 0;
+		constantAcceleration = 0;
+		lifetimeMS           = 1100;
+		lifetimeVarianceMS   = 300;
+		spinSpeed     = 0;
+		spinRandomMin = -90.0;
+		spinRandomMax =  90.0;
+		useInvAlpha   = false;
+		colors[0] = "0.000000 0.314961 0.740157 0.496063";
+		colors[1] = "0.000000 0.314961 0.740157 0.000000";
+		colors[2] = "1.000000 1.000000 1.000000 1.000000";
+		colors[3] = "1.000000 1.000000 1.000000 1.000000";
+		sizes[0] = "1.5";
+		sizes[1] = "2.5";
+		sizes[2] = "1";
+		sizes[3] = "1";
+		times[0] = "0";
+		times[1] = "1";
+		times[2] = "2";
+		times[3] = "2";
+	};
+}
+
+if(!isObject(PortalSystemParticleGreen))
+{
+	datablock ParticleData(PortalSystemParticleGreen : PortalSystemParticleBlue)
+	{
+		colors[0] = "0.105882 0.568627 0.000000 0.496063";
+		colors[1] = "0.105882 0.568627 0.000000 0.000000";
+	};
+}
+
+if(!isObject(PortalSystemParticleIndigo))
+{
+	datablock ParticleData(PortalSystemParticleIndigo : PortalSystemParticleBlue)
+	{
+		colors[0] = "0.180392 0.192156 0.572549 0.496063";
+		colors[1] = "0.180392 0.192156 0.572549 0.000000";
+	};
+}
+
+if(!isObject(PortalSystemParticleOrange))
+{
+	datablock ParticleData(PortalSystemParticleOrange : PortalSystemParticleBlue)
+	{
+		colors[0] = "0.933333 0.462745 0.000000 0.496063";
+		colors[1] = "0.933333 0.462745 0.000000 0.000000";
+	};
+}
+
+if(!isObject(PortalSystemParticleViolet))
+{
+	datablock ParticleData(PortalSystemParticleViolet : PortalSystemParticleBlue)
+	{
+		colors[0] = "0.309803 0.105882 0.466666 0.496063";
+		colors[1] = "0.309803 0.105882 0.466666 0.000000";
+	};
+}
+
+if(!isObject(PortalSystemParticleRed))
+{
+	datablock ParticleData(PortalSystemParticleRed : PortalSystemParticleBlue)
+	{
+		colors[0] = "0.737255 0.000000 0.000000 0.496063";
+		colors[1] = "0.737255 0.000000 0.000000 0.000000";
+	};
+}
+
+if(!isObject(PortalSystemParticleYellow))
+{
+	datablock ParticleData(PortalSystemParticleYellow : PortalSystemParticleBlue)
+	{
+		colors[0] = "0.964705 1.000000 0.000000 0.496063";
+		colors[1] = "0.964705 1.000000 0.000000 0.000000";
+	};
+}
+
+if(!isObject(PortalSystemEmitterBlue))
+{
+	datablock ParticleEmitterData(PortalSystemEmitterBlue)
+	{
+		ejectionPeriodMS = 150;
+		periodVarianceMS = 0;
+		ejectionVelocity = 3;
+		ejectionOffset   = 0.0;
+		velocityVariance = 0.0;
+		thetaMin         = 0;
+		thetaMax         = 0;
+		phiReferenceVel  = 0;
+		phiVariance      = 0;
+		overrideAdvance = 0;
+		particles = PortalSystemParticleBlue;
+	};
+}
+
+if(!isObject(PortalSystemEmitterGreen))
+{
+	datablock ParticleEmitterData(PortalSystemEmitterGreen : PortalSystemEmitterBlue)
+	{
+		particles = PortalSystemParticleGreen;
+	};
+}
+
+if(!isObject(PortalSystemEmitterIndigo))
+{
+	datablock ParticleEmitterData(PortalSystemEmitterIndigo : PortalSystemEmitterBlue)
+	{
+		particles = PortalSystemParticleIndigo;
+	};
+}
+
+if(!isObject(PortalSystemEmitterOrange))
+{
+	datablock ParticleEmitterData(PortalSystemEmitterOrange : PortalSystemEmitterBlue)
+	{
+		particles = PortalSystemParticleOrange;
+	};
+}
+
+if(!isObject(PortalSystemEmitterViolet))
+{
+	datablock ParticleEmitterData(PortalSystemEmitterViolet : PortalSystemEmitterBlue)
+	{
+		particles = PortalSystemParticleViolet;
+	};
+}
+
+if(!isObject(PortalSystemEmitterRed))
+{
+	datablock ParticleEmitterData(PortalSystemEmitterRed : PortalSystemEmitterBlue)
+	{
+		particles = PortalSystemParticleRed;
+	};
+}
+
+if(!isObject(PortalSystemEmitterYellow))
+{
+	datablock ParticleEmitterData(PortalSystemEmitterYellow : PortalSystemEmitterBlue)
+	{
+		particles = PortalSystemParticleYellow;
+	};
+}
+
+if(!isObject(portalSystemImage))
+{
+	datablock ShapeBaseImageData(portalSystemImage)
+	{
+		shapeFile = "base/data/shapes/empty.dts";
+		emap = false;
+		mountPoint = 0;
+		offset = "-0.17 0.17 -0.07";
+		rotation = eulerToMatrix("-90 90 0");
+		eyeOffset = "0.7 1.2 -0.15";
+		eyeRotation = eulerToMatrix("90 -90 0");
+		doColorShift = false;
+		correctMuzzleVector = false;
+		className = "WeaponImage";
+		item = portalSystemItem;
+		melee = true;
+		armReady = true;
+		stateName[0]                     = "Activate";
+		stateTimeoutValue[0]             = 0.5;
+		stateTransitionOnTimeout[0]       = "Ready";
+		stateName[1]                     = "Ready";
+		stateTransitionOnTriggerDown[1]  = "Fire";
+		stateAllowImageChange[1]         = true;
+		stateName[2]                    = "Fire";
+		stateTransitionOnTriggerUp[2]	= "Ready";
+		stateScript[2]                  = "onFire";
+	};
+}
+
+//Item Code
+
+function portalSystemItem::onPickup(%this,%obj,%user,%amount)
+{
+}
+
+function portalSystemItem::onCollision(%this,%obj,%col,%fade,%pos,%normal)
+{
+	if(%col.getClassName() $= "Player" && %col.client.getControlObject() == %col)
+	{
+		%client = %col.client;
+		%brickcount = 0;
+	
+		if(%client.portalpickup != %obj.spawnBrick && !%obj.spawnBrick.isFakeDead() && (returnUsePortals() || (%client.isAdmin || %client.isSuperAdmin)))
+		{
+			%col2 = %obj.spawnBrick;
+	
+			if(!%col2.isFakeDead())
+			{
+				messageClient(%client,'MsgCancelTimer','');
+				%client.portalcol = %col2;
+				%desc1 = %col2.portaldesc;
+				%matches = 0;
+	
+				for(%i = 1;%i <= PortalListSO.getCount();%i++)
+				{
+					%brickcount++;
+					%brick = PortalListSO.getObject(%i);
+					%bricks[%brickcount] = %brick;
+					%desc2 = %brick.portaldesc;
+	
+					if(%brick.isPortal && %desc1 $= %desc2 && %brick != %col2)
+					{
+						%matches++;
+						%match[%matches] = %brick;
+					}
+				}
+
+				if(%col2.restrictportal == 0)
+				{
+					%warp = 1;
+				}
+				else if(%col2.restrictportal == 1)
+				{
+					if(%client.isAdmin || %client.isSuperAdmin)
+					{
+						%warp = 1;
+					}
+					else
+					{
+						%warp = 0;			
+						commandtoclient(%client,'centerprint',"\c0Only Admins and SuperAdmins may use this Portal.",2,2,5000);
+					}
+				}
+				else if(%col2.restrictportal == 2)
+				{
+					if(%client.isSuperAdmin)
+					{
+						%warp = 1;
+					}
+					else
+					{
+						%warp = 0;
+						commandtoclient(%client,'centerprint',"\c0Only SuperAdmins may use this Portal.",2,2,5000);
+					}
+				}
+				else if(%col2.restrictportal == 3)
+				{
+					if(%client.minigame == 0 || %client.minigame $= "")
+					{
+						%warp = 0;
+
+						if(%client == %col2.getGroup().client)
+						{
+							commandtoclient(%client,'centerprint',"\c0You must create a Mini-Game to use this Portal.",2,2,5000);
+						}
+						else
+						{
+							commandtoclient(%client,'centerprint',"\c0You must join \c3" @ %col2.getGroup().client.name @ "\c3's \c0Mini-Game to use this Portal.",2,2,5000);
+						}
+					}
+					else if(%client.minigame != %col2.getGroup().client.minigame)
+					{
+						%warp = 0;
+
+						if(%client == %col2.getGroup().client)
+						{
+							commandtoclient(%client,'centerprint',"\c0You must create a Mini-Game to use this Portal.",2,2,5000);
+						}
+						else
+						{
+							commandtoclient(%client,'centerprint',"\c0You must join \c3" @ %col2.getGroup().client.name @ "\c3's \c0Mini-Game to use this Portal.",2,2,5000);
+						}
+					}
+					else
+					{
+						%warp = 1;
+					}
+				}
+				else if(%col2.restrictportal == 4)
+				{
+					if(%client == %col2.getGroup().client || %client.isAdmin || %client.isSuperAdmin)
+					{
+						%warp = 1;
+					}
+					else
+					{
+						%warp = 0;
+						commandtoclient(%client,'centerprint',"\c0Only \c3" @ %col2.getGroup().client.name @ "\c0, Admins, & SuperAdmins may use this Portal.",2,2,5000);
+					}
+				}
+
+				if(%warp == 1)
+				{
+					if((!returnRandomMode() || %col2.restrictportal == 1 || %col2.restrictportal == 2 || %col2.restrictportal == 4) && %col2.restrictportal != 3)
+					{
+						if(%matches == 1)
+						{
+							%trans = %match[%matches].getTransform();
+							%player = %client.player;
+							ServerPlay3D(printFireSound, %col2.getTransform());
+							%x = getWord(%trans,0);
+							%y = getWord(%trans,1);
+							%z = getWord(%match[%matches].getWorldBox(),5) + 0.25;
+							%player.setTransform(%x SPC %y SPC %z);
+							messageClient(%client,'MsgPortalAudio','');
+							serverCmdAddTeleportEffect(%client,%match[%matches],%player);
+							ServerPlay3D(printFireSound, %match[%matches].getTransform());
+							%client.portalpickup = %match[%matches];
+							%sched = schedule(3000,0,"serverCmdportalpickup",%client);
+							messageClient(%client,'MsgSetSchedule','',%sched);
+						}
+						else if(%matches == 0)
+						{
+							%client.portalpickup = %col2;
+							%client.portalobj = %client.Player;
+							portalhalt(%client.player,%col2,100);
+							serverCmdPortalTeleport(%client);
+						}
+					}
+					else if(returnRandomMode() && %col2.restrictportal == 0)
+					{
+						%portalchoices = 0;
+		
+						for(%i = 1;%i <= %brickcount;%i++)
+						{
+							%brick = %bricks[%i];
+
+							if(%brick.isPortal && %brick != %col2)
+							{
+								%passed = 0;
+
+								if(%brick.restrictportal == 0 && %client.portalcol.restrictportal != 3)
+								{
+									%passed = 1;
+								}
+								else if(%brick.restrictportal == 1 && (%client.isAdmin || %client.isSuperAdmin) && %client.portalcol.restrictportal != 3)
+								{
+									%passed = 1;
+								}
+								else if(%brick.restrictportal == 2 && %client.isSuperAdmin && %client.portalcol.restrictportal != 3)
+								{
+									%passed = 1;
+								}
+								else if(%brick.restrictportal == 3 && (%client.isAdmin || %client.isSuperAdmin))
+								{
+									%passed = 1;
+								}
+								else if(%brick.restrictportal == 4 && ((%client.isAdmin || %client.isSuperAdmin) || %client = %brick.getGroup().client))
+								{
+									%passed = 1;
+								}
+
+								if(%passed == 1)
+								{
+									%portalchoices++;
+									%portalchoice[%portalchoices] = %brick;
+								}
+							}
+						}
+
+						if(%portalchoices > 0)
+						{
+							%random = getRandom(1,%portalchoices);
+							%trans = %portalchoice[%random].getTransform();
+							%player = %client.player;
+							ServerPlay3D(printFireSound, %col2.getTransform());
+							%x = getWord(%trans,0);
+							%y = getWord(%trans,1);
+							%z = getWord(%portalchoice[%random].getWorldBox(),5) + 0.25;
+							%player.setTransform(%x SPC %y SPC %z);
+							messageClient(%client,'MsgPortalAudio','');
+							serverCmdAddTeleportEffect(%client,%portalchoice[%random],%player);
+							ServerPlay3D(printFireSound, %portalchoice[%random].getTransform());
+							%client.portalpickup = %portalchoice[%random];
+							%sched = schedule(3000,0,"serverCmdportalpickup",%client);
+							messageClient(%client,'MsgSetSchedule','',%sched);
+						}
+					}
+					else if(%client.MGisRandom == 1 && %col2.restrictportal == 3)
+					{
+						%portalchoices = 0;
+
+						for(%i = 1;%i <= %brickcount;%i++)
+						{
+							%brick = %bricks[%i];
+
+							if(%brick.isPortal && %brick != %col2)
+							{
+								if(%brick.restrictportal == 3 && %client.minigame == %brick.getGroup().client.minigame && %client.minigame != 0 && %client.minigame !$= "")
+								{
+									%portalchoices++;
+									%portalchoice[%portalchoices] = %brick;
+								}
+							}
+						}
+
+						if(%portalchoices > 0)
+						{
+							%random = getRandom(1,%portalchoices);
+							%trans = %portalchoice[%random].getTransform();
+							%player = %client.player;
+							ServerPlay3D(printFireSound, %col2.getTransform());
+							%x = getWord(%trans,0);
+							%y = getWord(%trans,1);
+							%z = getWord(%portalchoice[%random].getWorldBox(),5) + 0.25;
+							%player.setTransform(%x SPC %y SPC %z);
+							messageClient(%client,'MsgPortalAudio','');
+							serverCmdAddTeleportEffect(%client,%portalchoice[%random],%player);
+							ServerPlay3D(printFireSound, %portalchoice[%random].getTransform());
+							%client.portalpickup = %portalchoice[%random];
+							%sched = schedule(3000,0,"serverCmdportalpickup",%client);
+							messageClient(%client,'MsgSetSchedule','',%sched);
+						}
+					}
+					else if(%client.MGisRandom == 0 && %col2.restrictportal == 3)
+					{
+						if(%matches == 1 && %match[%matches].restrictportal == 3 && %match[%matches].getGroup().client.minigame == %client.minigame && %client.minigame != 0 && %client.minigame !$= "")
+						{
+							%trans = %match[%matches].getTransform();
+							%player = %client.player;
+							ServerPlay3D(printFireSound, %col2.getTransform());
+							%x = getWord(%trans,0);
+							%y = getWord(%trans,1);
+							%z = getWord(%match[%matches].getWorldBox(),5) + 0.25;
+							%player.setTransform(%x SPC %y SPC %z);
+							messageClient(%client,'MsgPortalAudio','');
+							serverCmdAddTeleportEffect(%client,%match[%matches],%player);
+							ServerPlay3D(printFireSound, %match[%matches].getTransform());
+							%client.portalpickup = %match[%matches];
+							%sched = schedule(3000,0,"serverCmdportalpickup",%client);
+							messageClient(%client,'MsgSetSchedule','',%sched);
+						}
+						else if(%matches == 0)
+						{
+							%client.portalpickup = %col2;
+							%client.portalobj = %client.Player;
+							portalhalt(%client.player,%col2,100);
+							serverCmdPortalTeleport(%client);
+						}
+					}
+				}
+			}
+		}		
+		else if(!returnUsePortals() && (!%client.isAdmin || !%client.isSuperAdmin) && !%col2.isFakeDead())
+		{
+			commandtoclient(%client,'centerprint',"\c0Clients are not allowed to use Portals at this time.",2,2,5000);
+		}
+	}
+}
+
+//Server Overrides
+
+package portalsServerOverrides
+{
+	function MiniGameSO::addMember(%this,%client)
+	{
+		ServerCmdFixMGRandom(%client,%this,"add");
+		Parent::addMember(%this,%client);
+	}
+
+	function MiniGameSO::delete(%this)
+	{
+		for(%i = 0;%i < ClientGroup.getCount();%i++)
+		{
+			%client = ClientGroup.getObject(%i);
+
+			ServerCmdFixMGRandom(%client,%this,"delete");
+		}
+
+		Parent::delete(%this);
+	}
+
+	function MiniGameSO::removeMember(%this,%client)
+	{
+		ServerCmdFixMGRandom(%client,%this,"remove");
+		Parent::removeMember(%this,%client);
+	}
+
+	function portalSystemItem::onRemove(%this,%obj)
+	{
+		%obj.spawnBrick.restrictportal = "";
+		%obj.spawnBrick.PortalOwner = "";
+		%obj.spawnBrick.isPortal = "";
+		%obj.spawnBrick.PortalDesc = "";
+		PortalListSO.remove(%obj.spawnBrick);
+	}
+};
+
+ActivatePackage(portalsServerOverrides);

@@ -1,0 +1,209 @@
+//Client Methods
+
+function clearalldoors()
+{
+	commandtoserver('clearalldoors');
+}
+
+function clearclientdoors()
+{
+	if(lstdoormanagementlist.getSelectedId() != -1)
+	{
+		messageboxokcancel("Clear Doors?","Are you sure you want to destroy all of " @ getWord(lstdoormanagementlist.getRowTextById(lstdoormanagementlist.getSelectedId()),0) @ "'s Doors?","clearclientdoors2();","");
+	}
+}
+
+function clearclientdoors2()
+{
+	if(lstdoormanagementlist.getSelectedId() != -1)
+	{
+		commandtoserver('clearclientdoors',lstdoormanagementlist.getSelectedId());
+	}
+}
+
+function cleardoorcolor()
+{
+	commandtoserver('cleardoorcolor');
+}
+
+function cleardoorcolor2()
+{
+	%brick = lstDoorList.getSelectedId();
+	%brick = getWord(%brick,0);
+	commandtoserver('cleardoorcolor2',%brick);
+}
+
+function cleardoorcolor3()
+{
+	commandtoserver('cleardoorcolor3');
+}
+
+function makedoor()
+{
+	%n = doordirN.getValue();
+	%e = doordirE.getValue();
+	%s = doordirS.getValue();
+	%w = doordirW.getValue();
+	%plus = doorrot90plus.getValue();
+	%minus = doorrot90minus.getValue();
+	%desc = ddescription.getValue();
+	%r0 = drestrict0.getValue();
+	%r1 = drestrict1.getValue();
+	%r2 = drestrict2.getValue();
+	%r3 = drestrict3.getValue();
+	%r4 = drestrict4.getValue();
+	%doortype = doorselect.getValue();
+	commandtoserver('makedoor2',%n,%e,%s,%w,%plus,%minus,%desc,%r0,%r1,%r2,%r3,%r4,%doortype);
+}
+
+function makedoor2()
+{
+	%brick = lstDoorList.getSelectedId();
+	%brick = getWord(%brick,0);
+	%n = doordirN2.getValue();
+	%e = doordirE2.getValue();
+	%s = doordirS2.getValue();
+	%w = doordirW2.getValue();
+	%plus = doorrot90plus2.getValue();
+	%minus = doorrot90minus2.getValue();
+	%desc = description2.getValue();
+	%r0 = drestrict02.getValue();
+	%r1 = drestrict12.getValue();
+	%r2 = drestrict22.getValue();
+	%r3 = drestrict32.getValue();
+	%r4 = drestrict42.getValue();
+	%doortype = doorselect2.getValue();
+	commandtoserver('makedoor',%n,%e,%s,%w,%plus,%minus,%desc,%r0,%r1,%r2,%r3,%r4,%doortype,%brick);
+}
+
+function modifydoor(%action)
+{
+	if(closedtoggle.mColor $= "255 75 0 255" && opentoggle.mColor $= "50 255 50 255")
+	{
+		if(%action $= "togclose")
+		{
+			closedtoggle.mColor = "50 255 50 255";
+			opentoggle.mColor = "255 75 0 255";
+		}
+		else if(%action $= "togopen")
+		{
+			closedtoggle.mColor = "255 75 0 255";
+			opentoggle.mColor = "255 75 0 255";
+		}
+	}
+	else if(closedtoggle.mColor $= "255 75 0 255" && opentoggle.mColor $= "255 75 0 255")
+	{
+		if(%action $= "togclose")
+		{
+			closedtoggle.mColor = "50 255 50 255";
+			opentoggle.mColor = "255 75 0 255";
+		}
+		else if(%action $= "togopen")
+		{
+			closedtoggle.mColor = "255 75 0 255";
+			opentoggle.mColor = "50 255 50 255";
+		}
+	}
+	else if(closedtoggle.mColor $= "50 255 50 255" && opentoggle.mColor $= "255 75 0 255")
+	{
+		if(%action $= "togclose")
+		{
+			closedtoggle.mColor = "255 75 0 255";
+			opentoggle.mColor = "255 75 0 255";
+		}
+		else if(%action $= "togopen")
+		{
+			closedtoggle.mColor = "255 75 0 255";
+			opentoggle.mColor = "50 255 50 255";
+		}
+	}
+
+	%brick = lstDoorList.getSelectedId();
+	%brick = getWord(%brick,0);
+	commandtoserver('modifydoor',%brick,%action);
+}
+
+function refreshList2()
+{
+	setModPaths(getModPaths());
+	lstDoorLoaderList.clear();
+
+	%i = 0;
+	for(%file = findFirstFile("add-ons/jvs/doors/saves/*.save");%file !$= "";%file = findNextFile("add-ons/jvs/doors/saves/*.save"))
+	{
+		%name = fileBase(%file);
+		lstDoorLoaderList.addRow(%i++, fileBase(%file));
+	}
+
+	lstDoorLoaderList.sort(0);
+}
+
+function saveDoors()
+{
+	%file = "add-ons/jvs/doors/saves/" @ txteditName2.getValue() @ ".save";
+
+	if(!isFile(%file))
+	{
+		commandtoserver('savedoors2',(txteditName2.getValue()));canvas.popDialog(jvsgui);
+	}
+	else
+	{
+		messageboxokcancel("File Exists, Overwrite?","Are you sure you want overwrite the file \"" @ txteditName2.getValue() @ "\"?","savedoors2();","");
+	}
+}
+
+function saveDoors2()
+{
+	commandtoserver('savedoors2',(txteditName2.getValue()));canvas.popDialog(jvsgui);
+}
+
+//Client Commands
+
+function clientCmdLoadDoors(%file)
+{
+	%open = new FileObject();
+	%open.openforRead(%file);
+	%lines = 0;
+
+	while(!%open.isEOF())
+	{
+		%line = %open.readline();
+		$doorlines[%lines] = %line;
+		%lines++;
+	}
+
+	%open.close();
+	%open.delete();
+	%currentLine = 0;
+	commandtoserver('LoadDoor',$doorlines[%currentLine],$doorlines[%currentLine++],$doorlines[%currentLine++],$doorlines[%currentLine++],$doorlines[%currentLine++],$doorlines[%currentLine++],$doorlines[%currentLine++],$doorlines[%currentLine++],%currentLine,%lines--);
+}
+
+function clientCmdLoadNextDoor(%currentLine,%totalLines)
+{
+	if(%currentLine <= %totalLines)
+	{
+		commandtoserver('LoadDoor',$doorlines[%currentLine],$doorlines[%currentLine++],$doorlines[%currentLine++],$doorlines[%currentLine++],$doorlines[%currentLine++],$doorlines[%currentLine++],$doorlines[%currentLine++],$doorlines[%currentLine++],%currentLine,%totalLines);
+	}
+}
+
+function clientCmdManageMyDoors()
+{
+	commandtoserver('managemydoors');
+}
+
+function clientCmdSaveDoors(%file)
+{
+	%write = new FileObject();
+	%write.openForWrite(%file);
+	%write.close();
+	%write.delete();
+}
+
+function clientCmdSaveNextDoor(%file,%line)
+{
+	%write = new FileObject();
+	%write.openForAppend(%file);
+	%write.writeLine(%line);
+	%write.close();
+	%write.delete();
+}

@@ -1,0 +1,29 @@
+Change-Log
+--------------------------------
+
+
+1.11
+
+Eliminated some audio datablocks due to existence of similar datablocks included with the game.
+
+Organizational changes in code.
+
+Common client code updated to fix issue with JVS unified GUI involving Door maintenance.
+
+Doors client code updated to fix issue with JVS unified GUI involved Doors maintenance.
+
+
+1.1
+
+Removed all Door GUIs and placed their contents in the unified JVS GUI.
+
+You should now use the 'Fire' button to exit the 'Door Cam' view instead of F7.
+
+Server-side Door management is now a lot more efficient.
+
+Fixed bug with .dts shapes not displaying correctly (white.png).
+
+
+1.0
+
+First release.  11 Doors.

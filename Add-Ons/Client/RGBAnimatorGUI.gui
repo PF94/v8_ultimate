@@ -1,0 +1,198 @@
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(rgbanimatorgui) {
+   profile = "GuiDefaultProfile";
+   horizSizing = "right";
+   vertSizing = "bottom";
+   position = "0 0";
+   extent = "640 480";
+   minExtent = "8 2";
+   visible = "1";
+
+   new GuiWindowCtrl(rgbanimatorgui_window) {
+      profile = "GuiWindowProfile";
+      horizSizing = "right";
+      vertSizing = "bottom";
+      position = (460-$rgbani_maxxdim*8) SPC (312-$rgbani_maxydim*9);
+      extent = (120+$rgbani_maxxdim*15) SPC (156+$rgbani_maxydim*18);
+      minExtent = "8 2";
+      visible = "1";
+      command = "canvas.popdialog(rgbanimatorgui);";
+      text = "RGB Animator";
+      maxLength = "255";
+      resizeWidth = "1";
+      resizeHeight = "1";
+      canMove = "1";
+      canClose = "1";
+      canMinimize = "1";
+      canMaximize = "1";
+      minSize = "50 50";
+      accelerator="escape";
+      closeCommand="canvas.popdialog(rgbanimatorgui);";
+
+      new GuiButtonCtrl(rgbanimatorgui_createmacrobutton) {
+         profile = "GuiButtonProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = (-3+$rgbani_maxxdim*15)@" 44";
+         extent = "100 30";
+         minExtent = "8 2";
+         visible = "1";
+         command = "rgbani_createmacro();";
+         text = "Create Macro";
+         groupNum = "-1";
+         buttonType = "PushButton";
+      };
+      new GuiButtonCtrl(rgbanimatorgui_framebutton1) {
+         profile = "GuiButtonProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "60 44";
+         extent = "30 30";
+         minExtent = "8 2";
+         visible = "1";
+         command = "rgbani_frame(1);";
+         text = "1";
+         groupNum = "-1";
+         buttonType = "PushButton";
+      };
+      new GuiButtonCtrl(rgbanimatorgui_framebutton2) {
+         profile = "GuiButtonProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "100 44";
+         extent = "30 30";
+         minExtent = "8 2";
+         visible = "1";
+         command = "rgbani_frame(2);";
+         text = "2";
+         groupNum = "-1";
+         buttonType = "PushButton";
+      };
+      new GuiButtonCtrl(rgbanimatorgui_framebutton3) {
+         profile = "GuiButtonProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "140 44";
+         extent = "30 30";
+         minExtent = "8 2";
+         visible = "1";
+         command = "rgbani_frame(3);";
+         text = "3";
+         groupNum = "-1";
+         buttonType = "PushButton";
+      };
+      new GuiTextCtrl() {
+         profile = "GuiTextProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "20 50";
+         extent = "30 18";
+         minExtent = "8 2";
+         visible = "1";
+         text = "Frame";
+         maxLength = "255";
+      };
+
+      new GuiButtonCtrl(rgbanimatorgui_clearframebutton) {
+         profile = "GuiButtonProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "20 "@(106+$rgbani_maxydim*18);
+         extent = "70 30";
+         minExtent = "8 2";
+         visible = "1";
+         command = "rgbani_clearframe();";
+         text = "Clear Frame";
+         groupNum = "-1";
+         buttonType = "PushButton";
+      };
+
+      new GuiButtonCtrl(rgbanimatorgui_setdimsbutton) {
+         profile = "GuiButtonProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = (-3+$rgbani_maxxdim*15) SPC (106+$rgbani_maxydim*18);
+         extent = "101 30";
+         minExtent = "8 2";
+         visible = "1";
+         command = "rgbani_setdims();";
+         text = "Set Dimensions";
+         groupNum = "-1";
+         buttonType = "PushButton";
+      };
+      new GuiTextEditCtrl(rgbanimatorgui_xdimtxt) {
+         profile = "GuiTextEditProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = (-35+$rgbani_maxxdim*15) SPC (112+$rgbani_maxydim*18);
+         extent = "24 18";
+         minExtent = "8 2";
+         visible = "1";
+         maxLength = "2";
+         historySize = "0";
+         password = "0";
+         tabComplete = "0";
+         sinkAllKeyEvents = "0";
+      };
+      new GuiTextEditCtrl(rgbanimatorgui_ydimtxt) {
+         profile = "GuiTextEditProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = (-65+$rgbani_maxxdim*15) SPC (112+$rgbani_maxydim*18);
+         extent = "24 18";
+         minExtent = "8 2";
+         visible = "1";
+         maxLength = "2";
+         historySize = "0";
+         password = "0";
+         tabComplete = "0";
+         sinkAllKeyEvents = "0";
+      };
+
+   };
+};
+//--- OBJECT WRITE END ---
+
+for(%y=0;%y<$rgbani_maxydim;%y++){
+ for(%x=0;%x<$rgbani_maxxdim;%x++){
+
+   %n=new GuiBitmapCtrl("rgbanibutton"@%x@"_"@%y) {
+      profile = "GuiDefaultProfile";
+      horizSizing = "right";
+      vertSizing = "bottom";
+      position = (60+%x*15) SPC (90+%y*18);
+      extent = "15 18";
+      minExtent = "8 2";
+      visible = "1";
+      bitmap = "base/data/shapes/whiteCheck";
+      wrap = "0";
+      lockAspectRatio = "0";
+      alignLeft = "0";
+      overflowImage = "0";
+      keepCached = "0";
+   };
+   rgbanimatorgui_window.add(%n);
+   %n=new GuiBitmapButtonCtrl("rgbanibuttoncover"@%x@"_"@%y) {
+      profile = "GuiDefaultProfile";
+      horizSizing = "right";
+      vertSizing = "bottom";
+      position = (60+%x*15) SPC (90+%y*18);
+      extent = "15 18";
+      minExtent = "8 2";
+      visible = "1";
+      command = "rgbani_togglebutton("@%x@","@%y@");";
+      bitmap = "base/client/ui/btncolor";
+      wrap = "0";
+      lockAspectRatio = "0";
+      alignLeft = "0";
+      overflowImage = "0";
+      keepCached = "0";
+      mcolor="255 255 255 255";
+      text="";
+   };
+   rgbanimatorgui_window.add(%n);
+   $rgbani_framegrid[1,%x,%y]=0;
+   $rgbani_framegrid[2,%x,%y]=0;
+   $rgbani_framegrid[3,%x,%y]=0;
+ }
+}

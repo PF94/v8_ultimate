@@ -1,0 +1,3 @@
+$JVS::ServerMods::Doors = 1;
+$JVS::ServerMods::Portals = 1;
+$JVS::ServerMods::Spectator = 0;

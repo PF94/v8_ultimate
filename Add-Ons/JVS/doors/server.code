@@ -1,0 +1,2701 @@
+//Server Methods
+
+function fixKnockingTimer(%door,%blid)
+{
+	%ids = -1;
+
+	for(%i = 0;%i < getWordCount(%door.knockers);%i++)
+	{
+		%ids++;
+		%testid = getWord(%door.knockers,%i);
+
+		if(%testid != %blid)
+		{
+			%renew[%ids] = %testid;
+		}
+	}
+
+	if(%ids > -1)
+	{
+		%door.knockers = "";
+
+		for(%j = 0;%j <= %ids;%j++)
+		{
+			%door.knockers = %door.knockers @ %renew[%j] @ " ";
+		}
+	}
+}
+
+function isUniqueDescription(%client,%description,%obj)
+{
+	%unique = 1;
+
+	for(%i = 1;%i <= DoorListSO.getCount();%i++)
+	{
+		%brick = DoorListSO.getObject(%i);
+
+		if(%brick.isDoor && %brick.door.brickgroup.client == %client && %brick != %obj)
+		{
+			if(stricmp(%brick.doordesc,%description) == 0)
+			{
+				%unique = 0;
+			}
+		}
+	}
+
+	return %unique;
+}
+
+function returnMakeDoors()
+{
+	return $JVS::Server::ClientsMakeDoors;
+}
+
+function returnMaxDoors()
+{
+	return $JVS::Server::MaxClientDoors;
+}
+
+function returnUploadDoors()
+{
+	return $JVS::Server::ClientsUploadDoors;
+}
+
+function rgbaColorMatch(%rgba)
+{
+	%prevdist = 100000;
+	%usecolor = 0;
+
+	for(%i = 0;%i < 64;%i++)
+	{
+		%color = getColorIDTable(%i);
+
+		if(vectorDist(%rgba,getWords(%color,0,2)) < %prevdist && getWord(%rgba,3) - getWord(%color,3) < 0.3 && getWord(%rgba,3) - getWord(%color,3) > -0.3)
+		{
+			%prevdist = vectorDist(%rgba,%color);
+			%colormatch = %i;
+		}
+	}
+
+	return %colormatch;
+}
+
+function sendDoorPaintTrustMessage(%client,%owner)
+{
+	commandtoclient(%client,'centerprint',"\c0" @ %owner.name @ " does not trust you enough to do that.",2,2,5000);
+}
+
+//Datablocks
+
+datablock AudioProfile(doorOpenSound)
+{
+	filename    = "Add-Ons/JVS/doors/Sounds/doorOpen.wav";
+	description = AudioClose3d;
+	preload = true;
+};
+
+datablock AudioProfile(doorCheckSound)
+{
+	filename    = "Add-Ons/JVS/doors/Sounds/doorCheck.wav";
+	description = AudioClose3d;
+	preload = true;
+};
+
+datablock AudioProfile(doorCloseSound)
+{
+	filename    = "Add-Ons/JVS/doors/Sounds/doorClose.wav";
+	description = AudioClose3d;
+	preload = true;
+};
+
+datablock ItemData(doorItem)
+{
+	category = "Item";
+	equipment = true;
+	shapeFile = "base/data/shapes/empty.dts";
+	mass = 1;
+	density = 0.2;
+	elasticity = 0.2;
+	friction = 0.6;
+	emap = true;
+	doColorShift = false;
+	image = doorImage;
+	canDrop = true;
+};
+
+datablock StaticShapeData(barnDoorShape)
+{
+	shapefile = "add-ons/jvs/doors/shapes/barndoor.dts";
+};
+
+datablock StaticShapeData(cellDoorShape)
+{
+	shapefile = "add-ons/jvs/doors/shapes/celldoor.dts";
+};
+
+datablock StaticShapeData(castleDoorShape)
+{
+	shapefile = "add-ons/jvs/doors/shapes/castledoor.dts";
+};
+
+datablock StaticShapeData(glassDoorShape)
+{
+	shapefile = "add-ons/jvs/doors/shapes/glassdoor.dts";
+};
+
+datablock StaticShapeData(glassPanelDoorShape)
+{
+	shapefile = "add-ons/jvs/doors/shapes/glasspaneldoor.dts";
+};
+
+datablock StaticShapeData(halfGlassDoorShape)
+{
+	shapefile = "add-ons/jvs/doors/shapes/halfglassdoor.dts";
+};
+
+datablock StaticShapeData(refrigeratorDoorShape)
+{
+	shapefile = "add-ons/jvs/doors/shapes/refrigeratordoor.dts";
+};
+
+datablock StaticShapeData(restroomDoorShape)
+{
+	shapefile = "add-ons/jvs/doors/shapes/restroomdoor.dts";
+};
+
+datablock StaticShapeData(screenDoorShape)
+{
+	shapefile = "add-ons/jvs/doors/shapes/screendoor.dts";
+};
+
+datablock StaticShapeData(vaultDoorShape)
+{
+	shapefile = "add-ons/jvs/doors/shapes/vaultdoor.dts";
+};
+
+datablock StaticShapeData(woodenDoorShape)
+{
+	shapefile = "add-ons/jvs/doors/shapes/woodendoor.dts";
+};
+
+datablock TriggerData(doorTrigger)
+{
+	tickPeriodMS = 100;
+};
+
+//Server Commands
+
+
+function serverCmdClearAllDoors(%client)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		%doors = 0;
+
+		for(%i = 1;%i <= DoorListSO.getCount();%i++)
+		{
+			%brick = DoorListSO.getObject(%i);
+
+			if(%brick.isDoor)
+			{
+				%doors++;
+				schedule(%doors * 25,0,"serverCmdClearThisDoor",%client,%brick);
+			}
+		}
+
+		messageAll('MsgClearDoorsAndPortals','\c3%1 \c0cleared all Doors.',%client.name);
+		schedule(%doors * 25 + 25,0,"serverCmdManageDoorList",%client);
+	}
+}
+
+function serverCmdClearClientDoors(%client,%victim)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		%doors = 0;
+
+		for(%i = 1;%i <= DoorListSO.getCount();%i++)
+		{
+			%brick = DoorListSO.getObject(%i);
+
+			if(%brick.isDoor && %brick.door.brickgroup.client == %victim)
+			{
+				%doors++;
+				schedule(%portals * 25,0,"serverCmdClearThisDoor",%client,%brick);
+			}
+		}
+
+		messageAll('MsgClearDoorsAndPortals','\c3%1 \c2cleared \c3%2\'s \c2Doors.',%client.name,%victim.name);
+		schedule(%doors * 25 + 25,0,"serverCmdManageDoorList",%client);
+	}
+}
+
+function serverCmdClearDoorColor(%client)
+{
+	%brick = %client.wrenchBrick;
+	%door = %brick.door;
+
+	if(isObject(%brick) && isObject(%door))
+	{
+		%brick = %client.wrenchBrick;
+
+		if(%brick.doorfakedeath == 1)
+		{
+			%brick.isDoor = "";
+			%brick.doortype = "";
+			%brick.restrictdoor = "";
+			%brick.DoorDesc = "";
+			%brick.rotdir = "";
+			%brick.itemdir = "";
+			%brick.door = "";
+			%brick.doorfakedeath = "";
+		}
+
+		%brick.doorcolor = "";
+	}
+}
+
+function serverCmdClearDoorColor2(%client,%brick)
+{
+	%door = %brick.door;
+
+	if(isObject(%brick) && isObject(%door))
+	{
+		if(%brick.doorfakedeath == 1)
+		{
+			%brick.doorfakedeath = "";
+		}
+
+		%brick.doorcolor = "";
+
+		if(isObject(%brick.item))
+		{
+			%brick.item.delete();
+		}
+	}
+}
+
+function serverCmdClearDoorColor3(%client)
+{
+	%brick = %client.wrenchBrick;
+	%door = %brick.door;
+
+	if(isObject(%brick) && isObject(%door))
+	{
+		if(%brick.doorfakedeath == 1)
+		{
+			%brick.doorfakedeath = "";
+		}
+
+		%brick.doorcolor = "";
+
+		if(isObject(%brick.item))
+		{
+			%brick.item.delete();
+		}
+	}
+}
+
+function serverCmdClearTheWay(%client)
+{
+	if(%client.isSuperAdmin && %client.Player.inDoorway)
+	{
+		%door = %client.Player.door;
+
+		if(%door.startRot == 90)
+		{
+			if(%door.spawnBrick.rotdir == 0)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) - 0.75 SPC getWord(%door.spawnBrick.position,1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+			else if(%door.spawnBrick.rotdir == 1)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) + 0.75 SPC getWord(%door.spawnBrick.position,1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+
+			%box = "1.9 1.25 2.80";
+		}
+		else if(%door.startRot == 270)
+		{
+			if(%door.spawnBrick.rotdir == 0)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) + 0.75 SPC getWord(%door.spawnBrick.position,1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+			else if(%door.spawnBrick.rotdir == 1)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) - 0.75 SPC getWord(%door.spawnBrick.position,1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+
+			%box = "1.9 1.25 2.80";
+		}
+		if(%door.startRot == 0)
+		{
+			if(%door.spawnBrick.rotdir == 0)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) SPC getWord(%door.spawnBrick.position,1) + 0.75 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+			else if(%door.spawnBrick.rotdir == 1)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) SPC getWord(%door.spawnBrick.position,1) - 0.75 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+
+			%box = "1.25 1.9 2.80";
+		}
+		else if(%door.startRot == 180)
+		{
+			if(%door.spawnBrick.rotdir == 0)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) SPC getWord(%door.spawnBrick.position,1) - 0.75 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+			else if(%door.spawnBrick.rotdir == 1)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) SPC getWord(%door.spawnBrick.position,1) + 0.75 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+
+			%box = "1.25 1.9 2.80";
+		}
+
+		InitContainerBoxSearch(%pos, %box, $TypeMasks::FxBrickObjectType);
+
+		while((%checkObj = containerSearchNext()) != 0)
+		{
+			if(%checkObj.isPlanted && %checkObj != %door)
+			{
+				%checkObj.killBrick();
+			}
+		}
+
+		InitContainerBoxSearch(%pos, %box, $TypeMasks::VehicleObjectType);
+
+		while((%checkObj = containerSearchNext()) != 0)
+		{
+		}
+	}
+}
+
+function serverCmdClearThisDoor(%client,%brick)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		if(isObject(%brick))
+		{
+			if(%brick.doorfakedeath == 1)
+			{
+				%brick.isDoor = "";
+				%brick.doortype = "";
+				%brick.restrictdoor = "";
+				%brick.DoorDesc = "";
+				%brick.rotdir = "";
+				%brick.itemdir = "";
+				%brick.door = "";
+				%brick.doorfakedeath = "";
+			}
+			else
+			{
+				%brick.doorcolor = "";
+
+				if(isObject(%brick.item))
+				{
+					%brick.item.delete();
+				}
+			}
+		}
+	}
+}
+
+function serverCmdCloseDoor(%client,%door,%degrees,%moving,%closing,%sched)
+{
+	if(isObject(%door))
+	{
+		%playersindoorway = 0;
+
+		for(%i = 0;%i < ClientGroup.getCount();%i++)
+		{
+			%cl = ClientGroup.getObject(%i);
+
+			if(%cl.Player.inDoorway == 1 & %cl.Player.door == %door)
+			{
+				%playersindoorway++;
+			}
+		}
+
+		if(%playersindoorway == 0)
+		{
+			%door.moving = %moving;
+			%door.closing = %closing;
+			%oldeuler = %door.eulerRot;
+			%door.eulerRot = %degrees;
+			%door.setTransform(%door.position SPC eulerToMatrix("0 0" SPC %degrees));
+			%door.closed = 0;
+
+			if(%degrees == %door.startRot)
+			{
+				%door.moving = 0;
+				%door.closing = 0;
+				%door.closed = 1;
+
+				if(%oldeuler != %degrees)
+				{
+					ServerPlay3D(doorCloseSound,%door.getTransform());
+				}
+			}
+		}
+
+		%door.closesched[%sched] = "";
+	}
+}
+
+function serverCmdCreateDoor(%client,%brick)
+{
+	messageClient(%client,'MsgCreateDoor','');
+}
+
+function serverCmdGetDoorProperties(%client,%brick)
+{
+	if(%brick.isDoor)
+	{
+		if(%brick.togopen == 1)
+		{
+			%open = 1;
+		}
+
+		if(%brick.togclose == 1)
+		{
+			%close = 1;
+		}
+
+		%doorrestrict = %brick.restrictdoor;
+		%doordesc = %brick.DoorDesc;
+		%door = %brick.door;
+		%itemdir = %brick.itemdir;
+		%rotdir = %brick.rotdir;
+		%doortype = DoorSO.getDisplayFromData(%brick.door.dataBlock);
+	}
+	else
+	{
+		%open = 0;
+		%close = 0;
+		%doorrestrict = 0;
+		%doordesc = "";
+		%itemdir = 2;
+		%rotdir = 0;
+		%doortype = "NONE";
+	}
+
+	messageClient(%client,'MsgReturnDoorProperties','',%open,%close,%doorrestrict,%doordesc,%itemdir,%rotdir,%doortype);
+}
+
+function serverCmdImStuck(%client)
+{
+	if(%client.Player.inDoorway)
+	{
+		%door = %client.Player.door;
+
+		if(isObject(%door))
+		{
+			if((%door.spawnBrick.itemdir == 2 && %door.spawnBrick.rotdir == 0) || (%door.spawnBrick.itemdir == 4 && %door.spawnBrick.rotdir == 1))
+			{
+				if(getWord(%client.Player.getTransform(),1) > getWord(%door.spawnBrick.getTransform(),1))
+				{
+					%client.Player.setTransform(getWord(%door.spawnBrick.getTransform(),0) SPC getWord(%door.spawnBrick.getTransform(),1) + 1.5 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.25);
+				}
+			}
+			else if((%door.spawnBrick.itemdir == 4 && %door.spawnBrick.rotdir == 0) || (%door.spawnBrick.itemdir == 2 && %door.spawnBrick.rotdir == 1))
+			{
+				if(getWord(%client.Player.getTransform(),1) < getWord(%door.spawnBrick.getTransform(),1))
+				{
+					%client.Player.setTransform(getWord(%door.spawnBrick.getTransform(),0) SPC getWord(%door.spawnBrick.getTransform(),1) - 1.5 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.25);
+				}
+			}
+			else if((%door.spawnBrick.itemdir == 3 && %door.spawnBrick.rotdir == 0) || (%door.spawnBrick.itemdir == 5 && %door.spawnBrick.rotdir == 1))
+			{
+				if(getWord(%client.Player.getTransform(),0) > getWord(%door.spawnBrick.getTransform(),0))
+				{
+					%client.Player.setTransform(getWord(%door.spawnBrick.getTransform(),0) + 1.5 SPC getWord(%door.spawnBrick.getTransform(),1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.25);
+				}
+			}
+			else if((%door.spawnBrick.itemdir == 3 && %door.spawnBrick.rotdir == 1) || (%door.spawnBrick.itemdir == 5 && %door.spawnBrick.rotdir == 0))
+			{
+				if(getWord(%client.Player.getTransform(),0) < getWord(%door.spawnBrick.getTransform(),0))
+				{
+					%client.Player.setTransform(getWord(%door.spawnBrick.getTransform(),0) - 1.5 SPC getWord(%door.spawnBrick.getTransform(),1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.25);
+				}
+			}
+		}
+	}
+}
+
+function serverCmdLoadDoor(%client,%datablock,%transform,%itemdir,%rotdir,%desc,%restrict,%doortype,%doorcolor,%currentLine,%totalLines)
+{
+	if(((%client.isAdmin || %client.isSuperAdmin) || returnUploadDoors()) && %datablock !$= "" && %transform !$= "" && %itemdir !$= "" && %rotdir !$= "" && %desc !$= "" && %restrict !$= "" && %doortype !$= "" && %doorcolor !$= "" && %currentLine !$= "" && %totalLines !$= "")
+	{
+		InitContainerBoxSearch(%transform, "0.1 0.1 0.1", $TypeMasks::FxBrickObjectType);
+
+		while((%checkObj = containerSearchNext()) != 0)
+		{
+			if(%checkObj.isPlanted && %checkObj.position $= %transform && %checkObj.dataBlock $= %datablock && !%checkObj.isDoor)
+			{
+				%loadbrick = %checkObj;
+			}
+		}
+
+		if(isObject(%loadbrick))
+		{
+			%n = getWord(%itemdir,0);
+			%e = getWord(%itemdir,1);
+			%s = getWord(%itemdir,2);
+			%w = getWord(%itemdir,3);
+			%plus = getWord(%rotdir,0);
+			%minus = getWord(%rotdir,1);
+			%r0 = getWord(%restrict,0);
+			%r1 = getWord(%restrict,1);
+			%r2 = getWord(%restrict,2);
+			%r3 = getWord(%restrict,3);
+			%r4 = getWord(%restrict,4);
+			%loadbrick.doorcolor = rgbaColorMatch(%doorcolor);
+			%client.doorsloaded++;
+			serverCmdMakeDoor(%client,%n,%e,%s,%w,%plus,%minus,%desc,%r0,%r1,%r2,%r3,%r4,%doortype,%loadbrick);
+		}
+
+		if(%currentLine < %totalLines)
+		{
+			commandtoclient(%client,'LoadNextDoor',%currentLine++,%totalLines);
+		}
+		else
+		{
+			messageAll('MsgDoorOrPortalLoadComplete','\c3%1 \c0finished loading a Door save.',%client.name);
+			%startMM = getSubStr(%client.doorloadtime,3,2);
+			%startSS = getSubStr(%client.doorloadtime,6,2);
+			%time = getWord(getDateTime(),1);
+			%endMM = getSubStr(%time,3,2);
+			%endSS = getSubStr(%time,6,2);
+			%start = (%startMM * 60) + %startSS;
+			%end = (%endMM * 60) + %endSS;
+			%seconds = %end - %start;
+
+			if(%seconds > 60)
+			{
+				%minutes = %seconds % 60;
+			}
+			else
+			{
+				%minutes = 0;
+			}
+
+			%seconds = %seconds - (%minutes * 60);
+
+			if(%seconds < 10)
+			{
+				%seconds = "0" @ %seconds;
+			}
+
+			%duration = %minutes @ ":" @ %seconds;
+			messageAll('','\c0%1 / %2 Doors created in %3.',%client.doorsloaded,(%totalLines + 1) / 8,%duration);
+			%client.doorloadtime = "";
+			%client.doorsloaded = "";
+		}
+	}
+}
+
+function serverCmdLoadDoors(%client)
+{
+	if(((%client.isAdmin || %client.isSuperAdmin) || returnUploadPortals()) && isObject(%client.Player))
+	{
+		messageClient(%client,'MsgDoorLoad');
+	}
+	else if(!isObject(%client.Player))
+	{
+		commandtoclient(%client,'centerprint',"\c0You must be spawned in order to load Doors.",2,2,5000);
+	}
+	else
+	{
+		commandtoclient(%client,'centerprint',"\c0Only Admins and SuperAdmins may load Doors at this time.",2,2,5000);
+	}
+}
+
+function serverCmdLoadDoors2(%client,%file)
+{
+	if(((%client.isAdmin || %client.isSuperAdmin) || returnUploadDoors()) && %file !$= "")
+	{
+		%client.doorsloaded = 0;
+		messageAll('MsgDoorOrPortalLoadStart','\c3%1 \c0is loading a Door save.',%client.name);
+		%client.doorloadtime = getWord(getDateTime(),1);
+		commandtoclient(%client,'LoadDoors',%file);
+	}
+}
+
+function serverCmdMakeDoor(%client,%n,%e,%s,%w,%plus,%minus,%desc,%r0,%r1,%r2,%r3,%r4,%doortype,%obj)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		%canmakedoors = 1;
+	}
+	else if(returnMakeDoors() && returnMaxDoors() > 0)
+	{
+		%canmakedoors = 1;
+	}
+	else
+	{
+		commandtoclient(%client,'centerprint',"\c0Clients are not permitted to make Doors at this time.",2,2,5000);
+	}
+
+	if(%canmakedoors == 1)
+	{
+		%doors = 0;
+
+		for(%i = 1;%i <= DoorListSO.getCount();%i++)
+		{
+			%brick = DoorListSO.getObject(%i);
+
+			if(%brick.isDoor && (%brick.door.brickgroup.client == %client || %brick.getGroup().client == %client))
+			{
+				%doors++;
+			}
+		}
+
+		if(%client.isAdmin || %client.isSuperAdmin)
+		{
+			%withindoorlimit = 1;
+		}
+		else if(%doors < returnMaxDoors())
+		{
+			%withindoorlimit = 1;
+		}
+		else
+		{
+			commandtoclient(%client,'centerprint',"\c0You are not permitted to make more than " @ returnMaxDoors() @ " Door(s).",2,2,5000);
+		}
+	}
+
+	if(%withindoorlimit == 1)
+	{
+		if(isObject(%obj) && %obj.getClassName() $= "FxDTSBrick")
+		{
+			%validbrick = 1;
+		}
+	}
+
+	if(%validbrick == 1)
+	{
+		if(%obj.isDoor && %obj.door.brickgroup.client != %client)
+		{
+			if(getTrustLevel(%client, %obj) == 2)
+			{
+				%trusted = 1;
+			}
+			else
+			{
+				commandtoclient(%client,'centerprint',"\c0" @ %obj.getGroup().name @ " does not trust you enough to do that.",2,2,5000);
+			}
+		}
+		else
+		{
+			if(getTrustLevel(%client, %obj) >= 1)
+			{
+				%trusted = 1;
+			}
+			else
+			{
+				commandtoclient(%client,'centerprint',"\c0" @ %obj.getGroup().name @ " does not trust you enough to do that.",2,2,5000);
+			}
+		}
+	}
+
+	if(%trusted == 1)
+	{
+		if(%desc !$= "")
+		{
+			%validdesc = 1;
+		}
+		else
+		{
+			commandtoclient(%client,'centerprint',"\c0A valid description is required to make a Door.",2,2,5000);
+		}
+	}
+
+	if(%validdesc == 1)
+	{
+		if(isUniqueDescription(%client,%desc,%obj))
+		{
+			%uniquedesc = 1;
+		}
+		else
+		{
+			commandtoclient(%client,'centerprint',"\c0You already have a Door with the description '" @ %desc @ ".",2,2,5000);
+		}
+	}
+
+	if(%uniquedesc == 1 && DoorSO.isDisplayName(%doortype))
+	{
+		if(%obj.isDoor)
+		{
+			DoorListSO.remove(%obj);
+		}
+
+		if(isObject(%obj.door.trigger))
+		{
+			%obj.door.trigger.delete();
+		}
+
+		if(isObject(%obj.item))
+		{
+			%obj.item.delete();
+		}
+
+		if(isObject(%obj.door))
+		{
+			%obj.door.delete();
+		}
+
+		if(%n == 1 && %e == 0 && %s == 0 && %w == 0)
+		{
+			%itemdir = 2;
+		}
+		else if(%n == 0 && %e == 1 && %s == 0 && %w == 0)
+		{
+			%itemdir = 3;
+		}
+		else if(%n == 0 && %e == 0 && %s == 1 && %w == 0)
+		{
+			%itemdir = 4;
+		}
+		else if(%n == 0 && %e == 0 && %s == 0 && %w == 1)
+		{
+			%itemdir = 5;
+		}
+		else
+		{
+			%itemdir = 2;
+		}
+
+		if(%minus == 1 && %plus == 0)
+		{
+			%rotdir = 0;
+		}
+		else if(%minus == 0 && %plus == 1)
+		{
+			%rotdir = 1;
+		}
+		else
+		{
+			%rotdir = 0;
+		}
+
+		if(%r1 == 1 && %r0 == 0 && %r2 == 0 && %r3 == 0 && %r4 == 0)
+		{
+			%restrict = 1;
+		}
+		else if(%r2 == 1 && %r0 == 0 && %r1 == 0 && %r3 == 0 && %r4 == 0)
+		{
+			%restrict = 2;
+		}
+		else if(%r3 == 1 && %r0 == 0 && %r1 == 0 && %r2 == 0 && %r4 == 0)
+		{
+			%restrict = 3;
+		}
+		else if(%r4 == 1 && %r0 == 0 && %r1 == 0 && %r2 == 0 && %r3 == 0)
+		{
+			%restrict = 4;
+		}
+		else
+		{
+			%restrict = 0;
+		}
+
+		%item = new Item()
+		{
+			datablock = "doorItem";
+			static = 1;
+		};
+
+		%item.setScale("1 1 1");
+		%item.setTransform(getWord(%obj.getTransform(),0) SPC getWord(%obj.getTransform(),1) SPC getWord(%obj.getWorldBox(),2) - 1.25);
+		%item.spawnBrick = %obj;
+		MissionCleanup.add(%item);
+		%obj.item = %item;
+		%datablock = DoorSO.getDataFromDisplay(%doortype);
+
+		%door = new StaticShape()
+		{
+			datablock = %datablock;
+			spawnBrick = %obj;
+		};
+
+		%door.scale = "1 1 1";
+		MissionCleanup.add(%door);
+		%obj.door = %door;
+		%door.moving = 0;
+		%door.closed = 1;
+		%door.brickgroup = %client.brickGroup;
+		%obj.restrictdoor = %restrict;
+		%obj.DoorDesc = %desc;
+		%obj.doortype = %doortype;
+
+		%trigger = new Trigger()
+		{
+			datablock = doorTrigger;
+			polyhedron = "0 0 0 1 0 0 0 -1 0 0 0 1";
+			scale = "5 2 2.5";
+		};
+
+		%posX = getWord(%obj.getWorldBoxCenter(),0);
+		%posY = getWord(%obj.getWorldBoxCenter(),1);
+		%posZ = getWord(%obj.getWorldBoxCenter(),2);
+
+		if(%itemdir == 3)
+		{
+			%door.setTransform(getWord(%obj.getWorldBoxCenter(),0) SPC getWord(%obj.getWorldBoxCenter(),1) - 0.90 SPC getWord(%obj.getWorldBox(),2) - 1.50 SPC eulerToMatrix("0 0 270"));
+			%door.eulerRot = 270;
+			%door.startRot = 270;
+
+			if(%rotdir == 0)
+			{
+				%door.endRot = 180;
+			}
+			else if(%rotdir == 1)
+			{
+				%door.endRot = 360;
+			}
+
+			%trigger.setTransform(getWord(%door.getWorldBoxCenter(),0) + 2.5 SPC getWord(%door.getWorldBoxCenter(),1) - 0.95 SPC getWord(%door.getWorldBox(),2) + 0.2 SPC eulerToMatrix("0 0 180"));
+		}
+		else if(%itemdir == 5)
+		{
+			%door.setTransform(getWord(%obj.getWorldBoxCenter(),0) SPC getWord(%obj.getWorldBoxCenter(),1) + 0.90 SPC getWord(%obj.getWorldBox(),2) - 1.50 SPC eulerToMatrix("0 0 90"));
+			%door.eulerRot = 90;
+			%door.startRot = 90;
+
+			if(%rotdir == 0)
+			{
+				%door.endRot = 0;
+			}
+			else if(%rotdir == 1)
+			{
+				%door.endRot = 180;
+			}
+
+			%trigger.setTransform(getWord(%door.getWorldBoxCenter(),0) - 2.5 SPC getWord(%door.getWorldBoxCenter(),1) + 0.95 SPC getWord(%door.getWorldBox(),2) + 0.2 SPC eulerToMatrix("0 0 0"));
+		}
+		else if(%itemdir == 2)
+		{
+			%door.setTransform(getWord(%obj.getWorldBoxCenter(),0) + 0.90 SPC getWord(%obj.getWorldBoxCenter(),1) SPC getWord(%obj.getWorldBox(),2) - 1.50 SPC eulerToMatrix("0 0 0"));
+			%door.eulerRot = 0;
+			%door.startRot = 0;
+
+			if(%rotdir == 0)
+			{
+				%door.endRot = -90;
+			}
+			else if(%rotdir == 1)
+			{
+				%door.endRot = 90;
+			}
+
+			%trigger.setTransform(getWord(%door.getWorldBoxCenter(),0) + 0.95 SPC getWord(%door.getWorldBoxCenter(),1) + 2.5 SPC getWord(%door.getWorldBox(),2) + 0.2 SPC eulerToMatrix("0 0 -90"));
+		}
+		else if(%itemdir == 4)
+		{
+			%door.setTransform(getWord(%obj.getWorldBoxCenter(),0) - 0.90 SPC getWord(%obj.getWorldBoxCenter(),1) SPC getWord(%obj.getWorldBox(),2) - 1.50 SPC eulerToMatrix("0 0 180"));
+			%door.eulerRot = 180;
+			%door.startRot = 180;
+
+			if(%rotdir == 0)
+			{
+				%door.endRot = 90;
+			}
+			else if(%rotdir == 1)
+			{
+				%door.endRot = 270;
+			}
+
+			%trigger.setTransform(getWord(%door.getWorldBoxCenter(),0) - 0.95 SPC getWord(%door.getWorldBoxCenter(),1) - 2.5 SPC getWord(%door.getWorldBox(),2) + 0.2 SPC eulerToMatrix("0 0 90`"));
+		}
+
+		%door.spawnBrick.itemdir = %itemdir;
+		%door.spawnBrick.rotdir = %rotdir;
+		%trigger.spawnBrick = %obj;
+		%door.trigger = %trigger;
+		%obj.isDoor = 1;
+		%obj.doorfakedeath = "";
+		MissionCleanup.add(%trigger);
+		DoorListSO.add(%obj);
+	}
+}
+
+function serverCmdMakeDoor2(%client,%n,%e,%s,%w,%plus,%minus,%desc,%r0,%r1,%r2,%r3,%r4,%doortype)
+{
+	serverCmdMakeDoor(%client,%n,%e,%s,%w,%plus,%minus,%desc,%r0,%r1,%r2,%r3,%r4,%doortype,%client.wrenchBrick);
+}
+
+function serverCmdManageDoorList(%client)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		%clients = 0;
+		messageClient(%client,'MsgClearManageList2','');
+
+		for(%i = 0;%i < ClientGroup.getCount();%i++)
+		{
+			%cl = ClientGroup.getObject(%i);
+			%doors = 0;
+
+			for(%j = 1;%j <= DoorListSO.getCount();%j++)
+			{
+				%brick = DoorListSO.getObject(%j);
+
+				if(%brick.isDoor && %brick.door.brickgroup.client == %cl)
+				{
+					%doors++;
+				}
+			}
+
+			messageClient(%client,'MsgUpdateManageList2','',%cl,%cl.name,%doors);
+		}
+
+		messageClient(%client,'MsgSortManageList2');	
+	}
+}
+
+function serverCmdManageDoors(%client)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		messageClient(%client,'MsgManageDoors');
+	}
+}
+
+function serverCmdManageMyDoors(%client)
+{
+	messageClient(%client,'MsgOpenDoorListGui','');
+}
+
+function serverCmdManageMyDoors2(%client)
+{
+	messageClient(%client,'MsgClearDoorListGui','');
+
+	for(%i = 1;%i <= DoorListSO.getCount();%i++)
+	{
+		%brick = DoorListSO.getObject(%i);
+
+		if(%brick.isDoor && (%brick.door.brickgroup.client == %client || %brick.getGroup().client == %client))
+		{
+			messageClient(%client,'MsgUpdateDoorListGui','',%brick,%brick.DoorDesc);
+		}
+	}
+
+	messageClient(%client,'MsgSortDoorListGui','');
+}
+
+function serverCmdModifyDoor(%client,%obj,%action)
+{
+	if(isObject(%obj) && isObject(%obj.door) && (%obj.getGroup().client == %client || %obj.door.brickgroup.client == %client))
+	{
+		%door = %obj.door;
+
+		if(%action $= "spy")
+		{
+			messageClient(%client,'MsgCloseJVSGUI','');
+			%client.Player.isdoorspying = 1;
+			%client.Camera.setOrbitMode(%door.spawnBrick.item,"",0.5,5,0,0);
+			%client.Camera.setTransform(%door.spawnBrick.item.getTransform());
+			%client.Camera.setVelocity("0 0 0");
+			%client.setControlObject(%client.Camera);
+		}
+		else if(%action $= "togclose")
+		{
+			if(%obj.togclose)
+			{
+				%obj.togclose = "";
+				%obj.togopen = "";
+			}
+			else
+			{
+				%obj.togclose = 1;
+				%obj.togopen = "";
+
+				for(%i = 0;%i <= 90;%i++)
+				{
+					cancel(%door.opensched[%i]);
+					cancel(%door.closesched[%i]);
+				}
+
+				%cycles2 = 0;
+
+				if(%door.spawnBrick.rotdir == 0)
+				{
+					for(%i = %door.eulerRot;%i <= %door.startRot;%i++)
+					{
+						%cycles2++;
+
+						if(%i < %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 1500 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,1,1,%cycles2 - 1);
+						}
+						else if(%i == %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 1500 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,0,0,%cycles2 - 1);
+						}
+					}
+				}
+				else if(%door.spawnBrick.rotdir == 1)
+				{
+					for(%i = %door.eulerRot;%i >= %door.startRot;%i--)
+					{
+						%cycles2++;
+
+						if(%i > %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 1500 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,1,1,%cycles2 - 1);
+						}
+						else if(%i == %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 1500 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,0,0,%cycles2 - 1);
+						}
+					}
+				}
+			}
+		}
+		else if(%action $= "togopen")
+		{
+			if(%obj.togopen)
+			{
+				%obj.togopen = "";
+				%obj.togclose = "";
+
+				for(%i = 0;%i <= 90;%i++)
+				{
+					cancel(%door.opensched[%i]);
+					cancel(%door.closesched[%i]);
+				}
+
+				%cycles2 = 0;
+
+				if(%door.spawnBrick.rotdir == 0)
+				{
+					for(%i = %door.eulerRot;%i <= %door.startRot;%i++)
+					{
+						%cycles2++;
+
+						if(%i < %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 1500 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,1,1,%cycles2 - 1);
+						}
+						else if(%i == %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 1500 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,0,0,%cycles2 - 1);
+						}
+					}
+				}
+				else if(%door.spawnBrick.rotdir == 1)
+				{
+					for(%i = %door.eulerRot;%i >= %door.startRot;%i--)
+					{
+						%cycles2++;
+
+						if(%i > %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 1500 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,1,1,%cycles2 - 1);
+						}
+						else if(%i == %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 1500 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,0,0,%cycles2 - 1);
+						}
+					}
+				}
+			}
+			else
+			{
+				%obj.togopen = 1;
+				%obj.togclose = "";
+
+				if(%door.eulerRot != %door.endRot)
+				{
+					if(%door.startRot == 90)
+					{
+						if(%door.spawnBrick.rotdir == 0)
+						{
+							%pos = getWord(%door.spawnBrick.position,0) - 0.75 SPC getWord(%door.spawnBrick.position,1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+						}
+						else if(%door.spawnBrick.rotdir == 1)
+						{
+							%pos = getWord(%door.spawnBrick.position,0) + 0.75 SPC getWord(%door.spawnBrick.position,1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+						}
+
+						%box = "1.9 1.25 2.80";
+					}
+					else if(%door.startRot == 270)
+					{
+						if(%door.spawnBrick.rotdir == 0)
+						{
+							%pos = getWord(%door.spawnBrick.position,0) + 0.75 SPC getWord(%door.spawnBrick.position,1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+						}
+						else if(%door.spawnBrick.rotdir == 1)
+						{
+							%pos = getWord(%door.spawnBrick.position,0) - 0.75 SPC getWord(%door.spawnBrick.position,1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+						}
+
+						%box = "1.9 1.25 2.80";
+					}
+					if(%door.startRot == 0)
+					{
+						if(%door.spawnBrick.rotdir == 0)
+						{
+							%pos = getWord(%door.spawnBrick.position,0) SPC getWord(%door.spawnBrick.position,1) + 0.75 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+						}
+						else if(%door.spawnBrick.rotdir == 1)
+						{
+							%pos = getWord(%door.spawnBrick.position,0) SPC getWord(%door.spawnBrick.position,1) - 0.75 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+						}
+
+						%box = "1.25 1.9 2.80";
+					}
+					else if(%door.startRot == 180)
+					{
+						if(%door.spawnBrick.rotdir == 0)
+						{
+							%pos = getWord(%door.spawnBrick.position,0) SPC getWord(%door.spawnBrick.position,1) - 0.75 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+						}
+						else if(%door.spawnBrick.rotdir == 1)
+						{
+							%pos = getWord(%door.spawnBrick.position,0) SPC getWord(%door.spawnBrick.position,1) + 0.75 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+						}
+
+						%box = "1.25 1.9 2.80";
+					}
+
+					%objects = 0;
+
+					InitContainerBoxSearch(%pos, %box, $TypeMasks::FxBrickObjectType);
+
+					while((%checkObj = containerSearchNext()) != 0)
+					{
+						if(%checkObj.isPlanted && %checkObj != %door)
+						{
+							%objects++;
+							%closest = 1;
+							%color = "1 1 1 1";
+
+							for(%i = 0;%i < 64;%i++)
+							{
+								%colori = getColorIDTable(%i);
+
+								for(%c = 0;%c < 4;%c++)
+								{
+									%coloradd += getWord(%color, %c) - getWord(%colori, %c);
+								}
+
+								%coloradd /= 4;
+
+								if(%coloradd < %closest)
+								{
+									%closest = %coloradd;
+									%closestID = %i;
+								}
+							}
+
+							if(!%checkObj.doorCheckHilighted)
+							{
+								schedule(2000,0,"serverCmdResetBrickHilight",%obj.client,%checkObj,%checkObj.getColorID(),%checkObj.getColorFxID());
+								%checkObj.setColor(%closestID);
+								%checkObj.setColorFX(3);
+								%checkObj.doorCheckHilighted = 1;
+							}
+						}
+					}
+
+					InitContainerBoxSearch(%pos, %box, $TypeMasks::VehicleObjectType);
+
+					while((%checkObj = containerSearchNext()) != 0)
+					{
+						%objects++;
+					}
+
+					if(%objects == 0)
+					{			
+						for(%i = 0;%i <= 90;%i++)	
+						{
+							cancel(%door.closesched[%i]);
+							%door.closesched[%i] = "";
+						}
+
+						%startrot = %door.startRot;
+						%endrot = %door.endRot;
+
+						if(%door.moving == 0)
+						{
+							%start = %door.endRot;
+							%cycles = 0;
+
+							if(%door.spawnBrick.rotdir == 0)
+							{
+								for(%i = %startrot;%i >= %endrot;%i--)
+								{
+									%door.moving = 1;
+									%cycles++;
+
+									if(%i ==  %door.startRot)
+									{
+										ServerPlay3D(doorOpenSound,%door.getTransform());
+									}
+
+									%door.opensched[%cycles] = schedule(%cycles * 5,0,"serverCmdOpenDoor",%obj.client,%door,%i,1,0,%cycles - 1);
+									%start++;
+								}
+							}
+							else if(%door.spawnBrick.rotdir == 1)
+							{
+								for(%i = %startrot;%i <= %endrot;%i++)
+								{
+									%door.moving = 1;
+									%cycles++;
+
+									if(%i == %startrot)
+									{
+										ServerPlay3D(doorOpenSound,%door.getTransform());
+									}
+
+									%door.opensched[%cycles] = schedule(%cycles * 5,0,"serverCmdOpenDoor",%obj.client,%door,%i,1,0,%cycles - 1);
+									%start--;
+								}
+							}
+						}
+						else if(%door.closing == 1)
+						{
+							%cycles = 0;
+							%eulerrot = %door.eulerRot;
+
+							if(%door.spawnBrick.rotdir == 0)
+							{
+								for(%i = %startrot;%i >= %endrot;%i--)
+								{
+									%cycles++;
+									%door.opensched[%cycles] = schedule(%cycles * 5,0,"serverCmdOpenDoor",%obj.client,%door,%i,1,0,%cycles - 1);
+								}
+							}
+							else if(%door.spawnBrick.rotdir == 1)
+							{
+								for(%i = %startrot;%i <= %endrot;%i++)
+								{
+									%cycles++;
+									%door.opensched[%cycles] = schedule(%cycles * 5,0,"serverCmdOpenDoor",%obj.client,%door,%i,1,0,%cycles - 1);
+								}
+							}
+						}
+					}
+					else if(%objects > 0)
+					{
+						commandtoclient(%client,'centerprint',"\c0At least one object blocks the path of this Door.",2,2,5000);
+					}
+				}
+			}
+		}
+	}
+}
+
+function serverCmdOpenDoor(%client,%door,%degrees,%moving,%closing,%sched)
+{
+	if(isObject(%door))
+	{
+		%door.closed = 0;
+		%door.moving = %moving;
+		%door.closing = %closing;
+		%door.eulerRot = %degrees;
+		%door.setTransform(%door.position SPC eulerToMatrix("0 0" SPC %degrees));
+	}
+}
+
+function serverCmdResetBrickHilight(%client,%brick,%colorid,%colorfxid)
+{
+	if(isObject(%brick))
+	{
+		%brick.setColor(%colorid);
+		%brick.setColorFx(%colorfxid);
+		%brick.doorCheckHilighted = 0;
+	}
+}
+
+function serverCmdSaveDoorColor(%client)
+{
+	if(%client.wrenchBrick.isDoor)
+	{
+		%client.wrenchBrick.doorfakedeath = 1;
+	}
+}
+
+function serverCmdSaveDoors(%client)
+{
+	messageClient(%client,'MsgDoorSave');
+}
+
+function serverCmdSaveDoors2(%client,%filename)
+{
+	%doors = 0;
+
+	for(%i = 1;%i <= DoorListSO.getCount();%i++)
+	{
+		%brick = DoorListSO.getObject(%i);
+
+		if(%brick.isDoor)
+		{
+			%doors++;
+			%door[%doors] = %brick;
+		}
+	}
+
+	if(%doors > 0)
+	{
+		commandtoclient(%client,'SaveDoors',"add-ons/jvs/doors/saves/" @ %filename @ ".save");
+
+		for(%i = 1;%i <= %doors;%i++)
+		{
+			%obj = %door[%i];
+			commandtoclient(%client,'SaveNextDoor',"add-ons/jvs/doors/saves/" @ %filename @ ".save",%obj.dataBlock);
+			commandtoclient(%client,'SaveNextDoor',"add-ons/jvs/doors/saves/" @ %filename @ ".save",getWord(%obj.getTransform(),0) SPC getWord(%obj.getTransform(),1) SPC getWord(%obj.getTransform(),2));
+
+			if(%obj.itemdir == 3)
+			{
+				%itemdir = "0 1 0 0";
+			}
+			else if(%obj.itemdir == 4)
+			{
+				%itemdir = "0 0 1 0";
+			}
+			else if(%obj.itemdir == 5)
+			{
+				%itemdir = "0 0 0 1";
+			}
+			else
+			{
+				%itemdir = "1 0 0 0";
+			}
+
+			commandtoclient(%client,'SaveNextDoor',"add-ons/jvs/doors/saves/" @ %filename @ ".save",%itemdir);
+
+			if(%obj.rotdir == 1)
+			{
+				%rotdir = "1 0";
+			}
+			else
+			{
+				%rotdir = "0 1";
+			}
+
+			commandtoclient(%client,'SaveNextDoor',"add-ons/jvs/doors/saves/" @ %filename @ ".save",%rotdir);
+			commandtoclient(%client,'SaveNextDoor',"add-ons/jvs/doors/saves/" @ %filename @ ".save",%obj.DoorDesc);
+
+			if(%obj.restrictdoor == 1)
+			{
+				%restrict = "0 1 0 0 0";
+			}
+			else if(%obj.restrictdoor == 2)
+			{
+				%restrict = "0 0 1 0 0";
+			}
+			else if(%obj.restrictdoor == 3)
+			{
+				%restrict = "0 0 0 1 0";
+			}
+			else if(%obj.restrictdoor == 4)
+			{
+				%restrict = "0 0 0 0 1";
+			}
+			else
+			{
+				%restrict = "1 0 0 0 0";
+			}
+
+			commandtoclient(%client,'SaveNextDoor',"add-ons/jvs/doors/saves/" @ %filename @ ".save",%restrict);
+			commandtoclient(%client,'SaveNextDoor',"add-ons/jvs/doors/saves/" @ %filename @ ".save",%obj.doortype);
+			commandtoclient(%client,'SaveNextDoor',"add-ons/jvs/doors/saves/" @ %filename @ ".save",getColorIDTable(%obj.doorcolor));
+		}
+	}
+}
+
+function serverCmdSetMaxDoors(%client,%numdoors)
+{
+	if(%client.isAdmin || %client.isSuperAdmin && %numdoors != returnMaxDoors() && %numdoors >=0 && %numdoors <= 100)
+	{
+		$JVS::Server::MaxClientDoors = %numdoors;
+		messageAll('','\c0The maximum number of Doors per client is now %2. [\c3%1\c0]',%client.name,%numdoors);
+	}
+}
+
+function serverCmdTogMakeDoors(%client)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		if(returnMakeDoors())
+		{
+			$JVS::Server::ClientsMakeDoors = 0;
+			messageAll('','\c0Clients are no longer able to make Doors. [\c3%1\c0]',%client.name);
+		}
+		else if(!returnMakeDoors())
+		{
+			$JVS::Server::ClientsMakeDoors = 1;
+			messageAll('','\c0Clients are now able to make Doors. [\c3%1\c0]',%client.name);
+		}
+		else
+		{
+			$JVS::Server::ClientsMakeDoors = 1;
+		}
+	}
+}
+
+function serverCmdTogUploadDoors(%client)
+{
+	if(%client.isAdmin || %client.isSuperAdmin)
+	{
+		if(returnUploadDoors())
+		{
+			$JVS::Server::ClientsUploadDoors = 0;
+			messageAll('','\c0Clients are no longer able to upload Door saves. [\c3%1\c0]',%client.name);
+		}
+		else if(!returnUploadDoors())
+		{
+			$JVS::Server::ClientsUploadDoors = 1;
+			messageAll('','\c0Clients are now able to upload Door saves. [\c3%1\c0]',%client.name);
+		}
+		else
+		{
+			$JVS::Server::ClientsUploadDoors = 0;
+			messageAll('','\c0Clients are no longer able to upload Door saves. [\c3%1\c0]',%client.name);
+		}
+	}
+}
+
+//DoorSO Code
+
+if(!isObject(DoorSo))
+{
+	new ScriptObject(DoorSO)
+	{
+		numDoors = 11;
+		doorDatablock[0] = barnDoorShape;
+		doorDisplayName[0] = "Barn Door";
+		doorDatablock[1] = castleDoorShape;
+		doorDisplayName[1] = "Castle Door";
+		doorDatablock[2] = cellDoorShape;
+		doorDisplayName[2] = "Cell Door";
+		doorDatablock[3] = glassDoorShape;
+		doorDisplayName[3] = "Glass Door";
+		doorDatablock[4] = glassPanelDoorShape;
+		doorDisplayName[4] = "Glass Panel Door";
+		doorDatablock[5] = halfGlassDoorShape;
+		doorDisplayName[5] = "Half Glass Door";
+		doorDatablock[6] = refrigeratorDoorShape;
+		doorDisplayName[6] = "Refrigerator Door";
+		doorDatablock[7] = restroomDoorShape;
+		doorDisplayName[7] = "Restroom Door";
+		doorDatablock[8] = screenDoorShape;
+		doorDisplayName[8] = "Screen Door";
+		doorDatablock[9] = vaultDoorShape;
+		doorDisplayName[9] = "Vault Door";
+		doorDatablock[10] = woodenDoorShape;
+		doorDisplayName[10] = "Wooden Door";
+	};
+}
+
+function DoorSO::getCount(%this)
+{
+	return %this.numDoors;
+}
+
+function DoorSO::getDatablock(%this,%doornumber)
+{
+	return %this.doorDatablock[%doornumber];
+}
+
+function DoorSO::getDataFromDisplay(%this,%displayname)
+{
+	%data = "";
+
+	for(%i = 0;%i < %this.getCount();%i++)
+	{
+		%check = %i;
+		%name = %this.getDisplayName(%check);
+
+		if(stricmp(%name,%displayname) == 0)
+		{
+			%data = %this.getDatablock(%check);
+		}
+	}
+
+	return %data;
+}
+
+function DoorSO::getDisplayFromData(%this,%datablock)
+{
+	%displayname = "";
+
+	for(%i = 0;%i <= %this.getCount();%i++)
+	{
+		%data = %this.getDatablock(%i);
+
+		if(stricmp(%data,%datablock) == 0)
+		{
+			%displayname = %this.getDisplayName(%i);
+		}
+	}
+
+	return %displayname;
+}
+
+function DoorSO::getDisplayName(%this,%doornumber)
+{
+	return %this.doorDisplayName[%doornumber];
+}
+
+function DoorSO::getDoorNumFromData(%this,%datablock)
+{
+	%doornumber = "";
+
+	for(%i = 0;%i <= %this.getCount();%i++)
+	{
+		%data = %this.getDatablock(%i);
+
+		if(stricmp(%data,%datablock) == 0)
+		{
+			%doornumber = %i;
+		}
+	}
+
+	return %doornumber;
+}
+
+function DoorSO::getDoorNumFromDisplay(%this,%displayname)
+{
+	%doornumber = "";
+
+	for(%i = 0;%i < %this.getCount();%i++)
+	{
+		%check = %i;
+		%name = %this.getDisplayName(%check);
+
+		if(stricmp(%name,%displayname) == 0)
+		{
+			%doornumber = %i;
+		}
+	}
+
+	return %doornumber;
+}
+
+function DoorSO::isDatablock(%this,%datablock)
+{
+	%return = 0;
+
+	for(%i = 0;%i <= %this.getCount();%i++)
+	{
+		%data = %this.getDatablock(%i);
+
+		if(stricmp(%data,%datablock) == 0)
+		{
+			%return = 1;
+		}
+	}
+
+	return %return;
+}
+
+function DoorSO::isDisplayName(%this,%displayname)
+{
+	%return = 0;
+
+	for(%i = 0;%i <= %this.getCount();%i++)
+	{
+		%name = %this.getDisplayName(%i);
+
+		if(stricmp(%name,%displayname) == 0)
+		{
+			%return = 1;
+		}
+	}
+
+	return %return;
+}
+
+//DoorListSO Code
+
+if(!isObject(DoorListSO))
+{
+	new ScriptObject(DoorListSO)
+	{
+		numDoors = 0;
+	};
+}
+
+function DoorListSO::add(%this,%obj)
+{
+	%this.Door[%this.numDoors++] = %obj;
+}
+
+function DoorListSO::clear(%this)
+{
+	for(%i = 1;%i <= %this.numDoors;%i++)
+	{
+		%this.Door[%i] = "";
+	}
+
+	%this.numDoors = 0;
+}
+
+function DoorListSO::getCount(%this)
+{
+	return %this.numDoors;
+}
+
+function DoorListSO::getObject(%this,%obj)
+{
+	return %this.Door[%obj];
+}
+
+function DoorListSO::listObjects(%this)
+{
+	for(%i = 1;%i <= %this.numDoors;%i++)
+	{
+		echo(%this.Door[%i]);
+	}
+}
+
+function DoorListSO::remove(%this,%obj)
+{
+	%doors = 0;
+
+	for(%i = 1;%i <= %this.numDoors;%i++)
+	{
+		if(%this.Door[%i] != %obj)
+		{
+			%doors++;
+			%door[%doors] = %this.Door[%i];
+		}
+
+		%this.Door[%i] = "";
+	}
+
+	if(%doors > 0)
+	{
+		for(%j = 1;%j <= %doors;%j++)
+		{
+			%this.Door[%j] = %door[%j];
+		}
+
+		%this.numDoors = %doors;
+	}
+	else
+	{
+		%this.numDoors = 0;
+	}
+}
+
+//Item Code
+
+function doorItem::onPickup(%this,%obj,%user,%amount)
+{
+}
+
+//Trigger Code
+
+function doorTrigger::onEnterTrigger(%this,%trigger,%obj)
+{
+	%door = %trigger.spawnBrick.door;
+
+	if(%obj.getClassName() $= "Player" && (!%obj.inDoorway || %client.door != %door))
+	{
+		%obj.inDoorway = 1;
+		%obj.door = %door;
+
+		if(%door.startRot == 90)
+		{
+			if(%door.spawnBrick.rotdir == 0)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) - 0.75 SPC getWord(%door.spawnBrick.position,1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+			else if(%door.spawnBrick.rotdir == 1)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) + 0.75 SPC getWord(%door.spawnBrick.position,1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+
+			%box = "1.9 1.25 2.80";
+		}
+		else if(%door.startRot == 270)
+		{
+			if(%door.spawnBrick.rotdir == 0)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) + 0.75 SPC getWord(%door.spawnBrick.position,1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+			else if(%door.spawnBrick.rotdir == 1)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) - 0.75 SPC getWord(%door.spawnBrick.position,1) SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+
+			%box = "1.9 1.25 2.80";
+		}
+		if(%door.startRot == 0)
+		{
+			if(%door.spawnBrick.rotdir == 0)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) SPC getWord(%door.spawnBrick.position,1) + 0.75 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+			else if(%door.spawnBrick.rotdir == 1)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) SPC getWord(%door.spawnBrick.position,1) - 0.75 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+
+			%box = "1.25 1.9 2.80";
+		}
+		else if(%door.startRot == 180)
+		{
+			if(%door.spawnBrick.rotdir == 0)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) SPC getWord(%door.spawnBrick.position,1) - 0.75 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+			else if(%door.spawnBrick.rotdir == 1)
+			{
+				%pos = getWord(%door.spawnBrick.position,0) SPC getWord(%door.spawnBrick.position,1) + 0.75 SPC getWord(%door.spawnBrick.getWorldBox(),2) - 1.42;
+			}
+
+			%box = "1.25 1.9 2.80";
+		}
+
+		%objects = 0;
+
+		InitContainerBoxSearch(%pos, %box, $TypeMasks::FxBrickObjectType);
+
+		while((%checkObj = containerSearchNext()) != 0)
+		{
+			if(%checkObj.isPlanted && %checkObj != %door)
+			{
+				%objects++;
+				%closestID = rgbaColorMatch("1 1 1 1");
+
+				if(!%checkObj.doorCheckHilighted)
+				{
+					schedule(2000,0,"serverCmdResetBrickHilight",%obj.client,%checkObj,%checkObj.getColorID(),%checkObj.getColorFxID());
+					%checkObj.setColor(%closestID);
+					%checkObj.setColorFX(3);
+					%checkObj.doorCheckHilighted = 1;
+				}
+			}
+		}
+
+		InitContainerBoxSearch(%pos, %box, $TypeMasks::VehicleObjectType);
+
+		while((%checkObj = containerSearchNext()) != 0)
+		{
+			%objects++;
+		}
+
+		if(%objects == 0)
+		{
+			%open = 0;
+
+			if(%door.spawnBrick.togclose == 1)
+			{
+				if(%obj.client.isAdmin || %obj.client.isSuperAdmin)
+				{
+					%open = 1;
+				}
+				else
+				{
+					commandtoclient(%obj.client,'centerprint',"\c0This Door has been toggled closed to all but Admins and SuperAdmins.",2,2,5000);
+				}
+			}
+			else
+			{
+				if(%door.spawnBrick.restrictdoor == 0)
+				{
+					%open = 1;
+				}
+				else if(%door.spawnBrick.restrictdoor == 1)
+				{
+					if(%obj.client.isAdmin || %obj.client.isSuperAdmin)
+					{
+						%open = 1;
+					}
+					else
+					{
+						commandtoclient(%obj.client,'centerprint',"\c0Only an Admin or SuperAdmin may open this Door.",2,2,5000);
+					}
+				}
+				else if(%door.spawnBrick.restrictdoor == 2)
+				{
+					if(%obj.client.isSuperAdmin)
+					{
+						%open = 1;
+					}
+					else
+					{
+						commandtoclient(%obj.client,'centerprint',"\c0Only a SuperAdmin may open this Door.",2,2,5000);
+					}
+				}
+				else if(%door.spawnBrick.restrictdoor == 3)
+				{
+					if(%obj.client.minigame == %door.brickgroup.client.minigame && %door.brickgroup.client.minigame !$= "" && %door.brickgroup.client.minigame != 0)
+					{
+						%open = 1;
+					}
+					else if(%obj.client != %door.brickgroup.client)
+					{
+						commandtoclient(%obj.client,'centerprint',"\c0You must be a member of " @ %door.spawnBrick.getGroup().name @ "'s Mini-Game to open this Door.",2,2,5000);
+					}
+					else
+					{
+						commandtoclient(%obj.client,'centerprint',"\c0You must create a Mini-Game to open this Door.",2,2,5000);
+					}
+				}
+				else if(%door.spawnBrick.restrictdoor == 4)
+				{
+					if(%obj.client == %door.spawnBrick.getGroup().client || %obj.client.isAdmin || %obj.client.isSuperAdmin)
+					{
+						%open = 1;
+					}
+					else
+					{
+						commandtoclient(%obj.client,'centerprint',"\c0Only " @ %door.spawnBrick.getGroup().name @ " or an Admin / SuperAdmin may open this Door.",2,2,5000);
+					}
+				}	
+			}
+		}
+
+		if(%objects == 0 && %open == 1)
+		{			
+			for(%i = 0;%i <= 90;%i++)	
+			{
+				cancel(%door.closesched[%i]);
+				%door.closesched[%i] = "";
+			}
+
+			%startrot = %door.startRot;
+			%endrot = %door.endRot;
+
+			if(%door.moving == 0)
+			{
+				%start = %door.endRot;
+				%cycles = 0;
+
+				if(%door.spawnBrick.rotdir == 0)
+				{
+					for(%i = %startrot;%i >= %endrot;%i--)
+					{
+						%door.moving = 1;
+						%cycles++;
+
+						if(%i ==  %door.startRot)
+						{
+							ServerPlay3D(doorOpenSound,%door.getTransform());
+						}
+
+						%door.opensched[%cycles] = schedule(%cycles * 5,0,"serverCmdOpenDoor",%obj,%door,%i,1,0,%cycles - 1);
+						%start++;
+					}
+				}
+				else if(%door.spawnBrick.rotdir == 1)
+				{
+					for(%i = %startrot;%i <= %endrot;%i++)
+					{
+						%door.moving = 1;
+						%cycles++;
+
+						if(%i == %startrot)
+						{
+							ServerPlay3D(doorOpenSound,%door.getTransform());
+						}
+
+						%door.opensched[%cycles] = schedule(%cycles * 5,0,"serverCmdOpenDoor",%obj.client,%door,%i,1,0,%cycles - 1);
+						%start--;
+					}
+				}
+			}
+			else if(%door.closing == 1)
+			{
+				%obj.door = %door;
+				%cycles = 0;
+				%eulerrot = %door.eulerRot;
+
+				if(%door.spawnBrick.rotdir == 0)
+				{
+					for(%i = %startrot;%i >= %endrot;%i--)
+					{
+						%cycles++;
+						%door.opensched[%cycles] = schedule(%cycles * 5,0,"serverCmdOpenDoor",%obj.client,%door,%i,1,0,%cycles - 1);
+					}
+				}
+				else if(%door.spawnBrick.rotdir == 1)
+				{
+					for(%i = %startrot;%i <= %endrot;%i++)
+					{
+						%cycles++;
+						%door.opensched[%cycles] = schedule(%cycles * 5,0,"serverCmdOpenDoor",%obj.client,%door,%i,1,0,%cycles - 1);
+					}
+				}
+			}
+		}
+		else if(%objects > 0)
+		{
+			commandtoclient(%obj.client,'centerprint',"\c0At least one object blocks the path of this Door. [" @ %door.spawnBrick.DoorDesc @ "]",2,2,5000);
+		}
+		else if(%open == 0 && %door.closed == 1 && %obj.client != %door.brickgroup.client)
+		{
+			%knocked = 0;
+
+			for(%i = 0;%i < getWordCount(%door.knockers);%i++)
+			{
+				if(getWord(%door.knockers,%i) == %obj.client.bl_id)
+				{
+					%knocked = 1;
+					break;
+				}
+			}
+
+			if(%knocked == 0)
+			{
+				%door.knockers = %door.knockers @ %obj.client.bl_id @ " ";
+				schedule(10000,0,"fixKnockingTimer",%door,%obj.client.bl_id);	
+				commandtoclient(%door.brickgroup.client,'centerprint',"\c0" @ %obj.client.name @ " wants to enter one of your Doors. [" @ %door.spawnBrick.DoorDesc @ "]",2,2,5000);
+				commandtoclient(%door.spawnBrick.getGroup().client,'centerprint',"\c0" @ %obj.client.name @ " wants to enter one of your Doors. [" @ %door.spawnBrick.DoorDesc @ "]",2,2,5000);
+				ServerPlay3D(doorCheckSound,%door.getTransform());
+			}
+			else
+			{
+				commandtoclient(%obj.client,'centerprint',"\c0You must wait 10 seconds between each knock.",2,2,5000);
+			}
+		}
+	}
+}
+
+function doorTrigger::onLeaveTrigger(%this,%trigger,%obj)
+{
+	%door = %trigger.spawnBrick.door;
+
+	if(%obj.getClassName() $= "Player")
+	{
+		%playersindoorway = 0;
+		%obj.inDoorway = 0;
+		%obj.door = "";
+
+		for(%i = 0;%i <= 90;%i++)
+		{
+			cancel(%door.opensched[%i]);
+			cancel(%door.closesched[%i]);
+		}
+
+		for(%i = 0;%i < ClientGroup.getCount();%i++)
+		{
+			%cl = ClientGroup.getObject(%i);
+
+			if(%cl.Player.inDoorway == 1 & %cl.Player.door == %door)
+			{
+				%playersindoorway++;
+			}
+		}
+
+		if(%playersindoorway == 0 && !%doorhasclosesched)
+		{
+			%cycles2 = 0;
+
+			if(%door.spawnBrick.rotdir == 0)
+			{
+				for(%i = %door.eulerRot;%i <= %door.startRot;%i++)
+				{
+					%cycles2++;
+
+					if(%i < %door.startRot && !%door.spawnBrick.togopen)
+					{
+						%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 1500 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,1,1,%cycles2 - 1);
+					}
+					else if(%i == %door.startRot && !%door.spawnBrick.togopen)
+					{
+						%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 1500 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,0,0,%cycles2 - 1);
+					}
+				}
+			}
+			else if(%door.spawnBrick.rotdir == 1)
+			{
+				for(%i = %door.eulerRot;%i >= %door.startRot;%i--)
+				{
+					%cycles2++;
+
+					if(%i > %door.startRot && !%door.spawnBrick.togopen)
+					{
+						%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 1500 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,1,1,%cycles2 - 1);
+					}
+					else if(%i == %door.startRot && !%door.spawnBrick.togopen)
+					{
+						%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 1500 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,0,0,%cycles2 - 1);
+					}
+				}
+			}
+		}
+	}
+}
+
+//Server Overrides
+
+package doorServerOverrides
+{
+	function barnDoorShape::onAdd(%this,%obj)
+	{
+		if((%obj.spawnBrick.doorcolor == 0 || %obj.spawnBrick.doorcolor) && %obj.spawnBrick.doorcolor !$= "")
+		{
+			%color = %obj.spawnBrick.doorcolor;
+		}
+		else
+		{
+			%color = %obj.spawnBrick.getColorId();
+			%obj.spawnBrick.doorcolor = %color;
+		}
+
+		%setcolor = getColorIDTable(%color);
+		%r = getWord(%setcolor,0);
+		%g = getWord(%setcolor,1);
+		%b = getWord(%setcolor,2);
+		%color1 = %r SPC %g SPC %b SPC 1;
+		%color2 = %r * 0.75 SPC %g * 0.75 SPC %b * 0.75 SPC 1;
+		%color3 = 205 / 255 SPC 176 / 255 SPC 86 / 255 SPC 1;
+		%obj.setNodeColor(door,%color1);
+		%obj.setNodeColor(panels,%color2);
+		%obj.setNodeColor(knobs,%color3);
+		Parent::onAdd(%this,%obj);
+	}
+
+	function castleDoorShape::onAdd(%this,%obj)
+	{
+		if((%obj.spawnBrick.doorcolor == 0 || %obj.spawnBrick.doorcolor) && %obj.spawnBrick.doorcolor !$= "")
+		{
+			%color = %obj.spawnBrick.doorcolor;
+		}
+		else
+		{
+			%color = %obj.spawnBrick.getColorId();
+			%obj.spawnBrick.doorcolor = %color;
+		}
+
+		%setcolor = getColorIDTable(%color);
+		%r = getWord(%setcolor,0);
+		%g = getWord(%setcolor,1);
+		%b = getWord(%setcolor,2);
+		%color1 = %r SPC %g SPC %b SPC 1;
+		%color2 = %r * 0.75 SPC %g * 0.75 SPC %b * 0.75 SPC 1;
+		%color3 = 205 / 255 SPC 176 / 255 SPC 86 / 255 SPC 1;
+		%obj.setNodeColor(door,%color1);
+		%obj.setNodeColor(panels,%color2);
+		%obj.setNodeColor(knobs,%color3);
+		Parent::onAdd(%this,%obj);
+	}
+
+	function cellDoorShape::onAdd(%this,%obj)
+	{
+		if((%obj.spawnBrick.doorcolor == 0 || %obj.spawnBrick.doorcolor) && %obj.spawnBrick.doorcolor !$= "")
+		{
+			%color = %obj.spawnBrick.doorcolor;
+		}
+		else
+		{
+			%color = %obj.spawnBrick.getColorId();
+			%obj.spawnBrick.doorcolor = %color;
+		}
+
+		%setcolor = getColorIDTable(%color);
+		%r = getWord(%setcolor,0);
+		%g = getWord(%setcolor,1);
+		%b = getWord(%setcolor,2);
+		%color1 = %r SPC %g SPC %b SPC 1;
+		%obj.setNodeColor(door,%color1);
+		%obj.setNodeColor(panels,%color1);
+		%obj.setNodeColor(knobs,%color1);
+		Parent::onAdd(%this,%obj);
+	}
+
+	function doorItem::onRemove(%this,%obj)
+	{
+		DoorListSO.remove(%obj.spawnBrick);
+
+		if(isObject(%obj.spawnBrick.door.trigger))
+		{
+			%obj.spawnBrick.door.trigger.delete();
+		}
+
+		if(isObject(%obj.spawnBrick.door))
+		{
+			%obj.spawnBrick.door.delete();
+		}
+
+		if(%obj.spawnBrick.doorfakedeath $= "")
+		{
+			%obj.spawnBrick.isDoor = "";
+			%obj.spawnBrick.doortype = "";
+			%obj.spawnBrick.restrictdoor = "";
+			%obj.spawnBrick.DoorDesc = "";
+			%obj.spawnBrick.rotdir = "";
+			%obj.spawnBrick.itemdir = "";
+			%obj.spawnBrick.door = "";
+		}
+	}
+
+	function FxDTSBrick::onClearFakeDeath(%this,%obj)
+	{
+		if(%obj.isDoor == 1)
+		{
+			%obj.doorfakedeath = "";
+			%restrictdoor = %obj.restrictdoor;
+
+			if(%restrictdoor == 0)
+			{
+				%r0 = 1;
+				%r1 = 0;
+				%r2 = 0;
+				%r3 = 0;
+				%r4 = 0;
+			}
+			else if(%restrictdoor == 1)
+			{
+				%r0 = 0;
+				%r1 = 1;
+				%r2 = 0;
+				%r3 = 0;
+				%r4 = 0;
+			}
+			else if(%restrictdoor == 2)
+			{
+				%r0 = 0;
+				%r1 = 0;
+				%r2 = 1;
+				%r3 = 0;
+				%r4 = 0;
+			}
+			else if(%restrictdoor == 3)
+			{
+				%r0 = 0;
+				%r1 = 0;
+				%r2 = 0;
+				%r3 = 1;
+				%r4 = 0;
+			}
+			else if(%restrictdoor == 4)
+			{
+				%r0 = 0;
+				%r1 = 0;
+				%r2 = 0;
+				%r3 = 0;
+				%r4 = 1;
+			}
+
+			%rotdir = %obj.rotdir;
+
+			if(%rotdir == 0)
+			{
+				%minus = 1;
+				%plus = 0;
+			}
+			else if(%rotdir == 1)
+			{
+				%minus = 0;
+				%plus = 1;
+			}
+
+			%itemdir = %obj.itemdir;
+
+			if(%itemdir == 2)
+			{
+				%n = 1;
+				%e = 0;
+				%s = 0;
+				%w = 0;
+			}
+			else if(%itemdir == 3)
+			{
+				%n = 0;
+				%e = 1;
+				%s = 0;
+				%w = 0;
+			}
+			else if(%itemdir == 4)
+			{
+				%n = 0;
+				%e = 0;
+				%s = 1;
+				%w = 0;
+			}
+			else if(%itemdir == 5)
+			{
+				%n = 0;
+				%e = 0;
+				%s = 0;
+				%w = 1;
+			}
+
+			%desc = %obj.DoorDesc;
+			%obj.DoorDesc = "";
+			serverCmdMakeDoor(%obj.getGroup().client,%n,%e,%s,%w,%plus,%minus,%desc,%r0,%r1,%r2,%r3,%r4,%obj.doortype,%obj);
+		}
+
+		Parent::onClearFakeDeath(%this,%obj);
+	}
+
+	function FxDTSBrick::onFakeDeath(%this,%obj)
+	{
+		if(%obj.isDoor)
+		{
+			%obj.doorfakedeath = 1;
+
+			if(isObject(%obj.item))
+			{
+				%obj.item.delete();
+			}
+		}
+
+		Parent::onFakeDeath(%this,%obj);
+	}
+
+	function glassDoorShape::onAdd(%this,%obj)
+	{
+		if((%obj.spawnBrick.doorcolor == 0 || %obj.spawnBrick.doorcolor) && %obj.spawnBrick.doorcolor !$= "")
+		{
+			%color = %obj.spawnBrick.doorcolor;
+		}
+		else
+		{
+			%color = %obj.spawnBrick.getColorId();
+			%obj.spawnBrick.doorcolor = %color;
+		}
+
+		%setcolor = getColorIDTable(%color);
+		%r = getWord(%setcolor,0);
+		%g = getWord(%setcolor,1);
+		%b = getWord(%setcolor,2);
+		%color1 = %r SPC %g SPC %b SPC 1;
+		%color2 = %r * 0.75 SPC %g * 0.75 SPC %b * 0.75 SPC 1;
+		%color3 = 205 / 255 SPC 176 / 255 SPC 86 / 255 SPC 1;
+		%obj.setNodeColor(door,%color1);
+		%obj.setNodeColor(panels,%color2);
+		%obj.setNodeColor(knobs,%color3);
+		Parent::onAdd(%this,%obj);
+	}
+
+	function glassPanelDoorShape::onAdd(%this,%obj)
+	{
+		if((%obj.spawnBrick.doorcolor == 0 || %obj.spawnBrick.doorcolor) && %obj.spawnBrick.doorcolor !$= "")
+		{
+			%color = %obj.spawnBrick.doorcolor;
+		}
+		else
+		{
+			%color = %obj.spawnBrick.getColorId();
+			%obj.spawnBrick.doorcolor = %color;
+		}
+
+		%setcolor = getColorIDTable(%color);
+		%r = getWord(%setcolor,0);
+		%g = getWord(%setcolor,1);
+		%b = getWord(%setcolor,2);
+		%color1 = %r SPC %g SPC %b SPC 1;
+		%color2 = %r * 0.75 SPC %g * 0.75 SPC %b * 0.75 SPC 1;
+		%color3 = 205 / 255 SPC 176 / 255 SPC 86 / 255 SPC 1;
+		%obj.setNodeColor(door,%color1);
+		%obj.setNodeColor(panels,%color2);
+		%obj.setNodeColor(knobs,%color3);
+		Parent::onAdd(%this,%obj);
+	}
+
+	function halfGlassDoorShape::onAdd(%this,%obj)
+	{
+		if((%obj.spawnBrick.doorcolor == 0 || %obj.spawnBrick.doorcolor) && %obj.spawnBrick.doorcolor !$= "")
+		{
+			%color = %obj.spawnBrick.doorcolor;
+		}
+		else
+		{
+			%color = %obj.spawnBrick.getColorId();
+			%obj.spawnBrick.doorcolor = %color;
+		}
+
+		%setcolor = getColorIDTable(%color);
+		%r = getWord(%setcolor,0);
+		%g = getWord(%setcolor,1);
+		%b = getWord(%setcolor,2);
+		%color1 = %r SPC %g SPC %b SPC 1;
+		%color2 = %r * 0.75 SPC %g * 0.75 SPC %b * 0.75 SPC 1;
+		%color3 = 205 / 255 SPC 176 / 255 SPC 86 / 255 SPC 1;
+		%obj.setNodeColor(door,%color1);
+		%obj.setNodeColor(panels,%color2);
+		%obj.setNodeColor(knobs,%color3);
+		Parent::onAdd(%this,%obj);
+	}
+
+	function Observer::onTrigger(%this,%obj,%slot,%val)
+	{
+		%client = %obj.getControllingClient();
+
+		if(%client.Player.isdoorspying && %val)
+		{
+			%client.camera.setFlyMode();
+			%client.Player.setVelocity("0 0 0");
+			%client.setControlObject(%client.Player);
+			%client.Player.isdoorspying = "";
+			commandtoclient(%client,'managemydoors');
+		}
+		else
+		{	
+			Parent::onTrigger(%this,%obj,%slot,%val);
+		}
+	}
+
+	function paintProjectile::onCollision(%this,%obj,%col,%fade,%pos,%normal)
+	{
+		if(%col.getClassName() $= "StaticShape" && DoorSO.isDatablock(%col.dataBlock) && (getTrustLevel(%obj, %col.spawnBrick) == 2 || %obj.sourceObject.client == %col.brickgroup.client))
+		{
+			%datablock = %obj.dataBlock;
+			%color = getSubStr(%datablock,5,1);
+			%colorpart2 = getSubStr(%datablock,6,1);
+
+			if(%colorpart2 == 0 || %colorpart2 == 1 || %colorpart2 == 2 || %colorpart2 == 3 || %colorpart2 == 4 || %colorpart2 == 5 || %colorpart2 == 6 || %colorpart2 == 7 || %colorpart2 == 8 || %colorpart2 == 9)
+			{
+				%color = %color @ %colorpart2;
+			}
+
+			%col.spawnBrick.doorcolor = %color;
+			%setcolor = getColorIDTable(%color);
+			%r = getWord(%setcolor,0);
+			%g = getWord(%setcolor,1);
+			%b = getWord(%setcolor,2);
+			%color1 = %r SPC %g SPC %b SPC 1;
+			%color2 = %r * 0.75 SPC %g * 0.75 SPC %b * 0.75 SPC 1;
+			%color3 = 205 / 255 SPC 176 / 255 SPC 86 / 255 SPC 1;
+			%col.setNodeColor(door,%color1);
+
+			if(%col.dataBlock $= "barnDoorShape" || %col.dataBlock $= "castleDoorShape" || %col.dataBlock $= "screenDoorShape" || %col.dataBlock $= "woodenDoorShape")
+			{
+				%col.setNodeColor(knobs,%color3);
+				%col.setNodeColor(panels,%color2);
+			}
+			else if(%col.dataBlock $= "cellDoorShape")
+			{
+				%col.setNodeColor(knobs,%color1);
+				%col.setNodeColor(panels,%color1);
+			}
+			else if(%col.dataBlock $= "glassDoorShape" || %col.dataBlock $= "glassPanelDoorShape" || %col.dataBlock $= "halfGlassDoorShape")
+			{
+				%col.setNodeColor(knobs,%color3);
+				%col.setNodeColor(panels,%color2);
+			}
+			else if(%col.dataBlock $= "refrigeratorDoorShape")
+			{
+				%col.setNodeColor(knobs,%color2);
+				%col.setNodeColor(panels,%color2);
+			}
+			else if(%col.dataBlock $= "restroomDoorShape")
+			{
+				%col.setNodeColor(knobs,%color2);
+				%col.setNodeColor(blue,9 / 255 SPC 43 / 255 SPC 133 / 255 SPC 1);
+				%col.setNodeColor(white,"1 1 1 1");
+			}
+			else if(%col.dataBlock $= "vaultDoorShape")
+			{
+				%col.setNodeColor(panels,%color1);
+				%col.setNodeColor(knobs,%color2);
+				%col.setNodeColor(bevel,%color2);
+				%col.setNodeColor(porthole,%color2);
+				%col.setNodeColor(handles,%color2);
+				%col.setNodeColor(rivets,%color1);
+				%col.setNodeColor(bump,%color1);
+			}
+		}
+		else if(%col.getClassName() $= "StaticShape" && DoorSO.isDatablock(%col.dataBlock) && (getTrustLevel(%obj, %col.spawnBrick) != 2 && %obj.sourceObject.client != %col.brickgroup.client))
+		{
+			%client = %obj.sourceObject.client;
+			%owner = %col.brickgroup;
+			sendDoorPaintTrustMessage(%client,%owner);
+		}
+
+		Parent::onCollision(%this,%obj,%col,%fade,%pos,%normal);
+	}
+
+	function refrigeratorDoorShape::onAdd(%this,%obj)
+	{
+		if((%obj.spawnBrick.doorcolor == 0 || %obj.spawnBrick.doorcolor) && %obj.spawnBrick.doorcolor !$= "")
+		{
+			%color = %obj.spawnBrick.doorcolor;
+		}
+		else
+		{
+			%color = %obj.spawnBrick.getColorId();
+			%obj.spawnBrick.doorcolor = %color;
+		}
+
+		%setcolor = getColorIDTable(%color);
+		%r = getWord(%setcolor,0);
+		%g = getWord(%setcolor,1);
+		%b = getWord(%setcolor,2);
+		%color1 = %r SPC %g SPC %b SPC 1;
+		%color2 = %r * 0.75 SPC %g * 0.75 SPC %b * 0.75 SPC 1;
+		%obj.setNodeColor(door,%color1);
+		%obj.setNodeColor(panels,%color2);
+		%obj.setNodeColor(knobs,%color2);
+		Parent::onAdd(%this,%obj);
+	}
+
+	function restroomDoorShape::onAdd(%this,%obj)
+	{
+		if((%obj.spawnBrick.doorcolor == 0 || %obj.spawnBrick.doorcolor) && %obj.spawnBrick.doorcolor !$= "")
+		{
+			%color = %obj.spawnBrick.doorcolor;
+		}
+		else
+		{
+			%color = %obj.spawnBrick.getColorId();
+			%obj.spawnBrick.doorcolor = %color;
+		}
+
+		%setcolor = getColorIDTable(%color);
+		%r = getWord(%setcolor,0);
+		%g = getWord(%setcolor,1);
+		%b = getWord(%setcolor,2);
+		%color1 = %r SPC %g SPC %b SPC 1;
+		%color2 = %r * 0.75 SPC %g * 0.75 SPC %b * 0.75 SPC 1;
+		%color3 = 9 / 255 SPC 43 / 255 SPC 133 / 255 SPC 1;
+		%color4 = "1 1 1 1";
+		%obj.setNodeColor(door,%color1);
+		%obj.setNodeColor(knobs,%color2);
+		%obj.setNodeColor(blue,%color3);
+		%obj.setNodeColor(white,%color4);
+		Parent::onAdd(%this,%obj);
+	}
+
+	function screenDoorShape::onAdd(%this,%obj)
+	{
+		if((%obj.spawnBrick.doorcolor == 0 || %obj.spawnBrick.doorcolor) && %obj.spawnBrick.doorcolor !$= "")
+		{
+			%color = %obj.spawnBrick.doorcolor;
+		}
+		else
+		{
+			%color = %obj.spawnBrick.getColorId();
+			%obj.spawnBrick.doorcolor = %color;
+		}
+
+		%setcolor = getColorIDTable(%color);
+		%r = getWord(%setcolor,0);
+		%g = getWord(%setcolor,1);
+		%b = getWord(%setcolor,2);
+		%color1 = %r SPC %g SPC %b SPC 1;
+		%color2 = %r * 0.75 SPC %g * 0.75 SPC %b * 0.75 SPC 1;
+		%color3 = 205 / 255 SPC 176 / 255 SPC 86 / 255 SPC 1;
+		%obj.setNodeColor(door,%color1);
+		%obj.setNodeColor(panels,%color2);
+		%obj.setNodeColor(knobs,%color3);
+		Parent::onAdd(%this,%obj);
+	}
+
+	function serverCmdDropPlayerAtCamera(%client)
+	{
+		if(isObject(%client) && %client.Player.inDoorway == 1)
+		{
+			%door = %client.Player.door;
+
+			for(%i = 0;%i <= 90;%i++)	
+			{
+				if(%door.closesched[%i])
+				{
+					%doorhasclosesched = 1;
+					break;
+				}		
+			}
+
+			%playersindoorway = 0;
+			%client.Player.inDoorway = 0;
+			%client.Player.door = "";
+
+			for(%i = 0;%i < ClientGroup.getCount();%i++)
+			{
+				%cl = ClientGroup.getObject(%i);
+
+				if(%cl.Player.inDoorway == 1 & %cl.Player.door == %door)
+				{
+					%playersindoorway++;
+				}
+			}
+
+			if(%playersindoorway == 0 && !%doorhasclosesched)
+			{
+				%cycles2 = 0;
+
+				if(%door.spawnBrick.rotdir == 0)
+				{
+					for(%i = %door.endRot;%i <= %door.startRot;%i++)
+					{
+						%cycles2++;
+
+						if(%i < %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 3000 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,1,1,%cycles2 - 1);
+						}
+						else if(%i == %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 3000 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,0,0,%cycles2 - 1);
+						}
+					}
+				}
+				else if(%door.spawnBrick.rotdir == 1)
+				{
+					for(%i = %door.endRot;%i >= %door.startRot;%i--)
+					{
+						%cycles2++;
+
+						if(%i > %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 3000 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,1,1,%cycles2 - 1);
+						}
+						else if(%i == %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 3000 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,0,0,%cycles2 - 1);
+						}
+					}
+				}
+			}
+		}
+
+		Parent::serverCmdDropPlayerAtCamera(%client);
+	}
+
+	function serverCmdFetch(%client,%namestring)
+	{
+		%length = strlen(%namestring);
+
+		for(%i = 0;%i < ClientGroup.getCount();%i++)
+		{
+			%cl = ClientGroup.getObject(%i);
+			%name = getSubStr(%cl.name,0,%length);
+
+			if(stricmp(%name,%namestring))
+			{
+				%victim = %cl;
+				break;
+			}
+		}
+
+		if(isObject(%victim) && %victim.Player.inDoorway == 1)
+		{
+			%door = %victim.Player.door;
+
+			for(%i = 0;%i <= 90;%i++)	
+			{
+				if(%door.closesched[%i])
+				{
+					%doorhasclosesched = 1;
+					break;
+				}		
+			}
+
+			%playersindoorway = 0;
+			%victim.Player.inDoorway = 0;
+			%victim.Player.door = "";
+
+			for(%i = 0;%i < ClientGroup.getCount();%i++)
+			{
+				%cl = ClientGroup.getObject(%i);
+
+				if(%cl.Player.inDoorway == 1 & %cl.Player.door == %door)
+				{
+					%playersindoorway++;
+				}
+			}
+
+			if(%playersindoorway == 0 && !%doorhasclosesched)
+			{
+				%cycles2 = 0;
+
+				if(%door.spawnBrick.rotdir == 0)
+				{
+					for(%i = %door.endRot;%i <= %door.startRot;%i++)
+					{
+						%cycles2++;
+
+						if(%i < %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 3000 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,1,1,%cycles2 - 1);
+						}
+						else if(%i == %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 3000 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,0,0,%cycles2 - 1);
+						}
+					}
+				}
+				else if(%door.spawnBrick.rotdir == 1)
+				{
+					for(%i = %door.endRot;%i >= %door.startRot;%i--)
+					{
+						%cycles2++;
+
+						if(%i > %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 3000 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,1,1,%cycles2 - 1);
+						}
+						else if(%i == %door.startRot && !%door.spawnBrick.togopen)
+						{
+							%door.closesched[%cycles2 - 1] = schedule(%cycles * 5 + 3000 + %cycles2 * 5,0,"serverCmdCloseDoor",%obj.client,%door,%i,0,0,%cycles2 - 1);
+						}
+					}
+				}
+			}
+		}
+
+		Parent::serverCmdFetch(%client,%namestring);
+	}
+
+	function vaultDoorShape::onAdd(%this,%obj)
+	{
+		if((%obj.spawnBrick.doorcolor == 0 || %obj.spawnBrick.doorcolor) && %obj.spawnBrick.doorcolor !$= "")
+		{
+			%color = %obj.spawnBrick.doorcolor;
+		}
+		else
+		{
+			%color = %obj.spawnBrick.getColorId();
+			%obj.spawnBrick.doorcolor = %color;
+		}
+
+		%setcolor = getColorIDTable(%color);
+		%r = getWord(%setcolor,0);
+		%g = getWord(%setcolor,1);
+		%b = getWord(%setcolor,2);
+		%color1 = %r SPC %g SPC %b SPC 1;
+		%color2 = %r * 0.75 SPC %g * 0.75 SPC %b * 0.75 SPC 1;
+		%color3 = 205 / 255 SPC 176 / 255 SPC 86 / 255 SPC 1;
+		%obj.setNodeColor(door,%color1);
+		%obj.setNodeColor(panels,%color1);
+		%obj.setNodeColor(knobs,%color2);
+		%obj.setNodeColor(bevel,%color2);
+		%obj.setNodeColor(porthole,%color2);
+		%obj.setNodeColor(handles,%color2);
+		%obj.setNodeColor(rivets,%color1);
+		%obj.setNodeColor(bump,%color1);
+		Parent::onAdd(%this,%obj);
+	}
+
+	function woodenDoorShape::onAdd(%this,%obj)
+	{
+		if((%obj.spawnBrick.doorcolor == 0 || %obj.spawnBrick.doorcolor) && %obj.spawnBrick.doorcolor !$= "")
+		{
+			%color = %obj.spawnBrick.doorcolor;
+		}
+		else
+		{
+			%color = %obj.spawnBrick.getColorId();
+			%obj.spawnBrick.doorcolor = %color;
+		}
+
+		%setcolor = getColorIDTable(%color);
+		%r = getWord(%setcolor,0);
+		%g = getWord(%setcolor,1);
+		%b = getWord(%setcolor,2);
+		%color1 = %r SPC %g SPC %b SPC 1;
+		%color2 = %r * 0.75 SPC %g * 0.75 SPC %b * 0.75 SPC 1;
+		%color3 = 205 / 255 SPC 176 / 255 SPC 86 / 255 SPC 1;
+		%obj.setNodeColor(door,%color1);
+		%obj.setNodeColor(panels,%color2);
+		%obj.setNodeColor(knobs,%color3);
+		Parent::onAdd(%this,%obj);
+	}
+};
+
+activatePackage(doorServerOverrides);

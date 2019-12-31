@@ -1,0 +1,303 @@
+//Client Methods
+
+function clearallportals()
+{
+	commandtoserver('clearallportals');
+}
+
+function clearclientportals()
+{
+	if(lstportalmanagementlist.getSelectedId() != -1)
+	{
+		messageboxokcancel("Clear Portals?","Are you sure you want to destroy all of " @ getWord(lstportalmanagementlist.getRowTextById(lstportalmanagementlist.getSelectedId()),0) @ "'s Portals?","clearclientportals2();","");
+	}
+}
+
+function clearclientportals2()
+{
+	if(lstportalmanagementlist.getSelectedId() != -1)
+	{
+		commandtoserver('clearclientportals',lstportalmanagementlist.getSelectedId());
+	}
+}
+
+function clearthisportal()
+{
+	%brick = lstPortalList.getSelectedId();
+	%brick = getWord(%brick,0);
+	commandtoserver('clearthisportal',%brick);
+}
+
+function clearthisportal1()
+{
+	commandtoserver('clearthisportal1');
+}
+
+function makeportal()
+{
+	%desc = description.getValue();
+	%r0 = restrict0.getValue();
+	%r1 = restrict1.getValue();
+	%r2 = restrict2.getValue();
+	%r3 = restrict3.getValue();
+	%r4 = restrict4.getValue();
+	commandtoserver('makeportal2',%desc,%r0,%r1,%r2,%r3,%r4);
+}
+
+function PortalDesc(%text)
+{
+	commandtoserver('PortalDesc',%text);
+}
+
+function PortalPickup()
+{
+	commandtoserver('portalpickup');
+}
+
+function RefreshList()
+{
+	setModPaths(getModPaths());
+	lstPortalLoaderList.clear();
+
+	%i = 0;
+	for(%file = findFirstFile("add-ons/jvs/portals/saves/*.save");%file !$= "";%file = findNextFile("add-ons/jvs/portals/saves/*.save"))
+	{
+		%name = fileBase(%file);
+		lstPortalLoaderList.addRow(%i++, fileBase(%file));
+	}
+
+	lstPortalLoaderList.sort(0);
+}
+
+function savePortals()
+{
+	%file = "add-ons/jvs/portals/saves/" @ txteditName.getValue() @ ".save";
+
+	if(!isFile(%file))
+	{
+		commandtoserver('saveportals2',(txteditName.getValue()));canvas.popDialog(jvsgui);
+	}
+	else
+	{
+		messageboxokcancel("File Exists, Overwrite?","Are you sure you want overwrite the file \"" @ txteditName.getValue() @ "\"?","saveportals2();","");
+	}
+}
+
+function savePortals2()
+{
+	commandtoserver('saveportals2',(txteditName.getValue()));canvas.popDialog(jvsgui);
+}
+
+//Client Commands
+
+function clientCmdLoadNextPortal(%currentLine,%totalLines)
+{
+	if(%currentLine <= %totalLines)
+	{
+		commandtoserver('LoadPortal',$portallines[%currentLine],$portallines[%currentLine++],$portallines[%currentLine++],$portallines[%currentLine++],$portallines[%currentLine++],%currentLine,%totalLines);
+	}
+}
+
+function clientCmdLoadPortals(%file)
+{
+	%open = new FileObject();
+	%open.openforRead(%file);
+	%lines = 0;
+
+	while(!%open.isEOF())
+	{
+		%line = %open.readline();
+		$portallines[%lines] = %line;
+		%lines++;
+	}
+
+	%open.close();
+	%open.delete();
+	%currentLine = 0;
+	commandtoserver('LoadPortal',$portallines[%currentLine],$portallines[%currentLine++],$portallines[%currentLine++],$portallines[%currentLine++],$portallines[%currentLine++],%currentLine,%lines--);
+}
+
+function clientCmdSaveNextPortal(%file,%line)
+{
+	%write = new FileObject();
+	%write.openForAppend(%file);
+	%write.writeLine(%line);
+	%write.close();
+	%write.delete();
+}
+
+function clientCmdSavePortals(%file)
+{
+	%write = new FileObject();
+	%write.openForWrite(%file);
+	%write.close();
+	%write.delete();
+}
+
+//Datablocks
+
+if(!isObject(PortalTeleportProfile))
+{
+	new AudioProfile(PortalTeleportProfile) 
+	{ 
+		filename = "base/data/sound/printfire.wav"; 
+		description = "JVSSoundDescription"; 
+		preload = false; 
+	};
+}
+
+//Client Variables
+
+$timeout = "";
+
+//Message Callbacks
+
+addMessageCallback('MsgCancelTimer',handleCancelTimer);
+
+function handleCancelTimer(%msgType,%msgString)
+{
+	cancel($timeout);
+}
+
+addMessageCallback('MsgClosePortalTeleportGUI',handleClosePortalTeleportGUI);
+
+function handleClosePortalTeleportGUI(%msgType,%msgString)
+{
+	canvas.popDialog(portalteleportgui);
+}
+
+addMessageCallback('MsgPortalAudio',handlePortalAudio);
+
+function handlePortalAudio(%msgType,%msgString)
+{
+	AlxPlay("PortalTeleportProfile");
+}
+
+addMessageCallback('MsgPortalCollision',handlePortalCollision);
+
+function handlePortalCollision(%msgType,%msgString)
+{
+	canvas.pushDialog(portalteleportgui);
+}
+
+addMessageCallback('MsgSetSchedule',handleSetSchedule);
+
+function handleSetSchedule(%msgType,%msgString,%sched)
+{
+	$timeout = %sched;
+}
+
+//GUI Functions
+
+function portalteleportgui::onWake()
+{
+	$escapecommand = moveMap.getCommand(keyboard,"escape");
+	moveMap.bindCmd(keyboard, "escape", "", "canvas.popDialog(portalteleportgui);");
+}
+
+function portalteleportgui::onSleep()
+{
+	moveMap.bindCmd(keyboard, "escape", "", $escapecommand);
+	schedule(3000,0,portalpickup);
+}
+
+function lstPortalSystemList::onSelect(%this,%id,%text)
+{
+	canvas.popDialog(portalteleportgui);
+	%brick = lstPortalSystemList.getSelectedId();
+	%brick = getWord(%brick,0);
+	commandtoserver('PortalTeleport2',%brick);
+}
+
+//GUIs
+
+//portalTeleportGui
+
+if(!isObject(portalteleportgui))
+{
+new GuiControl(portalteleportgui) {
+   profile = "GuiDefaultProfile";
+   horizSizing = "right";
+   vertSizing = "bottom";
+   position = "0 0";
+   extent = "640 480";
+   minExtent = "8 2";
+   visible = "1";
+      helpTag = "0";
+
+   new GuiWindowCtrl() {
+      profile = "BlockWindowProfile";
+      horizSizing = "center";
+      vertSizing = "center";
+      position = "215 127";
+      extent = "209 226";
+      minExtent = "8 2";
+      visible = "1";
+      text = "Portal Selector";
+      maxLength = "255";
+      resizeWidth = "0";
+      resizeHeight = "1";
+      canMove = "1";
+      canClose = "1";
+      canMinimize = "0";
+      canMaximize = "0";
+      minSize = "50 50";
+      closeCommand = "canvas.popDialog(portalteleportgui);";
+         helpTag = "0";
+
+      new GuiSwatchCtrl() {
+         profile = "GuiDefaultProfile";
+         horizSizing = "width";
+         vertSizing = "height";
+         position = "10 52";
+         extent = "188 161";
+         minExtent = "8 2";
+         visible = "1";
+         color = "255 255 255 128";
+      };
+      new GuiScrollCtrl() {
+         profile = "ColorScrollProfile";
+         horizSizing = "center";
+         vertSizing = "bottom";
+         position = "10 52";
+         extent = "188 161";
+         minExtent = "8 2";
+         visible = "1";
+         willFirstRespond = "1";
+         hScrollBar = "alwaysOff";
+         vScrollBar = "alwaysOn";
+         constantThumbHeight = "0";
+         childMargin = "0 0";
+         rowHeight = "10";
+         columnWidth = "30";
+
+         new GuiTextListCtrl(lstPortalSystemList) {
+            profile = "GuiTextListProfile";
+            horizSizing = "center";
+            vertSizing = "center";
+            position = "0 0";
+            extent = "176 2";
+            minExtent = "8 2";
+            visible = "1";
+            enumerate = "0";
+            resizeCell = "0";
+            columns = "0 120";
+            fitParentWidth = "1";
+            clipColumnText = "0";
+               helpTag = "0";
+         };
+      };
+      new GuiTextCtrl() {
+         profile = "GuiTextProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "11 32";
+         extent = "120 18";
+         minExtent = "8 2";
+         visible = "1";
+         text = "Choose your destination:";
+         maxLength = "255";
+      };
+   };
+};
+}

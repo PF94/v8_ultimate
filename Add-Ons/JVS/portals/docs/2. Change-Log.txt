@@ -1,0 +1,227 @@
+Change-Log
+--------------------------------
+
+
+2.01
+
+Eliminated some audio datablocks due to existence of similar datablocks included with the game.
+
+Organization changes in code.
+
+Common client code updated to fix issue with JVS unified GUI involving Door maintenance.
+
+
+2.0
+
+All Portal-related GUIs except PortalTeleportGUI were removed.  The contents of those GUIs were added to the unified JVS GUI.
+
+Portals are ridiculously more efficient.
+
+When loading Portals, the bricks must already exist.
+
+Fix teleport oversight that allowed corpses to be registered by a Portal.
+
+Updated the really old Read-Me.txt.
+
+
+1.93
+
+Made loading Portals much more efficient.
+
+When loading Portals, bricks that already exist will not be converted into Portals, even if they match the Portal brick being loaded.
+
+Fixed oversight that allowed bricks to remain designated as Portal bricks, even after the brick's item and / or emitter were changed.
+
+Made Portal emitter datablock code more efficient.
+
+Modified buttons to be "Set / Modify" and "Clear".
+
+Moved wrenchDlg-related code to the common files (Mod_JVS_Client.cs / Mod_JVS_Server.cs) for use with Doors add-on.
+
+Admins and SuperAdmins are no longer able to bypass the Mini-Game Portal restriction.
+
+Fixed oversight where Portal Management GUI would not update after clearing all Portals.
+
+PortalTeleportGUI is no longer able to be maximized.
+
+Made clearing Portals much more efficient.
+
+
+1.92
+
+Fixed bug that did not allow Admins or SuperAdmins to use Personal Portals.
+
+1.91
+
+Fixed oversight that interfered with ability to use escape menu after using the Portal Management GUI.
+
+Added checks to prevent datablocks from being re-exec'd if they already exist.
+
+
+1.9
+
+Minor changes to messages (messageClient / messageAll / centerPrint).
+
+'Refresh' button changed to 'Modify'.
+
+When loading Portal saves, bricks that do not belong to the client loading the save will no longer be made into Portals.
+
+Added status messages for loading Portals (how many Portals were loaded, how long the load took, which player is loading Portals, start and end messages).
+
+Added Personal Portals (Portal owner plus Admins and SuperAdmins only).
+
+Fixed oversight that allowed a player to load Portal saves when he / she was not currently spawned.
+
+Added check to init default JVS preferences if 'serverprefs.code' does not exist.
+
+Admins and SuperAdmins are no longer affected by Mini-Game restrictions.
+
+Fixed various oddities in the Portal restrictions.
+
+Added center print message to inform a player when he steps into a Portal if no Portals exist to which he is allowed to teleport.
+
+Fixed oversight that allowed certain servercmds involved Portal loading to be run without parameters.
+
+Fixed oversight that allowed GUIs to be re-exec'ed when exec'ing "add-ons/jvs/portals/client.code".
+
+Fixed oversight that interfered with the use of the escape key after exec'ing "add-ons/jvs/portals/client.code".
+
+Added methods and GUI for Admins and SuperAdmins to clear all Portals or clear Portals of a particular client.
+
+
+1.8
+
+Changed size of area in which you can actually trigger a Portal.
+
+Removed ability to make individual Portals in Random Mode.
+
+Added ability to toggle Random Mode for Mini-Game Portals.  When a client toggles Mini-Game Random Mode, only the Portals assigned to that client's Mini-Game are affected.
+
+Portal Colors: Blue - No Restriction. Green - Mini-Game. Purple - Mini-Game Random. Yellow - Admins & SuperAdmins. Orange - SuperAdmins.
+
+Wrench GUI now appears normal in servers that are not using the Portal System.
+
+Fixed Portal appearance change resulting from Blockland update 8.
+
+Clients that join a Mini-Game that is in random mode will have their Mini-Game Portals set to random mode.
+
+Clients that leave a Mini-Game or are in a Mini-Game that ends will have the Mini-Game Portals set to normal mode.
+
+While in a Mini-Game, you can only use Portals designated for that Mini-Game.
+
+
+1.7
+
+Fixed incompatibility of Portal System add-on with dedicated servers.
+
+Fixed bug where a brick that had been killed (fake dead) in a minigame would still allow teleportation.
+
+Separated execution of code into separate client and server mods, e.g. 'Mod_JVS_Client' & 'Mod_JVS_Server'. 
+
+Individual components (e.g. Portal System) can now be disabled by editing variables in the client and server mods.
+
+Modified GUIs to allow the escape key to close them.
+
+Code reorgnanization.
+
+Fixed bug in Portal saving that did not record the color of the Portal's spawn brick.
+
+Made Portal saving and loading code much more efficient.
+
+Reworked Wrench GUI to more closely resemble the original.
+
+Changed the colors Portal System buttons in the Wrench GUI to avoid confusion with standard buttons.
+
+Added line separator in Wrench GUI to help distinguish Portal System features.
+
+Added saving of JVS Server preferences when exiting Blockland.
+
+
+1.6
+
+Added ability to load and save Portals.  GUIs added to assist in loading / saving functionality.
+
+Fixed (partially at least) bug that continues to teleport you even if the Portal brick no longer exists.
+
+Modified the wrench GUI to populate the settings of the current wrench brick Portal to allow changing of its settings.
+
+The 'Portal' button was replaced by 'Set / Clear' for adding / removing Portals and the 'Refresh' button for changing Portal settings.
+
+Restrictions were modified as follows: 0 - None, 1 - Admin Only, 2 - SuperAdmin Only, 3 - Same Minigame (Plus Admins & SuperAdmins), 4 - Random.
+
+Fixed bug that interfered with clients changing Portal brick to item spawn and back to Portal brick.
+
+Fixed bug that allowed use of Portals whose bricks are 'dead' from mini-game damage.
+
+Various minor fixes, including code reorganization and file renaming.
+
+Added Credits file to distribution.
+
+Read-Me, Change-Log, Credits files moved to 'docs' folder.
+
+
+1.5
+
+Fixed bug that allowed the use of a Portal while not actually at a Portal.
+
+Revised restriction client messages to be more descriptive.
+
+Added toggle commands for use instead of separate on / off commands. See Read-Me for new commands.
+
+
+1.41
+
+Added Change-Log to distribution.
+
+
+1.4
+
+Modified 3-second timeout so that it only applies to a player's last-used Portal.
+
+Fixed minor bug that made it difficult to cancel out of a Portal Selector screen / decide not to use the Portal.
+
+Minor code changes to remove 'echo' commands left in from the debugging process.
+
+
+1.3
+
+Fixed major bug affecting clients' (those with add-on) ability to use Portal Selectors.
+
+
+1.2
+
+Read-Me now included with the distribution.
+
+Individual Portals can be setup in Random Mode.
+
+Restrictions / modifiers now use words instead of numbers to describe them.
+
+Fixed a bug that did not allow Random Mode Portals to send a player to restricted Portals, even if the restrictions do not apply to that player.
+
+
+1.11
+
+Restricted portals no longer send you to a random portal when random mode is turned on.
+
+Restricted portals now have a yellow particle to differentiate them from standard portals.
+
+
+1.1
+
+Added Random mode.
+
+Ability to enable / disable client permission to make / use portals.
+
+Fixed error in wrench GUI that prohibited users from changing restriction level.
+
+Various minor bug fixes.
+
+
+1.01
+
+Removed 'Jail' button left in by accident.
+
+
+1.0
+
+Basic system: Portal Pairs, Portal Selector, three levels of restriction.

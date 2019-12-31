@@ -1,0 +1,134 @@
+First pass:  enumerate scene...
+
+Processing Node Bounds with parent ROOT
+Bounding box found
+Processing Node __mainTree with parent ROOT
+Found subtree starting at Node "__mainTree"
+
+Second pass:  put shape structure together...
+
+Adding detail named "detail3" of size 3 to subtree "__mainTree".
+Adding detail named "detail4" of size 4 to subtree "__mainTree".
+Adding detail named "detail5" of size 5 to subtree "__mainTree".
+Adding node "__mainTree" with parent "__mainTree" to subtree rooted on node "__mainTree".
+Adding node "__meshes" with parent "__mainTree" to subtree rooted on node "__mainTree".
+Adding node "mountPoint" with parent "__meshes" to subtree rooted on node "__mainTree".
+Adding node "Root" with parent "__meshes" to subtree rooted on node "__mainTree".
+Adding node "Cylinder3" with parent "Root" to subtree rooted on node "__mainTree".
+Attaching object to node.
+Adding object named "Cylinder".
+Adding mesh of size 3 to object "Cylinder".
+Adding node "Cylinder4" with parent "Root" to subtree rooted on node "__mainTree".
+Attaching object to node.
+Adding mesh of size 4 to object "Cylinder".
+Adding node "Cylinder5" with parent "Root" to subtree rooted on node "__mainTree".
+Attaching object to node.
+Adding mesh of size 5 to object "Cylinder".
+
+Third pass:  Collapsing unneeded nodes...
+
+Removing node "__mainTree"
+Removing node "__meshes"
+
+Add default object states...
+
+Adding object state to 3 detail level(s) of mesh "Cylinder".
+Adding frame.
+Object is visible.
+Object offset transform for mesh dl=0:
+    scale:            x=1.00000, y=1.00000, z=1.00000
+    stretch rotation: x=0.00000, y=0.00000, z=0.00000, w=1.00000
+    translation:      x=0.00000, y=0.00000, z=0.00000
+    actual rotation:  x=0.00000, y=0.00000, z=0.00000, w=1.00000
+Object offset transform for mesh dl=1:
+    scale:            x=1.00000, y=1.00000, z=1.00000
+    stretch rotation: x=0.00000, y=0.00000, z=0.00000, w=1.00000
+    translation:      x=0.00000, y=0.00000, z=0.00000
+    actual rotation:  x=0.00000, y=0.00000, z=0.00000, w=1.00000
+Object offset transform for mesh dl=2:
+    scale:            x=1.00000, y=1.00000, z=1.00000
+    stretch rotation: x=0.00000, y=0.00000, z=0.00000, w=1.00000
+    translation:      x=0.00000, y=0.00000, z=0.00000
+    actual rotation:  x=0.00000, y=0.00000, z=0.00000, w=1.00000
+---------------------------------
+
+Add default node states...
+
+Adding node rotation at time 0.000000 for node "mountPoint".
+  rotation:     x=0.00000, y=0.00000, z=0.00000, w=1.00000
+---------------------------------
+Adding node translation at time 0.000000 for node "mountPoint".
+  translation:     x=0.00000, y=-0.00233, z=0.20050
+---------------------------------
+Adding node rotation at time 0.000000 for node "Root".
+  rotation:     x=0.00000, y=0.00000, z=0.00000, w=1.00000
+---------------------------------
+Adding node translation at time 0.000000 for node "Root".
+  translation:     x=0.00000, y=0.00000, z=0.00000
+---------------------------------
+Adding node rotation at time 0.000000 for node "Cylinder3".
+  rotation:     x=0.00000, y=0.00000, z=0.00000, w=1.00000
+---------------------------------
+Adding node translation at time 0.000000 for node "Cylinder3".
+  translation:     x=0.00000, y=0.00000, z=0.00000
+---------------------------------
+Adding node rotation at time 0.000000 for node "Cylinder4".
+  rotation:     x=0.00000, y=0.00000, z=0.00000, w=1.00000
+---------------------------------
+Adding node translation at time 0.000000 for node "Cylinder4".
+  translation:     x=0.00000, y=0.00000, z=0.00000
+---------------------------------
+Adding node rotation at time 0.000000 for node "Cylinder5".
+  rotation:     x=0.00000, y=0.00000, z=0.00000, w=1.00000
+---------------------------------
+Adding node translation at time 0.000000 for node "Cylinder5".
+  translation:     x=0.00000, y=0.00000, z=0.00000
+---------------------------------
+
+Adding 0 sequences...
+
+
+Optimizing meshes...
+
+Optimizing mesh "Cylinder" detail level 3.
+504 verts before joining verts
+426 verts after joining verts
+168 faces before stripping
+Using Quick, dirty, & ugly stripping method.
+130 strips with average length 3.43 (range 3 to 23) and 18 reversals
+
+Optimizing mesh "Cylinder" detail level 4.
+144 verts before joining verts
+74 verts after joining verts
+48 faces before stripping
+Using Quick, dirty, & ugly stripping method.
+14 strips with average length 6.71 (range 4 to 23) and 18 reversals
+
+Optimizing mesh "Cylinder" detail level 5.
+144 verts before joining verts
+124 verts after joining verts
+48 faces before stripping
+Using Quick, dirty, & ugly stripping method.
+38 strips with average length 3.26 (range 3 to 4) and 0 reversals
+
+Shape Hierarchy:
+
+   Details:
+      detail5, Subtree 0, objectDetail 0, size 5
+      detail4, Subtree 0, objectDetail 1, size 4
+      detail3, Subtree 0, objectDetail 2, size 3
+
+   Subtrees:
+      Subtree 0
+         mountPoint
+         Root
+            Cylinder3
+            Cylinder4
+            Cylinder5 --> Object Cylinder with following details:  5 4 3
+
+   Sequences:
+
+   Material list:
+   material #0: "black.blank".
+   material #1: "metal5".
+   material #2: "brown".

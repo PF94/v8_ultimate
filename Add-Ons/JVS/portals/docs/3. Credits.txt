@@ -1,0 +1,25 @@
+Credits
+--------------------------------
+
+
+Spaceomega:
+
+	Assistance in the initial design of the Portals.
+	Testing.
+
+
+Space Guy:
+
+	Suggestions for new features.
+	Testing.
+
+
+Kirbylikesit:
+
+	Suggestions for new features.
+
+
+Badspot:
+
+	Creating the game for which this add-on was made (obviously).
+	The use of the print gun particle, printer gun sound, spawn effect & sound, and empty.dts from that game.

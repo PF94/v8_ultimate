@@ -1,0 +1,10 @@
+$JVS::Server::ClientsMakeDoors = 1;
+$JVS::Server::ClientsMakePortals = 1;
+$JVS::Server::ClientsUploadDoors = 0;
+$JVS::Server::ClientsUploadPortals = 0;
+$JVS::Server::ClientsUsePortals = 1;
+$JVS::Server::MaxClientDoors = "10";
+$JVS::Server::MaxClientPortals = "10";
+$JVS::Server::MGSpectator = 1;
+$JVS::Server::RandomMode = 0;
+$JVS::Server::Spectator = 1;
