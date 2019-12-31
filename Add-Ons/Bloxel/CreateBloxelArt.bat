@@ -1,0 +1,1 @@
+bloxelRender.exe > out.png
