@@ -1,0 +1,1073 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         desc1 = "Author: [GSF]Ghost (ID: 3195)";
+         previewImage = "base/data/missions/ghostcityhp2";
+         descLines = "2";
+         name = "NYC HP2(!)";
+         desc0 = "Name: New York City - High Performance Version 2";
+         saveName = "NYCHP2";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-1376 -1664 3744 3328";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "948.5 -114.5 348.812";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4";
+      materialList = "~/data/skies/bluesky/sky_bluesky.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "4000";
+      fogDistance = "9000";
+      fogColor = "0.700000 0.700000 1.000000 1.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "0.25 0.25 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      useSkyTextures = "1";
+      renderBottomTexture = "0";
+      noRenderBans = "0";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "270";
+      elevation = "90";
+      color = "1.000000 1.000000 1.000000 1.000000";
+      ambient = "0.300000 0.300000 0.300000 1.000000";
+         scale = "1 1 1";
+         locked = "true";
+         direction = "0.57735 0.57735 -0.57735";
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "763.81 1749.85 1982.26";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "763.543 1763.62 1982.26";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "1905.03 2057.89 1982.26";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "-339.035 1592.37 1971.61";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "1606.64 630.873 1959.39";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "2945.68 61.3605 1962.84";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "2975.6 59.9839 1962.84";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "-115.539 146.296 1963.17";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+   };
+   new InteriorInstance(a) {
+      position = "73.4999 -306.7 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcity.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(a) {
+      position = "73.4999 -306.7 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/detail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(B) {
+      position = "73.4999 365.3 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityb.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(c) {
+      position = "937.5 -306.7 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityc.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(c) {
+      position = "937.5 -306.7 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/cdetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(d) {
+      position = "937.5 365.3 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityd.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(d) {
+      position = "937.5 365.3 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ddetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(e) {
+      position = "1801.5 -306.7 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcitye.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(e) {
+      position = "1801.5 -306.7 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/edetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(f) {
+      position = "1801.5 365.3 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityf.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(f) {
+      position = "1801.5 365.3 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/fdetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(G) {
+      position = "2665.52 -594.698 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityg.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(G) {
+      position = "2665.52 -594.698 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/gdetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(h) {
+      position = "2665.5 77.2999 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityh.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(h) {
+      position = "2665.5 77.2999 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/hdetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(o) {
+      position = "936.413 1860.68 2017.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityo.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(o) {
+      position = "936.413 1860.68 2017.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/odetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(m) {
+      position = "-595.65 1421.13 2002.97";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcitym.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(m) {
+      position = "-595.65 1421.13 2002.97";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/mdetails.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(N) {
+      position = "-795.65 1957.13 2002.97";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityn.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(N) {
+      position = "-795.65 1957.13 2002.97";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ndetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+         locked = "true";
+   };
+   new InteriorInstance(q) {
+      position = "1880.41 1860.68 2017.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityq.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(q) {
+      position = "1880.41 1860.68 2017.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/qdetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(p) {
+      position = "936.413 2532.68 2017.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityp.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(p) {
+      position = "936.413 2532.68 2017.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/pdetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(r) {
+      position = "782.73 1358.6 2016.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityr.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(r) {
+      position = "782.73 1358.6 2016.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/bridgedetails.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "2989.93 -1178.04 1952.95";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "3028.77 -1085.33 1953.39";
+      rotation = "1 0 0 0";
+      scale = "14 14 7";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new ScriptObject() {
+      class = "WhoTalkSO";
+         id0 = "5327";
+         count = "0";
+         textObj = "4099";
+   };
+   new TSStatic() {
+      position = "378.454 -92.4468 1964.84";
+      rotation = "1 0 0 0";
+      scale = "10 10 7";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new fxSunLight(Sun) {
+      position = "87.878 -41.8159 1959.1";
+      rotation = "0 0 -1 90";
+      scale = "2 2 2";
+      Enable = "1";
+      LocalFlareBitmap = "~/lighting/lightFalloffMono";
+      RemoteFlareBitmap = "~/lighting/lightFalloffMono";
+      SunAzimuth = "180";
+      SunElevation = "30";
+      LockToRealSun = "1";
+      FlareTP = "1";
+      Colour = "1.000000 0.500000 0.500000 0.500000";
+      Brightness = "1";
+      FlareSize = "1";
+      FadeTime = "0.1";
+      BlendMode = "0";
+      AnimColour = "0";
+      AnimBrightness = "0";
+      AnimRotation = "0";
+      AnimSize = "0";
+      AnimAzimuth = "0";
+      AnimElevation = "0";
+      LerpColour = "1";
+      LerpBrightness = "1";
+      LerpRotation = "1";
+      LerpSize = "1";
+      LerpAzimuth = "1";
+      LerpElevation = "1";
+      LinkFlareSize = "0";
+      SingleColourKeys = "1";
+      MinColour = "0.000000 0.000000 0.000000 1.000000";
+      MaxColour = "1.000000 1.000000 1.000000 1.000000";
+      MinBrightness = "0";
+      MaxBrightness = "1";
+      MinRotation = "0";
+      MaxRotation = "359";
+      minSize = "0.5";
+      MaxSize = "1";
+      MinAzimuth = "0";
+      MaxAzimuth = "359";
+      MinElevation = "-30";
+      MaxElevation = "210";
+      RedKeys = "AZA";
+      GreenKeys = "AZA";
+      BlueKeys = "AZA";
+      BrightnessKeys = "AZA";
+      RotationKeys = "AZA";
+      SizeKeys = "AZA";
+      AzimuthKeys = "AZ";
+      ElevationKeys = "AZ";
+      ColourTime = "5";
+      BrightnessTime = "5";
+      RotationTime = "5";
+      SizeTime = "5";
+      AzimuthTime = "5";
+      ElevationTime = "5";
+   };
+   new fxSunLight(sunflare) {
+      position = "2292.24 -219.377 1991.08";
+      rotation = "0 0 -1 90";
+      scale = "2 2 2";
+      Enable = "1";
+      LocalFlareBitmap = "~/lighting/gsfflare2";
+      RemoteFlareBitmap = "None";
+      SunAzimuth = "180";
+      SunElevation = "30";
+      LockToRealSun = "1";
+      FlareTP = "1";
+      Colour = "1.000000 1.000000 1.000000 1.000000";
+      Brightness = "0.5";
+      FlareSize = "4";
+      FadeTime = "0.1";
+      BlendMode = "0";
+      AnimColour = "0";
+      AnimBrightness = "0";
+      AnimRotation = "0";
+      AnimSize = "0";
+      AnimAzimuth = "0";
+      AnimElevation = "0";
+      LerpColour = "1";
+      LerpBrightness = "1";
+      LerpRotation = "1";
+      LerpSize = "1";
+      LerpAzimuth = "1";
+      LerpElevation = "1";
+      LinkFlareSize = "0";
+      SingleColourKeys = "1";
+      MinColour = "0.300000 0.300000 0.300000 0.300000";
+      MaxColour = "1.000000 1.000000 1.000000 1.000000";
+      MinBrightness = "0";
+      MaxBrightness = "1";
+      MinRotation = "0";
+      MaxRotation = "359";
+      minSize = "0.5";
+      MaxSize = "1";
+      MinAzimuth = "0";
+      MaxAzimuth = "359";
+      MinElevation = "-30";
+      MaxElevation = "210";
+      RedKeys = "AZA";
+      GreenKeys = "AZA";
+      BlueKeys = "AZA";
+      BrightnessKeys = "AZA";
+      RotationKeys = "AZA";
+      SizeKeys = "AZA";
+      AzimuthKeys = "AZ";
+      ElevationKeys = "AZ";
+      ColourTime = "10";
+      BrightnessTime = "5";
+      RotationTime = "5";
+      SizeTime = "5";
+      AzimuthTime = "5";
+      ElevationTime = "5";
+   };
+   new TSStatic() {
+      position = "3046.61 -1156.41 1938.8";
+      rotation = "1 0 0 0";
+      scale = "5 5 3";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new InteriorInstance(statue) {
+      position = "2997.3 -1006.25 2005.54";
+      rotation = "0 0 1 180";
+      scale = "2 2 2";
+      interiorFile = "~/data/interiors/ghostcitymain/sol.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "392.169 129.452 1942.52";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new Camera() {
+      position = "-328.395 -376.237 1967.31";
+      rotation = "-0.139484 -0.0620008 -0.988281 48.4337";
+      scale = "1 1 1";
+      dataBlock = "Observer";
+      canSetIFLs = "0";
+         mode = "Observer";
+   };
+   new TSStatic() {
+      position = "1032.68 77.209 1969.99";
+      rotation = "1 0 0 0";
+      scale = "20 20 15";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "725.656 71.5723 1963.51";
+      rotation = "1 0 0 0";
+      scale = "20 20 15";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "3075.71 -1182.46 1952.58";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "2880.07 -1063.2 1953.23";
+      rotation = "1 0 0 0";
+      scale = "10 10 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "3010.71 -1198.89 1930.6";
+      rotation = "1 0 0 0";
+      scale = "8 8 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "2949.84 -1103.3 1930.22";
+      rotation = "1 0 0 0";
+      scale = "10 10 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "2960.65 -1060.78 1953.35";
+      rotation = "1 0 0 0";
+      scale = "8 8 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "2919.42 -1081.89 1953.74";
+      rotation = "1 0 0 0";
+      scale = "11 11 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "3067.71 -1103.97 1929.5";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "3109.35 -1082.91 1953.51";
+      rotation = "1 0 0 0";
+      scale = "8 8 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "742.899 21.0933 1932.66";
+      rotation = "1 0 0 0";
+      scale = "10 10 7";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "817.69 -72.1579 1918.36";
+      rotation = "1 0 0 0";
+      scale = "15 15 10";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "795.034 102.327 1919.29";
+      rotation = "1 0 0 0";
+      scale = "15 15 10";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "895.787 57.9501 1915.47";
+      rotation = "1 0 0 0";
+      scale = "15 15 10";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "939.748 -36.3698 1918.91";
+      rotation = "1 0 0 0";
+      scale = "15 15 10";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1003.83 140.78 1918.9";
+      rotation = "1 0 0 0";
+      scale = "15 15 10";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "642.182 151.734 1925.21";
+      rotation = "1 0 0 0";
+      scale = "15 15 10";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "499.369 157.105 1913.22";
+      rotation = "1 0 0 0";
+      scale = "15 15 10";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "392.597 6.12812 1930.71";
+      rotation = "1 0 0 0";
+      scale = "10 10 7";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "683.613 -93.8189 1928.68";
+      rotation = "1 0 0 0";
+      scale = "10 10 7";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "470.812 -99.3402 1931.68";
+      rotation = "1 0 0 0";
+      scale = "10 10 7";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1023.59 -103.375 1950.44";
+      rotation = "1 0 0 0";
+      scale = "20 20 15";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "534.476 -102.81 1953.84";
+      rotation = "1 0 0 0";
+      scale = "20 20 15";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "426.761 72.0856 1963.84";
+      rotation = "1 0 0 0";
+      scale = "20 20 15";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new fxSunLight(helicopter) {
+      position = "-76.1306 -96.8503 105.821";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      Enable = "1";
+      LocalFlareBitmap = "~/lighting/flare";
+      RemoteFlareBitmap = "~/lighting/helicopter";
+      SunAzimuth = "30";
+      SunElevation = "30";
+      LockToRealSun = "0";
+      FlareTP = "1";
+      Colour = "1.000000 1.000000 1.000000 1.000000";
+      Brightness = "0.05";
+      FlareSize = "0.05";
+      FadeTime = "0.1";
+      BlendMode = "0";
+      AnimColour = "0";
+      AnimBrightness = "1";
+      AnimRotation = "0";
+      AnimSize = "0";
+      AnimAzimuth = "1";
+      AnimElevation = "1";
+      LerpColour = "1";
+      LerpBrightness = "1";
+      LerpRotation = "1";
+      LerpSize = "1";
+      LerpAzimuth = "1";
+      LerpElevation = "1";
+      LinkFlareSize = "0";
+      SingleColourKeys = "1";
+      MinColour = "0.000000 0.000000 0.000000 1.000000";
+      MaxColour = "1.000000 1.000000 1.000000 1.000000";
+      MinBrightness = "0";
+      MaxBrightness = "0.5";
+      MinRotation = "0";
+      MaxRotation = "359";
+      minSize = "0.5";
+      MaxSize = "1";
+      MinAzimuth = "0";
+      MaxAzimuth = "359";
+      MinElevation = "-30";
+      MaxElevation = "210";
+      RedKeys = "AZA";
+      GreenKeys = "AZA";
+      BlueKeys = "AZA";
+      BrightnessKeys = "AZA";
+      RotationKeys = "AZA";
+      SizeKeys = "AZA";
+      AzimuthKeys = "AZ";
+      ElevationKeys = "AZ";
+      ColourTime = "5";
+      BrightnessTime = "2";
+      RotationTime = "5";
+      SizeTime = "5";
+      AzimuthTime = "500";
+      ElevationTime = "100";
+   };
+   new SimSet(zombieFollowingGroup) {
+   };
+   new InteriorInstance() {
+      position = "2997.3 -1006.25 2005.54";
+      rotation = "0 0 1 180";
+      scale = "2 2 2";
+      interiorFile = "~/data/interiors/ghostcitymain/soldetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new ParticleEmitterNode() {
+      position = "3032.88 -916.154 2210.59";
+      rotation = "1 0 0 0";
+      scale = "1 1 4";
+      dataBlock = "GenericEmitterNode";
+      emitter = "JeepBurnEmitter";
+      velocity = "1";
+         brick = "6489";
+   };
+   new ParticleEmitterNode() {
+      position = "471 1287 2016.7";
+      rotation = "1 0 0 0";
+      scale = "1.002 1 2";
+      dataBlock = "GenericEmitterNode";
+      emitter = "FogEmitterA";
+      velocity = "1";
+         brick = "6100";
+   };
+   new ParticleEmitterNode() {
+      position = "444.775 1287.08 2016.82";
+      rotation = "1 0 0 0";
+      scale = "1.002 1 2";
+      dataBlock = "GenericEmitterNode";
+      emitter = "FogEmitterA";
+      velocity = "1";
+         brick = "6100";
+   };
+   new TSStatic() {
+      position = "689.976 1099.78 1959.64";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "543.547 1132.89 1958.53";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "173.657 1108.45 1958.93";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "190.655 1258.53 1958.93";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "609.817 1257.95 1958.96";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "209.305 1177.93 1936.15";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "151.406 1240.19 1933.83";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "572.887 1221.94 1935.01";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "627.691 1130.84 1930.24";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "380.647 1173.48 1935.04";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1027.28 1190.16 1958.08";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1132.64 1066.41 1959.39";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1361.43 1057.2 1958.6";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1567.95 1053.86 1959.25";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1400.26 1198.63 1958.64";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1176.49 1203.75 1959.25";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1519.24 1191.27 1932.34";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1259.07 1136.02 1932.44";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1036.08 1129.19 1934.04";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "-583.222 2115.47 1954.63";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "-783.194 2095.02 1955.89";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "-992.832 1975.19 1955.49";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "-857.095 1896.71 1957.46";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "-792.332 1601.65 1954.23";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "-898.9 1636.87 1955.89";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "-880.619 1603.19 1939.36";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "-804.095 1645.43 1956";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "-874.257 1237.45 1954.94";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "-819.375 1300.1 1957.07";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      shapeName = "~/data/foliage/ghostcity2/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1535.68 1661.21 1989.95";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "2328.87 2196.92 1968.79";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "2283.81 2280.27 1968.59";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "2325.92 2088.26 1965.31";
+      rotation = "1 0 0 0";
+      scale = "7 7 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "2327.5 2167.43 1955.84";
+      rotation = "1 0 0 0";
+      scale = "3 3 3";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "2326.11 2234.06 1954.97";
+      rotation = "1 0 0 0";
+      scale = "3 3 3";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "2324.4 2274.71 1953.75";
+      rotation = "1 0 0 0";
+      scale = "3 3 3";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "2324.83 2109.95 1955.56";
+      rotation = "1 0 0 0";
+      scale = "3 3 3";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "668.439 2334.68 1990.04";
+      rotation = "1 0 0 0";
+      scale = "3 3 3";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "640.586 2211.51 1989.95";
+      rotation = "1 0 0 0";
+      scale = "3 3 3";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "552.215 2133.8 1989.44";
+      rotation = "1 0 0 0";
+      scale = "3 3 3";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "662.171 2125.99 1988.2";
+      rotation = "1 0 0 0";
+      scale = "3 3 3";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "3068.66 211.134 1936.75";
+      rotation = "1 0 0 0";
+      scale = "5 5 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "3031.35 152.733 1957.81";
+      rotation = "1 0 0 0";
+      scale = "5 5 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "3091.35 358.882 1964.11";
+      rotation = "1 0 0 0";
+      scale = "5 5 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "3076.89 169.167 1935.64";
+      rotation = "1 0 0 0";
+      scale = "5 5 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "2832.99 -424.065 1963.26";
+      rotation = "1 0 0 0";
+      scale = "5 5 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1727.49 2.1233 1961.37";
+      rotation = "1 0 0 0";
+      scale = "5 5 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1684.43 -125.84 1961.85";
+      rotation = "1 0 0 0";
+      scale = "5 5 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1731.05 -137.862 1963.85";
+      rotation = "1 0 0 0";
+      scale = "5 5 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+   new TSStatic() {
+      position = "1685.15 -47.8678 1941.04";
+      rotation = "1 0 0 0";
+      scale = "5 5 5";
+      shapeName = "~/data/foliage/ghostcity/tree11.dts";
+   };
+};
+//--- OBJECT WRITE END ---

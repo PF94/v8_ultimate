@@ -1,0 +1,588 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         desc0 = "Name: New York City - Storm Version. Make sure you enable addOn-Environment in your add-ons menu for the rain.";
+         saveName = "NYC Storm";
+         name = "NYC Storm";
+         desc1 = "Author: [GSF]Ghost (ID: 3195)";
+         previewImage = "base/data/missions/ghostcitystorm";
+         descLines = "2";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-1376 -1664 3744 3328";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "948.5 -114.5 348.812";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4";
+      materialList = "~/data/skies/Sky_Day/Sky_Day.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      fogDistance = "9000";
+      fogColor = "0 0.1 0.08 0";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "0.25 0.25 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "0 0.2 0.1 0";
+      useSkyTextures = "0";
+      renderBottomTexture = "0";
+      noRenderBans = "0";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "250";
+      elevation = "90";
+      color = "0 0.1 0.08 0";
+      ambient = "0 0.1 0.08 0";
+         direction = "0.57735 0.57735 -0.57735";
+         scale = "1 1 1";
+         canSaveDynamicFields = "1";
+         locked = "true";
+         position = "0 0 0";
+         CastsShadows = "1";
+         rotation = "1 0 0 0";
+   };
+   new TerrainBlock(Terrain) {
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      detailTexture = "~/data/terrains/ghostcity/detail";
+      terrainFile = "./ghostcity.ter";
+      squareSize = "8";
+      emptySquares = "84603 104234 243401 374728 374984 375240 375496 375752 376008 376264 376520 376776 377032 246217 115345 115382 115601 115638";
+      bumpScale = "14";
+      bumpOffset = "0.1";
+      zeroBumpScale = "5";
+         locked = "true";
+         position = "-1024 -1024 -100";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "763.81 1749.85 1982.26";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "763.543 1763.62 1982.26";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "1905.03 2057.89 1982.26";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "-339.035 1592.37 1971.61";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "1606.64 630.873 1959.39";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "2945.68 61.3605 1962.84";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "2975.6 59.9839 1962.84";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+      new SpawnSphere() {
+         position = "-115.539 146.296 1963.17";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "1";
+         sphereWeight = "100";
+         indoorWeight = "100";
+         outdoorWeight = "100";
+      };
+   };
+   new InteriorInstance(a) {
+      position = "73.4999 -306.7 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcity.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(a) {
+      position = "73.4999 -306.7 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/detail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(B) {
+      position = "73.4999 365.3 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityb.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(c) {
+      position = "937.5 -306.7 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityc.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(c) {
+      position = "937.5 -306.7 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/cdetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(d) {
+      position = "937.5 365.3 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityd.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(d) {
+      position = "937.5 365.3 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ddetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(e) {
+      position = "1801.5 -306.7 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcitye.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(e) {
+      position = "1801.5 -306.7 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/edetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(f) {
+      position = "1801.5 365.3 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityf.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(f) {
+      position = "1801.5 365.3 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/fdetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(G) {
+      position = "2665.52 -594.698 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityg.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(G) {
+      position = "2665.52 -594.698 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/gdetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(h) {
+      position = "2665.5 77.2999 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityh.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(h) {
+      position = "2665.5 77.2999 1964.81";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/hdetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(o) {
+      position = "936.413 1860.68 2017.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityo.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(o) {
+      position = "936.413 1860.68 2017.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/odetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(m) {
+      position = "-595.65 1421.13 2002.97";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcitym.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(m) {
+      position = "-595.65 1421.13 2002.97";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/mdetails.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(N) {
+      position = "-795.65 1957.13 2002.97";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityn.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(N) {
+      position = "-795.65 1957.13 2002.97";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ndetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+         locked = "true";
+   };
+   new InteriorInstance(q) {
+      position = "1880.41 1860.68 2017.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityq.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(q) {
+      position = "1880.41 1860.68 2017.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/qdetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(p) {
+      position = "936.413 2532.68 2017.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityp.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(p) {
+      position = "936.413 2532.68 2017.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/pdetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(r) {
+      position = "782.73 1358.6 2016.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/ghostcityr.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(r) {
+      position = "782.73 1358.6 2016.02";
+      rotation = "0 0 -1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/bridgedetails.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new SimSet(zombieFollowingGroup) {
+   };
+   new ScriptObject() {
+      class = "WhoTalkSO";
+         textObj = "4099";
+         count = "0";
+         id0 = "5327";
+   };
+   new InteriorInstance() {
+      position = "2997.3 -1006.25 2005.54";
+      rotation = "0 0 1 180";
+      scale = "2 2 2";
+      interiorFile = "~/data/interiors/ghostcitymain/soldetail.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new Precipitation(letitrain) {
+      position = "140.023 -239.302 101.788";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "HeavyRain";
+      minSpeed = "1.5";
+      maxSpeed = "2";
+      minMass = "0.75";
+      maxMass = "0.85";
+      maxTurbulence = "0.1";
+      turbulenceSpeed = "0.2";
+      rotateWithCamVel = "1";
+      useTurbulence = "0";
+      numDrops = "1000";
+      boxWidth = "200";
+      boxHeight = "100";
+      doCollision = "1";
+   };
+   new ParticleEmitterNode() {
+      position = "3032.88 -916.154 2210.59";
+      rotation = "1 0 0 0";
+      scale = "1 1 4";
+      dataBlock = "GenericEmitterNode";
+      emitter = "JeepBurnEmitter";
+      velocity = "1";
+         brick = "6489";
+   };
+   new InteriorInstance(statue) {
+      position = "2997.3 -1006.25 2005.54";
+      rotation = "0 0 1 180";
+      scale = "2 2 2";
+      interiorFile = "~/data/interiors/ghostcitymain/sol.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new ParticleEmitterNode() {
+      position = "444.775 1287.08 2016.82";
+      rotation = "1 0 0 0";
+      scale = "1.002 1 2";
+      dataBlock = "GenericEmitterNode";
+      emitter = "FogEmitterA";
+      velocity = "1";
+         brick = "6100";
+   };
+   new WaterBlock(water) {
+      position = "-1024 -1024 1900.11";
+      rotation = "1 0 0 0";
+      scale = "2048 2048 50";
+      UseDepthMask = "1";
+      surfaceTexture = "~/data/water/vice/newyork";
+      ShoreTexture = "~/data/water/vice/newyork";
+      envMapOverTexture = "~/data/interiors/ghostcitymain/black.trans";
+      envMapUnderTexture = "~/data/interiors/ghostcitymain/black.trans";
+      liquidType = "OceanWater";
+      density = "1";
+      viscosity = "15";
+      waveMagnitude = "2";
+      surfaceOpacity = "1";
+      envMapIntensity = "0.8";
+      TessSurface = "5";
+      TessShore = "6";
+      SurfaceParallax = "0.5";
+      FlowAngle = "180";
+      FlowRate = "0.03";
+      DistortGridScale = "0.05";
+      DistortMag = "0.02";
+      DistortTime = "0.9";
+      ShoreDepth = "20";
+      DepthGradient = "1";
+      MinAlpha = "0.03";
+      MaxAlpha = "1";
+      removeWetEdges = "0";
+      specularColor = "0.900000 0.900000 0.900000 1.000000";
+      specularPower = "2e+008";
+         params0 = "0.32 -0.67 0.066 0.5";
+         params1 = "0.63 -2.41 0.33 0.21";
+         params2 = "0.39 0.39 0.2 0.133";
+         seedPoints = "0 0 1 0 1 1 0 1";
+         floodFill = "1";
+         textureSize = "32 32";
+         envMapTexture = "common/data/skies/sunset_0007";
+         params3 = "1.21 -0.61 0.13 -0.33";
+         extent = "100 100 10";
+   };
+   new Camera() {
+      position = "-328.395 -376.237 1967.31";
+      rotation = "-0.139484 -0.0620008 -0.988281 48.4337";
+      scale = "1 1 1";
+      dataBlock = "Observer";
+      canSetIFLs = "0";
+         mode = "Observer";
+   };
+   new ParticleEmitterNode() {
+      position = "471 1287 2016.7";
+      rotation = "1 0 0 0";
+      scale = "1.002 1 2";
+      dataBlock = "GenericEmitterNode";
+      emitter = "FogEmitterA";
+      velocity = "1";
+         brick = "6100";
+   };
+   new fxSunLight(helicopter) {
+      position = "-76.1306 -96.8503 105.821";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      Enable = "1";
+      LocalFlareBitmap = "~/lighting/flare";
+      RemoteFlareBitmap = "~/lighting/helicopter";
+      SunAzimuth = "30";
+      SunElevation = "30";
+      LockToRealSun = "0";
+      FlareTP = "1";
+      Colour = "1.000000 1.000000 1.000000 1.000000";
+      Brightness = "0.05";
+      FlareSize = "0.05";
+      FadeTime = "0.1";
+      BlendMode = "0";
+      AnimColour = "0";
+      AnimBrightness = "1";
+      AnimRotation = "0";
+      AnimSize = "0";
+      AnimAzimuth = "1";
+      AnimElevation = "1";
+      LerpColour = "1";
+      LerpBrightness = "1";
+      LerpRotation = "1";
+      LerpSize = "1";
+      LerpAzimuth = "1";
+      LerpElevation = "1";
+      LinkFlareSize = "0";
+      SingleColourKeys = "1";
+      MinColour = "0.000000 0.000000 0.000000 1.000000";
+      MaxColour = "1.000000 1.000000 1.000000 1.000000";
+      MinBrightness = "0";
+      MaxBrightness = "0.5";
+      MinRotation = "0";
+      MaxRotation = "359";
+      minSize = "0.5";
+      MaxSize = "1";
+      MinAzimuth = "0";
+      MaxAzimuth = "359";
+      MinElevation = "-30";
+      MaxElevation = "210";
+      RedKeys = "AZA";
+      GreenKeys = "AZA";
+      BlueKeys = "AZA";
+      BrightnessKeys = "AZA";
+      RotationKeys = "AZA";
+      SizeKeys = "AZA";
+      AzimuthKeys = "AZ";
+      ElevationKeys = "AZ";
+      ColourTime = "5";
+      BrightnessTime = "2";
+      RotationTime = "5";
+      SizeTime = "5";
+      AzimuthTime = "500";
+      ElevationTime = "100";
+   };
+   new InteriorInstance() {
+      position = "920.996 1089.4 309.203";
+      rotation = "0 0 1 90";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/bluehell.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "1695.07 1155.15 1918.8";
+      rotation = "1 0 0 0";
+      scale = "10000 10000 1";
+      interiorFile = "~/data/interiors/ghostcitymain/null.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "1682.52 1144.98 1920";
+      rotation = "1 0 0 90";
+      scale = "10000 1 10000";
+      shapeName = "~/data/interiors/ghostcitymain/oceanfloor/glassa.dts";
+   };
+   new InteriorInstance() {
+      position = "920.996 1089.4 4000";
+      rotation = "1 0 0 0";
+      scale = "4 4 4.8";
+      interiorFile = "~/data/interiors/ghostcitymain/blueheaven.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+};
+//--- OBJECT WRITE END ---
