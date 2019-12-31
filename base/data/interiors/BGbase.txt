@@ -1,0 +1,49 @@
+C:/Users/KEVIN/Desktop/US/base/data/interiors/BGbase.dif
+
+
+
+Constructor Version: 1.0.3
+
+
+
+Date: 2008/02/04 16:16:11
+
+
+Detail Level 0
+
+
+
+  Zones:         1
+
+  Points:        725
+
+  Surfaces:      290
+
+  Null Surfaces: 0
+
+  BSP Nodes:     261
+
+
+
+  Textures From Brushes:
+
+
+
+    CEMENT
+
+    MTLPILRBOTTOM
+
+    FLOOR1
+
+    FLOOR2
+
+
+
+  Static Meshes and Textures:
+
+
+
+    -- None --
+
+
+

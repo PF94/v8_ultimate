@@ -1,0 +1,45 @@
+C:/Users/KEVIN/Desktop/US/base/data/interiors/satta.dif
+
+
+
+Constructor Version: 1.0.3
+
+
+
+Date: 2008/02/15 15:30:47
+
+
+Detail Level 0
+
+
+
+  Zones:         1
+
+  Points:        34
+
+  Surfaces:      22
+
+  Null Surfaces: 0
+
+  BSP Nodes:     16
+
+
+
+  Textures From Brushes:
+
+
+
+    WALL5
+
+    CEMENT
+
+
+
+  Static Meshes and Textures:
+
+
+
+    -- None --
+
+
+

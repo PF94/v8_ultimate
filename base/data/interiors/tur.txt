@@ -1,0 +1,45 @@
+C:/Users/KEVIN/Desktop/US/base/data/interiors/tur.dif
+
+
+
+Constructor Version: 1.0.3
+
+
+
+Date: 2008/02/15 14:53:28
+
+
+Detail Level 0
+
+
+
+  Zones:         1
+
+  Points:        209
+
+  Surfaces:      112
+
+  Null Surfaces: 0
+
+  BSP Nodes:     57
+
+
+
+  Textures From Brushes:
+
+
+
+    WALL5
+
+    FLOOR1
+
+
+
+  Static Meshes and Textures:
+
+
+
+    -- None --
+
+
+

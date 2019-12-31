@@ -1,0 +1,43 @@
+C:/Users/KEVIN/Desktop/US/base/data/interiors/stairs.dif
+
+
+
+Constructor Version: 1.0.3
+
+
+
+Date: 2008/02/15 14:54:38
+
+
+Detail Level 0
+
+
+
+  Zones:         1
+
+  Points:        14
+
+  Surfaces:      5
+
+  Null Surfaces: 0
+
+  BSP Nodes:     5
+
+
+
+  Textures From Brushes:
+
+
+
+    FLOOR1
+
+
+
+  Static Meshes and Textures:
+
+
+
+    -- None --
+
+
+

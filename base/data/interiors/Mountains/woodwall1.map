@@ -1,0 +1,20 @@
+{
+"classname" "worldspawn"
+"classname" "worldspawn"
+"min_pixels" "250"
+"geometry_scale" "32.0"
+"light_geometry_scale" "32.0"
+"ambient_color" "0 0 0"
+"emergency_ambient_color" "0 0 0"
+"mapversion" "220"
+"mapversion" "220"
+"wad" "\cogfactory\tw.wad"
+{
+( -12 -72 64 ) ( -12 220 64 ) ( 16 220 64 ) VERTICALLOGS [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1 
+( -12 220 -116 ) ( -12 -72 -116 ) ( 16 -72 -116 ) VERTICALLOGS [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1 
+( -12 -72 -116 ) ( -12 220 -116 ) ( -12 220 64 ) VERTICALLOGS [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1 
+( 16 220 -116 ) ( 16 -72 -116 ) ( 16 -72 64 ) VERTICALLOGS [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1 
+( -12 220 -116 ) ( 16 220 -116 ) ( 16 220 64 ) VERTICALLOGS [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1 
+( 16 -72 -116 ) ( -12 -72 -116 ) ( -12 -72 64 ) VERTICALLOGS [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1 
+}
+}

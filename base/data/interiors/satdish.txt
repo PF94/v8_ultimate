@@ -1,0 +1,43 @@
+C:/Users/KEVIN/Desktop/US/base/data/interiors/satdish.dif
+
+
+
+Constructor Version: 1.0.3
+
+
+
+Date: 2008/02/15 15:26:26
+
+
+Detail Level 0
+
+
+
+  Zones:         1
+
+  Points:        17
+
+  Surfaces:      9
+
+  Null Surfaces: 0
+
+  BSP Nodes:     9
+
+
+
+  Textures From Brushes:
+
+
+
+    FLOOR1
+
+
+
+  Static Meshes and Textures:
+
+
+
+    -- None --
+
+
+

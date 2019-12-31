@@ -1,0 +1,320 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         descLines = "2";
+         desc0 = "Name:Town Rage";
+         desc1 = "Author: Builder";
+         saveName = "Town Rage";
+         name = "Town Rage";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-1048 -1064 2096 2128";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "312 96 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      materialList = "~/data/skies/sky_storm/sky_storm.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "1500";
+      fogDistance = "1000";
+      fogColor = "0.900000 0.900000 0.900000 1.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "0.25 0.25 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      useSkyTextures = "1";
+      renderBottomTexture = "0";
+      noRenderBans = "0";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "0";
+      elevation = "35";
+      color = "0.800000 0.800000 0.900000 1.000000";
+      ambient = "0.300000 0.300000 0.500000 1.000000";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         locked = "true";
+         position = "0 0 0";
+         direction = "0.57735 0.57735 -0.57735";
+   };
+   new TerrainBlock(Terrain) {
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      terrainFile = "./townrage.ter";
+      bumpTexture = "~/data/terrains/snow/TTicefrosty1";
+      squareSize = "8";
+      bumpScale = "7";
+      bumpOffset = "0.01";
+      zeroBumpScale = "6";
+         locked = "true";
+         position = "-1024 -1024 0";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "246.347 772.497 521.371";
+         rotation = "0 0 1 130.062";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "10";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            homingCount = "0";
+            locked = "false";
+            lockCount = "0";
+      };
+   };
+   new WaterBlock(water) {
+      position = "-352 704 206.99";
+      rotation = "1 0 0 0";
+      scale = "2048 2048 300";
+      UseDepthMask = "1";
+      surfaceTexture = "~/data/water/TSwater1";
+      ShoreTexture = "~/data/water/TSwater1";
+      submergeTexture[0] = "~/data/water/TSwater1";
+      submergeTexture[1] = "~/data/water/TSwater1";
+      liquidType = "OceanWater";
+      density = "1";
+      viscosity = "40";
+      waveMagnitude = "0";
+      surfaceOpacity = "0.25";
+      envMapIntensity = "0.4";
+      TessSurface = "20";
+      TessShore = "30";
+      SurfaceParallax = "0.5";
+      FlowAngle = "90";
+      FlowRate = "0.05";
+      DistortGridScale = "0.1";
+      DistortMag = "0.015";
+      DistortTime = "0.5";
+      ShoreDepth = "20";
+      DepthGradient = "1";
+      MinAlpha = "0.03";
+      MaxAlpha = "0.5";
+      removeWetEdges = "0";
+      specularColor = "1.000000 1.000000 1.000000 1.000000";
+      specularPower = "6";
+         extent = "100 100 10";
+         params0 = "0.32 -0.67 0.066 0.5";
+         params1 = "0.63 -2.41 0.33 0.21";
+         params3 = "1.21 -0.61 0.13 -0.33";
+         params2 = "0.39 0.39 0.2 0.133";
+         textureSize = "32 32";
+         floodFill = "1";
+         seedPoints = "0 0 1 0 1 1 0 1";
+         envMapTexture = "base/data/skies/sunset_0007";
+   };
+   new Sun(Sun) {
+      azimuth = "0";
+      elevation = "35";
+      color = "0.800000 0.800000 0.800000 1.000000";
+      ambient = "0.200000 0.200000 0.200000 1.000000";
+         direction = "1 1 -1";
+   };
+   new InteriorInstance() {
+      position = "138.152 726.214 510.58";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Dorf/schmiede.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "158.422 722.347 510.598";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/farm/farmhouse.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "157.953 747.102 509.552";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/farm/farm_well.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "142.111 794.502 511.017";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/farm/farm_house2.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "137.874 752.112 510.159";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Dorf/kirche.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "180.158 721.545 509.709";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/farm/farmhouse.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "157.223 751.478 509.001";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Dorf/haupthaus.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "140.948 776.175 510.172";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Dorf/haus.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "137.457 697.665 510.853";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/farm/farm_barn1.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "146.621 788.606 509.873";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Dorf/haupthaus.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "114.094 743.753 510.206";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/BigTower/BigTower.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "202.933 765.917 506.987";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Chris/bridge_pack/bridge1.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "151.921 688.674 509.337";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Dorf/scheune.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "117.393 771.489 509.176";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/kaputtes haus/holzhaus.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "118.826 793.868 511.054";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/farm/farm_house2.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "58.5969 727.922 513.998";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/outpost/outpost1.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "82.7943 756.144 513.103";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Dorf/galgen.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "96.6671 671.865 526.245";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm06.dts";
+   };
+   new TSStatic() {
+      position = "102.703 718.547 509.177";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm04.dts";
+   };
+   new TSStatic() {
+      position = "151.487 665.919 507.078";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm05.dts";
+   };
+   new TSStatic() {
+      position = "182.931 663.258 506.104";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm02.dts";
+   };
+   new TSStatic() {
+      position = "189.517 785.214 502.446";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm07.dts";
+   };
+   new TSStatic() {
+      position = "90.5078 779.109 508.616";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "111.445 710.713 509.08";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm06.dts";
+   };
+   new TSStatic() {
+      position = "103.488 674.955 520.951";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm04.dts";
+   };
+};
+//--- OBJECT WRITE END ---
