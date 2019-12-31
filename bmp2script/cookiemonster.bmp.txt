@@ -1,0 +1,1553 @@
+C:\Documents and Settings\Philip\Skrivbord\cookiemonster.bmp
+Converted using BMP2SCRIPT by boomlinde.
+1x1
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	15
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	5
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	5
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	5
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	5
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	5
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	5
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	7
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	14
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	UseSprayCan	13
+Server	plantBrick
+Server	ShiftBrick	0	-1	0
+Server	ShiftBrick	-1	29	0
+Server	cancelBrick
