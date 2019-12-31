@@ -1,0 +1,742 @@
+//Capture The Flag
+//2
+//Raid the enemy's base, capture their flag and return it to yours to gain 10 points!
+//Place Red and Blue flag spawns before starting a game, and a Green one for a three-team game.
+//ctf
+//0
+
+function CTFctrlSO::tdmStart()
+{
+ if((%a = $TeamDM::packagemanager.tdmcheck()) !$= "1")
+ {
+  servercmdStartPackage(-1,"Capture The Flag");
+  messageall('',"(" @ %a @ ")");
+  return;
+ }
+ $TeamDM::CTF::FlagRedSpawn = "";
+ $TeamDM::CTF::FlagBlueSpawn = "";
+ $TeamDM::CTF::FlagGreenSpawn = "";
+ for(%i=0;%i<mainbrickgroup.getCount();%i++)
+ {
+  for(%j=0;%j<mainbrickgroup.getObject(%i).getCount();%j++)
+  {
+   %obj = mainbrickgroup.getObject(%i).getObject(%j).getdatablock().getName();
+   if(%obj $= "brickCTFRedFlagData")
+   {
+    if(isObject($TeamDM::CTF::FlagRedSpawn)){return;}
+    $TeamDM::CTF::FlagRedSpawn = mainbrickgroup.getObject(%i).getObject(%j);
+    $TeamDM::CTF::FlagRedSpawn.setItem("ctfRedFlagItem");
+    $TeamDM::CTF::FlagRedSpawn.setItemPosition(0);
+    $TeamDM::CTF::FlagRedSpawn.setItemDirection(0);
+   }
+   if(%obj $= "brickCTFBlueFlagData")
+   {
+    if(isObject($TeamDM::CTF::FlagBlueSpawn)){return;}
+    $TeamDM::CTF::FlagBlueSpawn = mainbrickgroup.getObject(%i).getObject(%j);
+    $TeamDM::CTF::FlagBlueSpawn.setItem("ctfBlueFlagItem");
+    $TeamDM::CTF::FlagBlueSpawn.setItemPosition(0);
+    $TeamDM::CTF::FlagBlueSpawn.setItemDirection(0);
+   }
+   if(%obj $= "brickCTFGreenFlagData")
+   {
+    if(isObject($TeamDM::CTF::FlagGreenSpawn)){return;}
+    $TeamDM::CTF::FlagGreenSpawn = mainbrickgroup.getObject(%i).getObject(%j);
+    $TeamDM::CTF::FlagGreenSpawn.setItem("ctfGreenFlagItem");
+    $TeamDM::CTF::FlagGreenSpawn.setItemPosition(0);
+    $TeamDM::CTF::FlagGreenSpawn.setItemDirection(0);
+   }
+  }
+ }
+}
+function CTFctrlSO::tdmCheck(%this)
+{
+ for(%i=0;%i<mainbrickgroup.getCount();%i++)
+ {
+  for(%j=0;%j<mainbrickgroup.getObject(%i).getCount();%j++)
+  {
+   %obj = mainbrickgroup.getObject(%i).getObject(%j).getdatablock().getName();
+   if(%obj $= "brickCTFRedFlagData"){%red = 1;}
+   if(%obj $= "brickCTFBlueFlagData"){%blue = 1;}
+  }
+ }
+ if(!%red){return "\c5A \c0Red\c5 flag spawn does not exist.";}
+ if(!%blue){return "\c5A \c1Blue\c5 flag spawn does not exist.";}
+ return 1;
+}
+function CTFctrlSO::tdmSettings(%client)
+{
+ for(%i = $teamDM::TeamManager.teamcount-1;%i>-1;%i--)
+ {
+  %team = $TeamDM::TeamManager.team[%i];
+  if(%team.name $= "Red"){%red = 1;continue;}
+  if(%team.name $= "Blue"){%blue = 1;continue;}
+  if(%team.name $= "Green"){%green2 = 1;continue;}
+  %team.leader.isLeader = "";
+  for(%j = %i;%j<$teamDM::TeamManager.teamcount;%j++)
+  {
+   $teamDM::TeamManager.team[%j].serverID--;
+   $teamDM::TeamManager.team[%j] = $teamDM::TeamManager.team[%j+1];
+  }
+  for(%j=0;%j<ClientGroup.getCount();%j++)
+  {
+  %cl = ClientGroup.getObject(%j);
+  if(%cl.tdmTeam $= %team && $TeamDM::TeamsOn && isObject(%cl.minigame))
+  {
+   schedule(100,0,respawn,%cl);
+  }
+ }
+ $TeamDM::TeamManager.teamCount--;
+ %team.delete();
+ }
+ if(!%red){newTeam("Red","red");}
+ if(!%blue){newTeam("Blue","blue");}
+ for(%i=0;%i<mainbrickgroup.getCount();%i++)
+ {
+  for(%j=0;%j<mainbrickgroup.getObject(%i).getCount();%j++)
+  {
+   %obj = mainbrickgroup.getObject(%i).getObject(%j).getdatablock().getName();
+   if(%obj $= "brickCTFGreenFlagData"){%green = 1;}
+  }
+ }
+ if(%green && !%green2){newTeam("Green","Green");}
+ $TeamDM::PackageTeamLock = 1;
+}
+function CTFctrlSO::tdmEnd()
+{
+   if(isObject($TeamDM::CTF::FlagRedSpawn)){
+    $TeamDM::CTF::FlagRedSpawn.setItem("wrenchImage");}
+   if(isObject($TeamDM::CTF::FlagBlueSpawn)){
+    $TeamDM::CTF::FlagBlueSpawn.setItem("wrenchImage");}
+   if(isObject($TeamDM::CTF::FlagGreenSpawn)){
+    $TeamDM::CTF::FlagGreenSpawn.setItem("wrenchImage");}
+   if(isObject($TeamDM::CTF::DroppedRed))
+    $TeamDM::CTF::DroppedRed.delete();
+   if(isObject($TeamDM::CTF::DroppedBlue))
+    $TeamDM::CTF::DroppedBlue.delete();
+   if(isObject($TeamDM::CTF::DroppedGreen))
+    $TeamDM::CTF::DroppedGreen.delete();
+   for(%i=0;%i<Clientgroup.getCount();%i++)
+   {
+    %cl = clientgroup.getObject(%i);
+    %name = (isObject(%cl.player.getMountedImage(0)) ? %cl.player.getMountedImage(0).getName() : "");
+    if(%name $= "ctfRedFlagImage" || %name $= "ctfBlueFlagImage" || %name $= "ctfGreenFlagImage")
+    {
+     %cl.player.unmountImage(0);
+    }
+   }
+
+    $TeamDM::CTF::FlagGreenSpawn = "";
+    $TeamDM::CTF::FlagBlueSpawn = "";
+    $TeamDM::CTF::FlagRedSpawn = "";
+}
+
+function servercmdResetFlags(%client)
+{
+   if(!%client.isSuperAdmin || $TeamDM::PackageOn !$= "Capture The Flag" || !$TeamDM::TeamsOn){return;}
+   if(isObject($TeamDM::CTF::FlagRedSpawn)){
+    $TeamDM::CTF::FlagRedSpawn.setItem("ctfRedFlagItem");}
+   if(isObject($TeamDM::CTF::FlagBlueSpawn)){
+    $TeamDM::CTF::FlagBlueSpawn.setItem("ctfBlueFlagItem");}
+   if(isObject($TeamDM::CTF::FlagGreenSpawn)){
+    $TeamDM::CTF::FlagGreenSpawn.setItem("ctfGreenFlagItem");}
+   if(isObject($TeamDM::CTF::DroppedRed))
+    $TeamDM::CTF::DroppedRed.delete();
+   if(isObject($TeamDM::CTF::DroppedBlue))
+    $TeamDM::CTF::DroppedBlue.delete();
+   if(isObject($TeamDM::CTF::DroppedGreen))
+    $TeamDM::CTF::DroppedGreen.delete();
+   cancel($TeamDM::CTF::FlagRespawnRed);
+   cancel($TeamDM::CTF::FlagRespawnBlue);
+   cancel($TeamDM::CTF::FlagRespawnGreen);
+   for(%i=0;%i<Clientgroup.getCount();%i++)
+   {
+    %cl = clientgroup.getObject(%i);
+    %name = (isObject(%cl.player.getMountedImage(0)) ? %cl.player.getMountedImage(0).getName() : "");
+    if(%name $= "ctfRedFlagImage" || %name $= "ctfBlueFlagImage" || %name $= "ctfGreenFlagImage")
+    {
+     %cl.player.unmountImage(0);
+    }
+   }
+}
+
+ function CTFctrlSO::respawn(%obj,%this)
+ {
+   %name = (isObject(%this.player.getMountedImage(0)) ? %this.player.getMountedImage(0).getName() : "");
+   switch$(%name)
+   {
+    case "ctfRedFlagImage":
+	messageall('',"<color:" @ $TeamDM::Color[%this.tdmteam.color,1] @ ">" @ %this.name @ "\c5 has lost the \c0Red\c5 flag.");
+	cancel($TeamDM::CTF::FlagRespawnRed);
+	$TeamDM::CTF::FlagRedSpawn.setItem("ctfRedFlagItem");
+     	$TeamDM::CTF::FlagRedSpawn.setItemPosition(0);
+     	$TeamDM::CTF::FlagRedSpawn.setItemDirection(0);
+	%this.player.flagUnmount = 1;
+	%this.player.unmountImage(0);
+    case "ctfBlueFlagImage":
+	messageall('',"<color:" @ $TeamDM::Color[%this.tdmteam.color,1] @ ">" @ %this.name @ "\c5 has lost the <color:0000FF>Blue\c5 flag.");
+	$TeamDM::CTF::FlagBlueSpawn.setItem("ctfBlueFlagItem");
+	cancel($TeamDM::CTF::FlagRespawnBlue);
+     	$TeamDM::CTF::FlagBlueSpawn.setItemPosition(0);
+     	$TeamDM::CTF::FlagBlueSpawn.setItemDirection(0);
+	%this.player.flagUnmount = 1;
+	%this.player.unmountImage(0);
+    case "ctfGreenFlagImage":
+	messageall('',"<color:" @ $TeamDM::Color[%this.tdmteam.color,1] @ ">" @ %this.name @ "\c5 has lost the <color:00FF00>Green\c5 flag.");
+	$TeamDM::CTF::FlagGreenSpawn.setItem("ctfGreenFlagItem");
+	cancel($TeamDM::CTF::FlagRespawnGreen);
+	$TeamDM::CTF::FlagGreenSpawn.setItemPosition(0);
+     	$TeamDM::CTF::FlagGreenSpawn.setItemDirection(0);
+	%this.player.flagUnmount = 1;
+	%this.player.unmountImage(0);
+   }
+ }
+ function CTFctrlSO::OnDeath(%this,%client,%obj,%a,%b,%c)
+ {
+  %this = %client.player;
+   %name = (isObject(%this.getMountedImage(0)) ? %this.getMountedImage(0).getName() : "");
+   switch$(%name)
+   {
+    case "ctfRedFlagImage":
+	messageall('',"<color:" @ $TeamDM::Color[%this.client.tdmteam.color,1] @ ">" @ %this.client.name @ "\c5 has lost the \c0Red\c5 flag.");
+	%p = new Item()
+	{
+		datablock = ctfRedFlagItem;
+		position = vectorAdd(%this.position,"0 0 1");
+		dropped = 1;
+		rotate = 0;
+		static = 0;
+	};$TeamDM::CTF::DroppedRed = %p;cancel($TeamDM::CTF::FlagRespawnRed);$TeamDM::CTF::FlagRespawnRed = schedule(30000,0,ctfFlagRespawn,"Red");
+	%this.flagUnmount = 1;
+	%this.unmountImage(0);
+    case "ctfBlueFlagImage":
+	messageall('',"<color:" @ $TeamDM::Color[%this.client.tdmteam.color,1] @ ">" @ %this.client.name @ "\c5 has lost the <color:0000FF>Blue\c5 flag.");
+	%p = new Item()
+	{
+		datablock = ctfBlueFlagItem;
+		position = vectorAdd(%this.position,"0 0 1");
+		dropped = 1;
+		rotate = 0;
+		static = 0;
+	};$TeamDM::CTF::DroppedBlue = %p;cancel($TeamDM::CTF::FlagRespawnBlue);$TeamDM::CTF::FlagRespawnBlue = schedule(30000,0,ctfFlagRespawn,"Blue");
+	%this.flagUnmount = 1;
+	%this.unmountImage(0);
+    case "ctfGreenFlagImage":
+	messageall('',"<color:" @ $TeamDM::Color[%this.client.tdmteam.color,1] @ ">" @ %this.client.name @ "\c5 has lost the <color:00FF00>Green\c5 flag.");
+	%p = new Item()
+	{
+		datablock = ctfGreenFlagItem;
+		position = vectorAdd(%this.position,"0 0 1");
+		dropped = 1;
+		rotate = 0;
+		static = 0;
+	};$TeamDM::CTF::DroppedGreen = %p;cancel($TeamDM::CTF::FlagRespawnGreen);$TeamDM::CTF::FlagRespawnGreen = schedule(30000,0,ctfFlagRespawn,"Green");
+	%this.flagUnmount = 1;
+	%this.unmountImage(0);
+   }
+ }
+ function CTFctrlSO::onClientLeaveGame(%obj,%client)
+ {
+  %this = %client.player;
+  if(!isObject(%this)){return;}
+   %name = (isObject(%this.getMountedImage(0)) ? %this.getMountedImage(0).getName() : "");
+   switch$(%name)
+   {
+    case "ctfRedFlagImage":
+	messageall('',"<color:" @ $TeamDM::Color[%this.client.tdmteam.color,1] @ ">" @ %this.client.name @ "\c5 has lost the \c0Red\c5 flag.");
+	%p = new Item()
+	{
+		datablock = ctfRedFlagItem;
+		position = vectorAdd(%this.position,"0 0 1");
+		dropped = 1;
+		rotate = 0;
+		static = 0;
+	};$TeamDM::CTF::DroppedRed = %p;cancel($TeamDM::CTF::FlagRespawnRed);$TeamDM::CTF::FlagRespawnRed = schedule(30000,0,ctfFlagRespawn,"Red");
+	%this.flagUnmount = 1;
+	%this.unmountImage(0);
+    case "ctfBlueFlagImage":
+	messageall('',"<color:" @ $TeamDM::Color[%this.client.tdmteam.color,1] @ ">" @ %this.client.name @ "\c5 has lost the <color:0000FF>Blue\c5 flag.");
+	%p = new Item()
+	{
+		datablock = ctfBlueFlagItem;
+		position = vectorAdd(%this.position,"0 0 1");
+		dropped = 1;
+		rotate = 0;
+		static = 0;
+	};$TeamDM::CTF::DroppedBlue = %p;cancel($TeamDM::CTF::FlagRespawnBlue);$TeamDM::CTF::FlagRespawnBlue = schedule(30000,0,ctfFlagRespawn,"Blue");
+	%this.flagUnmount = 1;
+	%this.unmountImage(0);
+    case "ctfGreenFlagImage":
+	messageall('',"<color:" @ $TeamDM::Color[%this.client.tdmteam.color,1] @ ">" @ %this.client.name @ "\c5 has lost the <color:00FF00>Green\c5 flag.");
+	%p = new Item()
+	{
+		datablock = ctfGreenFlagItem;
+		position = vectorAdd(%this.position,"0 0 1");
+		dropped = 1;
+		rotate = 0;
+		static = 0;
+	};$TeamDM::CTF::DroppedGreen = %p;cancel($TeamDM::CTF::FlagRespawnGreen);$TeamDM::CTF::FlagRespawnGreen = schedule(30000,0,ctfFlagRespawn,"Green");
+	%this.flagUnmount = 1;
+	%this.unmountImage(0);
+   }
+ }
+
+function ctfFlagRespawn(%type)
+{
+ if(!isObject($TeamDM::CTF::Dropped[%type])){return;}
+ $TeamDM::CTF::Dropped[%type].delete();
+	$TeamDM::CTF::Flag[%type @ "Spawn"].setItem("ctf" @ %type @ "FlagItem");
+	$TeamDM::CTF::Flag[%type @ "Spawn"].setItemPosition(0);
+     	$TeamDM::CTF::Flag[%type @ "Spawn"].setItemDirection(0);
+ messageall('',"\c5The <color:" @ $TeamDM::Color[%type,1] @ ">" @ %type @ "\c5 flag has been respawned. (30sec no pickup)");
+}
+package ctfFunctions
+{
+function ctfRedFlagImage::onUnMount(%this,%obj,%slot)
+{
+ if($TeamDM::PackageOn !$= "Capture The Flag"){return;}
+ if(%obj.getState() $= "Dead" || %obj.flagUnmount)
+ {
+  %obj.flagunmount = 0;
+  return;
+ }
+ schedule(100,0,remount,%obj,%this,%slot);
+}
+ function ctfBlueFlagImage::onUnMount(%this,%obj,%slot)
+{
+ if($TeamDM::PackageOn !$= "Capture The Flag"){return;}
+ if(%obj.getState() $= "Dead" || %obj.flagUnmount)
+ {
+  %obj.flagunmount = 0;
+  return;
+ }
+ schedule(0,0,remount,%obj,%this,%slot);
+}
+ function ctfGreenFlagImage::onUnMount(%this,%obj,%slot)
+{
+ if($TeamDM::PackageOn !$= "Capture The Flag"){return;}
+ if(%obj.getState() $= "Dead" || %obj.flagUnmount)
+ {
+  %obj.flagunmount = 0;
+  return;
+ }
+ schedule(100,0,remount,%obj,%this,%slot);
+}
+function remount(%obj,%this,%slot)
+{
+ %obj.mountimage(%this,%slot);
+ %obj.playThread(1,armreadyright);
+}
+function ctfRedFlagItem::onPickup(%this,%obj,%user,%amount)
+{
+ if($TeamDM::PackageOn !$= "Capture The Flag"){return;}
+ %cl = %user.client;
+ %team = %cl.tdmteam;
+ %flagteam = "Red";
+ %drop = %obj.dropped;
+ %name = (isObject(%user.getMountedImage(0)) ? %user.getMountedImage(0).getName() : "");
+ if(!isObject(%team) || !$TeamDM::TeamsOn || !isObject(%cl.minigame))
+  return;
+ cancel($TeamDM::CTF::FlagRespawnRed);
+ if(%team.name $= %flagteam && (%name $= "ctfBlueFlagImage" || %name $= "ctfGreenFlagImage"))
+ {
+  if(!%obj.dropped)
+  {
+   %flag = (%user.getMountedImage(0).getName() $= "ctfBlueFlagImage" ? "<color:0000FF>Blue" : "<color:00FF00>Green");
+   messageall('',"<color:" @ $TeamDM::Color[%team.color,1] @ ">" @ %cl.name @ "\c5 has returned the " @ %flag @ "\c5 flag for 10 points!");
+   if(%user.getMountedImage(0).getName() $= "ctfBlueFlagImage")
+   {
+             $TeamDM::CTF::FlagBlueSpawn.setItem("ctfBlueFlagItem");
+   	$TeamDM::CTF::FlagBlueSpawn.setItemPosition(0);
+     	$TeamDM::CTF::FlagBlueSpawn.setItemDirection(0);
+    }
+    if(%user.getMountedImage(0).getName() $= "ctfGreenFlagImage")
+    {
+              $TeamDM::CTF::FlagGreenSpawn.setItem("ctfgreenFlagItem");
+     	$TeamDM::CTF::FlagGreenSpawn.setItemPosition(0);
+     	$TeamDM::CTF::FlagGreenSpawn.setItemDirection(0);
+    }
+    %user.flagUnMount = 1;
+    %user.unmountImage(0);
+    %cl.incScore(10);
+   }
+  }
+   if(%team.name $= %flagteam && %obj.dropped)
+   {
+    messageall('',"<color:" @ $TeamDM::Color[%team.color,1] @ ">" @ %cl.name @ "\c5 recovered the dropped <color:FF0000>Red\c5 flag.");
+              $TeamDM::CTF::FlagRedSpawn.setItem("ctfRedFlagItem");
+     	$TeamDM::CTF::FlagRedSpawn.setItemPosition(0);
+     	$TeamDM::CTF::FlagRedSpawn.setItemDirection(0);
+	%obj.delete();
+   }
+  if(%team.name !$= %flagteam && %name !$= "ctfBlueFlagImage" && %name !$= "ctfGreenFlagImage")
+  {
+   messageall('',"<color:" @ $TeamDM::Color[%team.color,1] @ ">" @ %cl.name @ "\c5 has taken the \c0Red\c5 flag!");
+   if(isObject(%obj.spawnbrick)){%obj.spawnbrick.setItem(wrenchImage);}else{%obj.delete();}
+   %user.mountImage(ctfRedFlagImage,0);
+  }
+  fixArmReady(%user);
+ }
+
+ function ctfBlueFlagItem::onPickup(%this,%obj,%user,%amount)
+ {
+ if($TeamDM::PackageOn !$= "Capture The Flag"){return;}
+  %cl = %user.client;
+  %team = %cl.tdmteam;
+  %flagteam = "Blue";
+  %drop = %obj.dropped;
+  %name = (isObject(%user.getMountedImage(0)) ? %user.getMountedImage(0).getName() : "");
+  if(!isObject(%team) || !$TeamDM::TeamsOn || !isObject(%cl.minigame))
+   return;
+  cancel($TeamDM::CTF::FlagRespawnBlue);
+  if(%team.name $= %flagteam && (%name $= "ctfRedFlagImage" || %name $= "ctfGreenFlagImage"))
+  {
+   if(!%obj.dropped)
+   {
+    %flag = (%user.getMountedImage(0).getName() $= "ctfRedFlagImage" ? "<color:FF0000>Red" : "<color:00FF00>Green");
+    messageall('',"<color:" @ $TeamDM::Color[%team.color,1] @ ">" @ %cl.name @ "\c5 has returned the " @ %flag @ "\c5 flag for 10 points!");
+    if(%user.getMountedImage(0).getName() $= "ctfRedFlagImage")
+    {
+              $TeamDM::CTF::FlagRedSpawn.setItem("ctfRedFlagItem");
+     	$TeamDM::CTF::FlagRedSpawn.setItemPosition(0);
+     	$TeamDM::CTF::FlagRedSpawn.setItemDirection(0);
+    }
+    if(%user.getMountedImage(0).getName() $= "ctfGreenFlagImage")
+    {
+              $TeamDM::CTF::FlagGreenSpawn.setItem("ctfgreenFlagItem");
+     	$TeamDM::CTF::FlagGreenSpawn.setItemPosition(0);
+     	$TeamDM::CTF::FlagGreenSpawn.setItemDirection(0);
+    }
+    %user.flagUnMount = 1;
+    %user.unmountImage(0);
+    %cl.incScore(10);
+   }
+  }
+   if(%team.name $= %flagteam && %obj.dropped)
+   {
+    messageall('',"<color:" @ $TeamDM::Color[%team.color,1] @ ">" @ %cl.name @ "\c5 recovered the dropped <color:0000FF>Blue\c5 flag.");
+              $TeamDM::CTF::FlagBlueSpawn.setItem("ctfBlueFlagItem");
+     	$TeamDM::CTF::FlagBlueSpawn.setItemPosition(0);
+     	$TeamDM::CTF::FlagBlueSpawn.setItemDirection(0);
+	%obj.delete();
+   }
+  if(%team.name !$= %flagteam && %name !$= "ctfGreenFlagImage" && %name !$= "ctfRedFlagImage")
+  {
+   messageall('',"<color:" @ $TeamDM::Color[%team.color,1] @ ">" @ %cl.name @ "\c5 has taken the <color:0000FF>Blue\c5 flag!");
+   if(isObject(%obj.spawnbrick)){%obj.spawnbrick.setItem(wrenchImage);}else{%obj.delete();}
+   %user.mountImage(ctfBlueFlagImage,0);
+  }
+  fixArmReady(%user);
+ }
+
+ function ctfGreenFlagItem::onPickup(%this,%obj,%user,%amount)
+ {
+ if($TeamDM::PackageOn !$= "Capture The Flag"){return;}
+  %cl = %user.client;
+  %team = %cl.tdmteam;
+  %flagteam = "Green";
+  %drop = %obj.dropped;
+  %name = (isObject(%user.getMountedImage(0)) ? %user.getMountedImage(0).getName() : "");
+  if(!isObject(%team) || !$TeamDM::TeamsOn || !isObject(%cl.minigame))
+   return;
+  cancel($TeamDM::CTF::FlagRespawnGreen);
+  if(%team.name $= %flagteam && (%name $= "ctfRedFlagImage" || %name $= "ctfBlueFlagImage"))
+  {
+   if(!%obj.dropped)
+   {
+    %flag = (%user.getMountedImage(0).getName() $= "ctfRedFlagImage" ? "<color:FF0000>Red" : "<color:0000FF>Blue");
+    messageall('',"<color:" @ $TeamDM::Color[%team.color,1] @ ">" @ %cl.name @ "\c5 has returned the " @ %flag @ "\c5 flag for 10 points!");
+    if(%user.getMountedImage(0).getName() $= "ctfBlueFlagImage")
+    {
+              $TeamDM::CTF::FlagBlueSpawn.setItem("ctfBlueFlagItem");
+     	$TeamDM::CTF::FlagBlueSpawn.setItemPosition(0);
+     	$TeamDM::CTF::FlagBlueSpawn.setItemDirection(0);
+    }
+    if(%user.getMountedImage(0).getName() $= "ctfRedFlagImage")
+    {
+              $TeamDM::CTF::FlagRedSpawn.setItem("ctfRedFlagItem");
+     	$TeamDM::CTF::FlagRedSpawn.setItemPosition(0);
+     	$TeamDM::CTF::FlagRedSpawn.setItemDirection(0);
+    }
+    %user.flagUnMount = 1;
+    %user.unmountImage(0);
+    %cl.incScore(10);
+   }
+  }
+   if(%team.name $= %flagteam && %obj.dropped)
+   {
+    messageall('',"<color:" @ $TeamDM::Color[%team.color,1] @ ">" @ %cl.name @ "\c5 recovered the dropped <color:00FF00>Green\c5 flag.");
+              $TeamDM::CTF::FlagGreenSpawn.setItem("ctfGreenFlagItem");
+     	$TeamDM::CTF::FlagGreenSpawn.setItemPosition(0);
+     	$TeamDM::CTF::FlagGreenSpawn.setItemDirection(0);
+	%obj.delete();
+   }
+  if(%team.name !$= %flagteam && %name !$= "ctfBlueFlagImage" && %name !$= "ctfRedFlagImage")
+  {
+   messageall('',"<color:" @ $TeamDM::Color[%team.color,1] @ ">" @ %cl.name @ "\c5 has taken the <color:00FF00>Green\c5 flag!");
+   if(isObject(%obj.spawnbrick)){%obj.spawnbrick.setItem(wrenchImage);}else{%obj.delete();}
+   %user.mountImage(ctfGreenFlagImage,0);
+  }
+  fixArmReady(%user);
+ }
+ function servercmdUseTool(%client,%use)
+ {
+  if(!isObject(%client.player)){return;}
+  if(!isObject(%client.player.getMountedImage(0)) || strStr(%client.player.getMountedImage(0).getName(),"ctf") $= "-1"){Parent::servercmdUseTool(%client,%use);}
+ }
+ function servercmdUnUseTool(%client,%use)
+ {
+  if(!isObject(%client.player)){return;}
+  if(!isObject(%client.player.getMountedImage(0)) || strStr(%client.player.getMountedImage(0).getName(),"ctf") $= "-1"){Parent::servercmdUnUseTool(%client,%use);}
+ }
+};activatePackage(ctfFunctions);
+////----Datablocks and Code----\\\\
+datablock fxDTSBrickData(brickCTFRedFlagData : brick2x2data)
+{
+ uiName = "(CTF) Red Flag";
+ Category = "Special";
+ subCategory = "Team DM";
+};
+
+datablock fxDTSBrickData(brickCTFBlueFlagData : brick2x2data)
+{
+ uiName = "(CTF) Blue Flag";
+ Category = "Special";
+ subCategory = "Team DM";
+};
+
+datablock fxDTSBrickData(brickCTFGreenFlagData : brick2x2data)
+{
+ uiName = "(CTF) Green Flag";
+ Category = "Special";
+ subCategory = "Team DM";
+};
+
+datablock ItemData(ctfRedFlagItem)
+{
+	category = "Weapon";  // Mission editor category
+	className = "Weapon"; // For inventory system
+
+	 // Basic Item Properties
+	shapeFile = "Add-Ons/shapes/tdmflag.dts";
+	mass = 1;
+	density = 0.2;
+	elasticity = 0.2;
+	friction = 0.6;
+	emap = true;
+
+	//gui stuff
+	uiName = "";
+	iconName = "./ItemIcons/sword";
+	doColorShift = true;
+	colorShiftColor = "1 0 0 1.000";
+
+	 // Dynamic properties defined by the scripts
+	image = ctfRedFlagImage;
+	canDrop = true;
+};
+
+datablock ItemData(ctfBlueFlagItem : ctfRedFlagItem)
+{
+	uiname = "";
+	doColorShift = true;
+	colorShiftColor = "0 0 1 1.000";
+	image = ctfBlueFlagImage;
+};
+
+datablock ItemData(ctfGreenFlagItem : ctfRedFlagItem)
+{
+	uiname = "";
+	doColorShift = true;
+	colorShiftColor = "0 1 0 1.000";
+	image = ctfGreenFlagImage;
+};
+
+datablock ExplosionData(flagExplosion)
+{
+   //explosionShape = "";
+   lifeTimeMS = 500;
+
+   soundProfile = "";
+
+   particleEmitter = hammerSparkEmitter;
+   particleDensity = 10;
+   particleRadius = 0.2;
+
+   faceViewer     = true;
+   explosionScale = "1 1 1";
+
+   shakeCamera = true;
+   camShakeFreq = "20.0 22.0 20.0";
+   camShakeAmp = "1.0 1.0 1.0";
+   camShakeDuration = 0.5;
+   camShakeRadius = 10.0;
+
+   // Dynamic light
+   lightStartRadius = 3;
+   lightEndRadius = 0;
+   lightStartColor = "0.6 0.6 0.6";
+   lightEndColor = "0 0 0";
+};
+
+
+//projectile
+AddDamageType("flag",   '<bitmap:add-ons/ci/tdmflag> %1',    '%2 <bitmap:add-ons/ci/tdmflag> %1',1,1);
+datablock ProjectileData(flagProjectile)
+{
+   //projectileShapeName = "~/data/shapes/arrow.dts";
+   directDamage        = 10;
+   directDamageType  = $DamageType::Flag;
+   radiusDamageType  = $DamageType::Flag;
+   explosion           = flagExplosion;
+   //particleEmitter     = as;
+
+   impactImpulse	     = 500;
+   verticalImpulse     = 1000;
+
+   muzzleVelocity      = 50;
+   velInheritFactor    = 1;
+
+   armingDelay         = 0;
+   lifetime            = 100;
+   fadeDelay           = 70;
+   bounceElasticity    = 0;
+   bounceFriction      = 0;
+   isBallistic         = false;
+   gravityMod = 0.0;
+
+   hasLight    = false;
+   lightRadius = 3.0;
+   lightColor  = "0 0 0.5";
+};
+
+datablock ShapeBaseImageData(ctfRedFlagImage)
+{
+   // Basic Item properties
+   shapeFile = "Add-Ons/shapes/tdmFlag.dts";
+   emap = true;
+
+   // Specify mount point & offset for 3rd person, and eye offset
+   // for first person rendering.
+   mountPoint = 0;
+   offset = "0 -0.5 0";
+   //eyeOffset = "0.1 0.2 -0.55";
+
+   // When firing from a point offset from the eye, muzzle correction
+   // will adjust the muzzle vector to point to the eye LOS point.
+   // Since this weapon doesn't actually fire from the muzzle point,
+   // we need to turn this off.  
+   correctMuzzleVector = false;
+
+   eyeOffset = "0.7 1.2 -0.25";
+
+   // Add the WeaponImage namespace as a parent, WeaponImage namespace
+   // provides some hooks into the inventory system.
+   className = "WeaponImage";
+
+   // Projectile && Ammo.
+   item = ctfRedFlagItem;
+   ammo = " ";
+   projectile = flagProjectile;
+   projectileType = Projectile;
+
+   //melee particles shoot from eye node for consistancy
+   melee = false;
+   doRetraction = false;
+   //raise your arm up or not
+   armReady = true;
+
+   //casing = " ";
+   doColorShift = true;
+   colorShiftColor = "1 0 0 1.000";
+
+   // Images have a state system which controls how the animations
+   // are run, which sounds are played, script callbacks, etc. This
+   // state system is downloaded to the client so that clients can
+   // predict state changes and animate accordingly.  The following
+   // system supports basic ready->fire->reload transitions as
+   // well as a no-ammo->dryfire idle state.
+
+   // Initial start up state
+	stateName[0]                     = "Activate";
+	stateTimeoutValue[0]             = 0.5;
+	stateTransitionOnTimeout[0]      = "Ready";
+	stateSound[0]                    = weaponSwitchSound;
+
+	stateName[1]                     = "Ready";
+	stateTransitionOnTriggerDown[1]  = "PreFire";
+	stateAllowImageChange[1]         = true;
+
+	stateName[2]			= "PreFire";
+	stateScript[2]                  = "onPreFire";
+	stateAllowImageChange[2]        = false;
+	stateTimeoutValue[2]            = 0.1;
+	stateTransitionOnTimeout[2]     = "Fire";
+
+	stateName[3]                    = "Fire";
+	stateTransitionOnTimeout[3]     = "CheckFire";
+	stateTimeoutValue[3]            = 0.2;
+	stateFire[3]                    = true;
+	stateAllowImageChange[3]        = false;
+	stateSequence[3]                = "Fire";
+	stateScript[3]                  = "onFire";
+	stateWaitForTimeout[3]		= true;
+	//stateTransitionOnTriggerUp[3]	= "StopFire";
+
+	stateName[4]			= "CheckFire";
+	stateTransitionOnTriggerUp[4]	= "StopFire";
+	stateTransitionOnTriggerDown[4]	= "Fire";
+
+	
+	stateName[5]                    = "StopFire";
+	stateTransitionOnTimeout[5]     = "Ready";
+	stateTimeoutValue[5]            = 0.2;
+	stateAllowImageChange[5]        = false;
+	stateWaitForTimeout[5]		= true;
+	stateSequence[5]                = "StopFire";
+	stateScript[5]                  = "onStopFire";
+
+
+};
+
+datablock ShapeBaseImageData(ctfBlueFlagImage : ctfRedFlagImage)
+{
+   doColorShift = true;
+   colorShiftColor = "0 0 1 1.000";
+};
+
+datablock ShapeBaseImageData(ctfGreenFlagImage : ctfRedFlagImage)
+{
+   doColorShift = true;
+   colorShiftColor = "0 1 0 1.000";
+};
+function ctfRedFlagImage::onPreFire(%this, %obj, %slot)
+{
+	%obj.playthread(2, armattack);
+}
+
+function ctfRedFlagImage::onStopFire(%this, %obj, %slot){%obj.playthread(2, root);}
+function ctfRedFlagImage::onPreFire(%this, %obj, %slot){%obj.playthread(2, armattack);}
+function ctfBlueFlagImage::onStopFire(%this, %obj, %slot){%obj.playthread(2, root);}
+function ctfBlueFlagImage::onPreFire(%this, %obj, %slot){%obj.playthread(2, armattack);}
+function ctfGreenFlagImage::onStopFire(%this, %obj, %slot){%obj.playthread(2, root);}
+function ctfGreenFlagImage::onPreFire(%this, %obj, %slot){%obj.playthread(2, armattack);}
+function flagProjectile::onCollision(%this,%obj,%col,%fade,%pos,%normal){parent::onCollision(%this,%obj,%col,%fade,%pos,%normal);}
+function flagProjectile::Damage(%this,%obj,%col,%fade,%pos,%normal){Parent::Damage(%this,%obj,%col,%fade,%pos,%normal);}
+
+package itemset
+{
+ function fxDTSBrick::setItem(%brick,%item)
+ {
+  if(flagName(%brick) || %item $= "ctfRedFlagItem" || %item $= "ctfBlueFlagItem" || %item $= "ctfGreenFlagItem" || %item $= "wrenchImage")
+  {
+   if(%item $= "ctfRedFlagItem" || %item $= "ctfBlueFlagItem" || %item $= "ctfGreenFlagItem"){%item.uiname = "x";Parent::setItem(%brick,%item);schedule(100,0,resetitem,%item);return;}
+   Parent::setItem(%brick,%item);
+  }
+ }
+ function resetitem(%item){%item.uiname = "";}
+ function flagName(%brick)
+ {
+  %name = %brick.getDatablock().getName();
+  return !(%name $= "brickCTFRedFlagData" || %name $= "brickCTFBlueFlagData" || %name $= "brickCTFGreenFlagData");
+ }
+};activatePackage(itemSet);

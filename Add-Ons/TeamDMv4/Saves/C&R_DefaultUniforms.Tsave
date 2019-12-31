@@ -1,0 +1,115 @@
+// Teams - TEAM word1 [words...] color
+TEAM Cops	blue
+INFO NONE NONE NONE NONE Police_Baton Standard_Player
+UNI accent 0
+UNI LEADaccent 0
+UNI accentColor 0 0.200 0.640 0.700
+UNI LEADaccentColor 0 0.200 0.640 0.700
+UNI chest 0
+UNI LEADchest 0
+UNI chestColor 1 1 1 1
+UNI LEADchestColor 1 1 1 1
+UNI decalName Mod-Police
+UNI LEADdecalName Mod-Police
+UNI faceName smileyCreepy
+UNI LEADfaceName smileyCreepy
+UNI hat 6
+UNI LEADhat 6
+UNI hatColor 0 0.141 0.333 1
+UNI LEADhatColor 0 0.141 0.333 1
+UNI lhand 0
+UNI LEADlhand 0
+UNI lhandColor 1 0.878 0.611 1
+UNI LEADlhandColor 1 0.878 0.611 1
+UNI rhand 0
+UNI LEADrhand 0
+UNI rhandColor 1 0.878 0.611 1
+UNI LEADrhandColor 1 0.878 0.611 1
+UNI larm 0
+UNI LEADlarm 0
+UNI larmcolor 0 0.141 0.333 1
+UNI LEADlarmcolor 0 0.141 0.333 1
+UNI rarm 0
+UNI LEADrarm 0
+UNI rarmcolor 0 0.141 0.333 1
+UNI LEADrarmcolor 0 0.141 0.333 1
+UNI lleg 0
+UNI LEADlleg 0
+UNI llegcolor 0.078 0.078 0.078 1
+UNI LEADllegcolor 0.078 0.078 0.078 1
+UNI rleg 0
+UNI LEADrleg 0
+UNI rlegColor 0.078 0.078 0.078 1
+UNI LEADrlegColor 0.078 0.078 0.078 1
+UNI pack 0
+UNI LEADpack 0
+UNI packColor 0 0.435 0.831 1
+UNI LEADpackColor 0 0.435 0.831 1
+UNI secondpack 0
+UNI LEADsecondpack 0
+UNI secondPackColor 0.9 0.9 0 1
+UNI LEADsecondPackColor 0.9 0.9 0 1
+UNI headColor 1 0.878 0.611 1
+UNI LEADheadColor 1 0.878 0.611 1
+UNI hip 0
+UNI LEADhip 0
+UNI hipColor 0 0.141 0.333 1
+UNI LEADhipColor 0 0.141 0.333 1
+TEAM Robbers	grey
+INFO NONE NONE NONE NONE NONE Standard_Player
+UNI accent 0
+UNI LEADaccent 0
+UNI accentColor 0 0.200 0.640 0.700
+UNI LEADaccentColor 0 0.200 0.640 0.700
+UNI chest 0
+UNI LEADchest 0
+UNI chestColor 0.5 0.5 0.5 1
+UNI LEADchestColor 0.901 0.341 0.078 1
+UNI decalName Mod-Prisoner
+UNI LEADdecalName Mod-Prisoner
+UNI faceName smileyEvil2
+UNI LEADfaceName smileyEvil2
+UNI hat 7
+UNI LEADhat 0
+UNI hatColor 0.078 0.078 0.078 1
+UNI LEADhatColor 0.078 0.078 0.078 1
+UNI lhand 0
+UNI LEADlhand 0
+UNI lhandColor 1 0.878 0.611 1
+UNI LEADlhandColor 0.078 0.078 0.078 1
+UNI rhand 0
+UNI LEADrhand 0
+UNI rhandColor 1 0.878 0.611 1
+UNI LEADrhandColor 0.078 0.078 0.078 1
+UNI larm 0
+UNI LEADlarm 0
+UNI larmcolor 0.2 0.2 0.2 1
+UNI LEADlarmcolor 0.901 0.341 0.078 1
+UNI rarm 0
+UNI LEADrarm 0
+UNI rarmcolor 0.2 0.2 0.2 1
+UNI LEADrarmcolor 0.901 0.341 0.078 1
+UNI lleg 0
+UNI LEADlleg 0
+UNI llegcolor 0.078 0.078 0.078 1
+UNI LEADllegcolor 0.078 0.078 0.078 1
+UNI rleg 0
+UNI LEADrleg 0
+UNI rlegColor 0.078 0.078 0.078 1
+UNI LEADrlegColor 0.078 0.078 0.078 1
+UNI pack 0
+UNI LEADpack 0
+UNI packColor 0 0.435 0.831 1
+UNI LEADpackColor 0 0.435 0.831 1
+UNI secondpack 0
+UNI LEADsecondpack 0
+UNI secondPackColor 0.9 0.9 0 1
+UNI LEADsecondPackColor 0.9 0.9 0 1
+UNI headColor 1 0.878 0.611 1
+UNI LEADheadColor 1 0.878 0.611 1
+UNI hip 0
+UNI LEADhip 0
+UNI hipColor 0.078 0.078 0.078 1
+UNI LEADhipColor 0.901 0.341 0.078 1
+// Spawn Bricks - BRICK p1 p2 p3 r1 r2 r3 r4 c1 c2 c3 c4
+// End

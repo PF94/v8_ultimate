@@ -1,0 +1,177 @@
+// Teams - TEAM word1 [words...] color
+TEAM Red	red
+INFO Gun Sword NONE NONE NONE No-Jet_Player
+UNI accent 1
+UNI LEADaccent 1
+UNI accentColor 0 0.2 0.64 0.7
+UNI LEADaccentColor 0 0.2 0.64 0.7
+UNI chest 0
+UNI LEADchest 0
+UNI chestColor 1 0 0 1
+UNI LEADchestColor 1 0 0 1
+UNI decalName AAA-None
+UNI LEADdecalName Mod-Daredevil
+UNI faceName smileyCreepy
+UNI LEADfaceName smileyCreepy
+UNI hat 1
+UNI LEADhat 1
+UNI hatColor 1 0 0 1
+UNI LEADhatColor 1 0 0 1
+UNI lhand 0
+UNI LEADlhand 0
+UNI lhandColor 0.2 0.2 0.2 1
+UNI LEADlhandColor 0.2 0.2 0.2 1
+UNI rhand 0
+UNI LEADrhand 0
+UNI rhandColor 0.2 0.2 0.2 1
+UNI LEADrhandColor 0.2 0.2 0.2 1
+UNI larm 0
+UNI LEADlarm 0
+UNI larmcolor 1 0 0 1
+UNI LEADlarmcolor 1 0 0 1
+UNI rarm 0
+UNI LEADrarm 0
+UNI rarmcolor 1 0 0 1
+UNI LEADrarmcolor 1 0 0 1
+UNI lleg 0
+UNI LEADlleg 0
+UNI llegcolor 1 0 0 1
+UNI LEADllegcolor 1 0 0 1
+UNI rleg 0
+UNI LEADrleg 0
+UNI rlegColor 1 0 0 1
+UNI LEADrlegColor 1 0 0 1
+UNI pack 0
+UNI LEADpack 0
+UNI packColor 0.2 0.2 0.2 1
+UNI LEADpackColor 0.9 0.9 0.0 1
+UNI secondpack 0
+UNI LEADsecondpack 3
+UNI secondPackColor 0.9 0.9 0.0 1
+UNI LEADsecondPackColor 0.9 0.9 0.0 1
+UNI headColor 1 0.878 0.611 1
+UNI LEADheadColor 1 0.878 0.611 1
+UNI hip 0
+UNI LEADhip 0
+UNI hipColor 0.2 0.2 0.2 1
+UNI LEADhipColor 0.2 0.2 0.2 1
+TEAM Blue	blue
+INFO Gun Sword NONE NONE NONE No-Jet_Player
+UNI accent 1
+UNI LEADaccent 1
+UNI accentColor 0 0.2 0.64 0.7
+UNI LEADaccentColor 0 0.2 0.64 0.7
+UNI chest 0
+UNI LEADchest 0
+UNI chestColor 0 0 1 1
+UNI LEADchestColor 0 0 1 1
+UNI decalName AAA-None
+UNI LEADdecalName Mod-Daredevil
+UNI faceName smileyCreepy
+UNI LEADfaceName smileyCreepy
+UNI hat 1
+UNI LEADhat 1
+UNI hatColor 0 0 1 1
+UNI LEADhatColor 0 0 1 1
+UNI lhand 0
+UNI LEADlhand 0
+UNI lhandColor 0.2 0.2 0.2 1
+UNI LEADlhandColor 0.2 0.2 0.2 1
+UNI rhand 0
+UNI LEADrhand 0
+UNI rhandColor 0.2 0.2 0.2 1
+UNI LEADrhandColor 0.2 0.2 0.2 1
+UNI larm 0
+UNI LEADlarm 0
+UNI larmcolor 0 0 1 1
+UNI LEADlarmcolor 0 0 1 1
+UNI rarm 0
+UNI LEADrarm 0
+UNI rarmcolor 0 0 1 1
+UNI LEADrarmcolor 0 0 1 1
+UNI lleg 0
+UNI LEADlleg 0
+UNI llegcolor 0 0 1 1
+UNI LEADllegcolor 0 0 1 1
+UNI rleg 0
+UNI LEADrleg 0
+UNI rlegColor 0 0 1 1
+UNI LEADrlegColor 0 0 1 1
+UNI pack 0
+UNI LEADpack 0
+UNI packColor 0.2 0.2 0.2 1
+UNI LEADpackColor 0.9 0.9 0.0 1
+UNI secondpack 0
+UNI LEADsecondpack 3
+UNI secondPackColor 0.9 0.9 0.0 1
+UNI LEADsecondPackColor 0.9 0.9 0.0 1
+UNI headColor 1 0.878 0.611 1
+UNI LEADheadColor 1 0.878 0.611 1
+UNI hip 0
+UNI LEADhip 0
+UNI hipColor 0.2 0.2 0.2 1
+UNI LEADhipColor 0.2 0.2 0.2 1
+TEAM Green	Green
+INFO Gun Sword NONE NONE NONE No-Jet_Player
+UNI accent 1
+UNI LEADaccent 1
+UNI accentColor 0 0.2 0.64 0.7
+UNI LEADaccentColor 0 0.2 0.64 0.7
+UNI chest 0
+UNI LEADchest 0
+UNI chestColor 0 1 0 1
+UNI LEADchestColor 0 1 0 1
+UNI decalName AAA-None
+UNI LEADdecalName Mod-Daredevil
+UNI faceName smileyCreepy
+UNI LEADfaceName smileyCreepy
+UNI hat 1
+UNI LEADhat 1
+UNI hatColor 0 1 0 1
+UNI LEADhatColor 0 1 0 1
+UNI lhand 0
+UNI LEADlhand 0
+UNI lhandColor 0.2 0.2 0.2 1
+UNI LEADlhandColor 0.2 0.2 0.2 1
+UNI rhand 0
+UNI LEADrhand 0
+UNI rhandColor 0.2 0.2 0.2 1
+UNI LEADrhandColor 0.2 0.2 0.2 1
+UNI larm 0
+UNI LEADlarm 0
+UNI larmcolor 0 1 0 1
+UNI LEADlarmcolor 0 1 0 1
+UNI rarm 0
+UNI LEADrarm 0
+UNI rarmcolor 0 1 0 1
+UNI LEADrarmcolor 0 1 0 1
+UNI lleg 0
+UNI LEADlleg 0
+UNI llegcolor 0 1 0 1
+UNI LEADllegcolor 0 1 0 1
+UNI rleg 0
+UNI LEADrleg 0
+UNI rlegColor 0 1 0 1
+UNI LEADrlegColor 0 1 0 1
+UNI pack 0
+UNI LEADpack 0
+UNI packColor 0.2 0.2 0.2 1
+UNI LEADpackColor 0.9 0.9 0.0 1
+UNI secondpack 0
+UNI LEADsecondpack 3
+UNI secondPackColor 0.9 0.9 0.0 1
+UNI LEADsecondPackColor 0.9 0.9 0.0 1
+UNI headColor 1 0.878 0.611 1
+UNI LEADheadColor 1 0.878 0.611 1
+UNI hip 0
+UNI LEADhip 0
+UNI hipColor 0.2 0.2 0.2 1
+UNI LEADhipColor 0.2 0.2 0.2 1
+// Spawn Bricks - BRICK p1 p2 p3 r1 r2 r3 r4 c1 c2 c3 c4
+BRICK 143.25 -185.25 322.5 1 0 0 0 0 0.200000 0.000000 0.800000 1.000000
+BRICK -38.75 -188.75 350.1 0 0 1 3.14159 2 0.000000 0.498039 0.247059 1.000000
+BRICK -27.75 -188.75 350.1 0 0 1 3.14159 2 0.000000 0.498039 0.247059 1.000000
+BRICK -52.75 -65.75 355.7 0 0 1 3.14159 2 0.898039 0.000000 0.000000 1.000000
+BRICK -54.75 -65.75 355.7 0 0 1 3.14159 2 0.898039 0.000000 0.000000 1.000000
+BRICK 119.75 -185.25 322.5 1 0 0 0 0 0.200000 0.000000 0.800000 1.000000
+// End
