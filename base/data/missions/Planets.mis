@@ -3,11 +3,11 @@ new SimGroup(MissionGroup) {
 
    new ScriptObject(MissionInfo) {
          saveName = "planets";
-         desc0 = "Skybox: Laremere";
-         name = "Planets";
-         desc1 = "Triggers: Nitramtj";
-         previewImage = "base/data/missions/planets";
          descLines = "2";
+         name = "Planets";
+         desc0 = "Name: Planets";
+         previewImage = "base/data/missions/planets";
+         desc1 = "Author: Reactor Worker";
    };
    new MissionArea(MissionArea) {
       Area = "-360 -648 720 1296";
@@ -53,8 +53,8 @@ new SimGroup(MissionGroup) {
       ambient = "0.800000 0.750000 0.600000 1.000000";
          scale = "1 1 1";
          locked = "true";
-         direction = "0.57735 0.57735 -0.57735";
          position = "0 0 0";
+         direction = "0.57735 0.57735 -0.57735";
          rotation = "1 0 0 0";
    };
    new SimGroup(PlayerDropPoints) {
@@ -90,7 +90,7 @@ new SimGroup(MissionGroup) {
       useGLLighting = "0";
       showTerrainInside = "0";
    };
-   new TSStatic(Earthmega) {
+   new TSStatic(earthmega) {
       position = "289.955 4769.6 254.425";
       rotation = "1 0 0 0";
       scale = "92 92 92";
@@ -109,7 +109,24 @@ new SimGroup(MissionGroup) {
       interiorFile = "~/data/interiors/Moon.dif";
       useGLLighting = "0";
       showTerrainInside = "0";
-
+   };
+   new PhysicalZone(Moon) {
+      position = "-266.122 4902.75 390.9";
+      rotation = "1 0 0 0";
+      scale = "52.5 52.5 52.5";
+      velocityMod = "1";
+      gravityMod = "1";
+      appliedForce = "0 0 -1000";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new PhysicalZone(Earth) {
+      position = "68.765 4971.87 240.1";
+      rotation = "1 0 0 0";
+      scale = "410 410 250";
+      velocityMod = "1";
+      gravityMod = "1";
+      appliedForce = "0 0 -2000";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
    };
    new TSStatic(satrings) {
       position = "4073.59 -1104.69 722.084";
@@ -140,23 +157,31 @@ new SimGroup(MissionGroup) {
    new PhysicalZone(Spacezone) {
       position = "-6383.49 6400.76 -1200.7";
       rotation = "1 0 0 0";
-      scale = "1 1 1";
+      scale = "18500 18500 5000";
       velocityMod = "1";
       gravityMod = "0";
       appliedForce = "0 0 0";
       polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
    };
    new ScriptObject() {
+         count = "0";
          textObj = "4213";
          id0 = "4892";
-         count = "0";
    };
    new ScriptObject() {
       class = "WhoTalkSO";
+         count = "0";
          textObj = "4213";
          id0 = "4894";
-         count = "0";
- 
+   };
+   new PhysicalZone(marszone) {
+      position = "1898.54 -3026.47 845.203";
+      rotation = "1 0 0 0";
+      scale = "410 410 250";
+      velocityMod = "1";
+      gravityMod = "40";
+      appliedForce = "0 0 0";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
    };
    new TSStatic(saturn) {
       position = "4072.14 -1111.68 710.275";
@@ -164,7 +189,7 @@ new SimGroup(MissionGroup) {
       scale = "180 180 180";
       shapeName = "~/data/shapes/Saturnmega.dts";
    };
-   new TSStatic(Marsmega) {
+   new TSStatic(marsmega) {
       position = "2100.9 -3217.24 860.025";
       rotation = "1 0 0 0";
       scale = "90 90 90";
@@ -222,8 +247,8 @@ new SimGroup(MissionGroup) {
       scale = "2000 2000 2000";
       dataBlock = "KillTickTrigger";
       polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
-         damageType = "sundamage";
          damagePercent = "50";
+         damageType = "sundamage";
    };
    new Trigger(Spacedeathtrigger) {
       position = "-6399.07 6343.39 2126.7";
@@ -231,14 +256,14 @@ new SimGroup(MissionGroup) {
       scale = "15000 15000 100";
       dataBlock = "KillTickTrigger";
       polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
-         damageType = "spacedamage";
          damagePercent = "100";
+         damageType = "spacedamage";
    };
    new ScriptObject() {
       class = "WhoTalkSO";
+         count = "0";
          textObj = "4099";
          id0 = "6794";
-         count = "0";
    };
    new InteriorInstance(buildpad2) {
       position = "511.344 4469.16 367.12";
@@ -248,24 +273,17 @@ new SimGroup(MissionGroup) {
       useGLLighting = "0";
       showTerrainInside = "0";
    };
+   new PhysicalZone(Mars) {
+      position = "1890.19 -3019.14 832.7";
+      rotation = "1 0 0 0";
+      scale = "410 410 250";
+      velocityMod = "1";
+      gravityMod = "1";
+      appliedForce = "0 0 -2000";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
    new InteriorInstance() {
       position = "2010.89 -2866.58 957.72";
-      rotation = "1 0 0 0";
-      scale = "1 1 1";
-      interiorFile = "~/data/interiors/Buildpad.dif";
-      useGLLighting = "0";
-      showTerrainInside = "0";
-   };
-   new InteriorInstance() {
-      position = "-4099.54 -3097.01 390.418";
-      rotation = "1 0 0 0";
-      scale = "1 1 1";
-      interiorFile = "~/data/interiors/Buildpad.dif";
-      useGLLighting = "0";
-      showTerrainInside = "0";
-   };
-   new InteriorInstance() {
-      position = "-2494.65 1680.84 147.328";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       interiorFile = "~/data/interiors/Buildpad.dif";
