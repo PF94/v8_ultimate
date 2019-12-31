@@ -1,0 +1,281 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         saveName = "Restraunt";
+         desc0 = "Name: Restraunt";
+         previewImage = "base/data/missions/Rest1";
+         name = "Restraunt";
+         desc1 = "Author: Trueno";
+         descLines = "2";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-1376 -1664 3744 3328";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "0 0 1 90";
+      scale = "1 1 1";
+      materialList = "~/data/skies/daysnap/bjsky.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "900";
+      fogDistance = "500";
+      fogColor = "0.580000 0.680000 0.940000 1.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "0.600000 0.100000 0.600000 1.000000";
+      useSkyTextures = "1";
+      renderBottomTexture = "0";
+      noRenderBans = "0";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "290";
+      elevation = "35";
+      color = "0.200000 0.200000 0.200000 1.000000";
+      ambient = "0.300000 0.300000 0.300000 1.000000";
+         rotation = "1 0 0 0";
+         direction = "0.57735 0.57735 -0.57735";
+         scale = "1 1 1";
+         position = "0 0 0";
+         locked = "true";
+   };
+   new TerrainBlock(Terrain) {
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      terrainFile = "./Restarunt.ter";
+      bumpTexture = "~/data/terrains/greenhills/sand1";
+      squareSize = "16";
+      bumpScale = "5";
+      bumpOffset = "0.0051";
+      zeroBumpScale = "5";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "-355.177 -80.272 107.778";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "2";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            lockCount = "0";
+            locked = "false";
+            homingCount = "0";
+      };
+   };
+   new StaticShape() {
+      position = "-313.755 -185.596 137.498";
+      rotation = "0 0 -1 90";
+      scale = "136.109 20.4904 10.3384";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+         indestructable = "1";
+   };
+   new InteriorInstance() {
+      position = "-386.107 -248.207 105.145";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Trueno/Restraunt2.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new StaticShape() {
+      position = "-415.834 -38.9682 127.677";
+      rotation = "0 0 -1 90";
+      scale = "23.1228 20.4904 29.298";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+         indestructable = "1";
+   };
+   new ScriptObject() {
+      class = "WhoTalkSO";
+         count = "0";
+         id0 = "3306";
+         textObj = "2855";
+   };
+   new StaticShape() {
+      position = "-312.855 -39.2102 127.189";
+      rotation = "0 0 -1 90";
+      scale = "23.1228 20.4904 29.298";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+         indestructable = "1";
+   };
+   new StaticShape() {
+      position = "-414.853 -184.059 138.206";
+      rotation = "0 0 -1 90";
+      scale = "136.109 20.4904 10.3384";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+         indestructable = "1";
+   };
+   new ScriptObject() {
+      class = "NewChatSO";
+         tail = "0";
+         head = "1";
+         pageUpEnd = "1";
+         line0 = "<bitmap:add-ons/ci/skull> Trueno";
+         lineTime = "4000";
+         size = "1000";
+         textObj = "4098";
+         maxLines = "6";
+         time0 = "240874";
+   };
+   new fxLight(Light1) {
+      position = "-322.694 -130.587 136.345";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BrightLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+   new fxLight(Light1) {
+      position = "-321.992 -167.544 136.345";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BrightLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+   new fxLight(Light1) {
+      position = "-322.143 -204.338 136.378";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BrightLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+   new fxLight(Light1) {
+      position = "-321.695 -241.281 136.605";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BrightLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+   new fxLight(Light1) {
+      position = "-405.807 -241.547 136.63";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BrightLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+   new fxLight(Light1) {
+      position = "-404.757 -204.136 136.223";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BrightLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+   new fxLight(Light1) {
+      position = "-405.476 -168.093 136.111";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BrightLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+   new fxLight(Light1) {
+      position = "-404.725 -129.248 136.348";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BrightLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+   new fxLight(Lantern) {
+      position = "-407.331 -23.1759 127.884";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "OrangeLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+   new fxLight(Lantern) {
+      position = "-318.959 -22.8777 127.206";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "OrangeLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+   new ScriptObject() {
+      class = "NewChatSO";
+         tail = "0";
+         head = "2";
+         line1 = "2491 / 2491 bricks created in 0:02.49";
+         pageUpEnd = "-1";
+         displaySchedule = "7333";
+         time1 = "437954";
+         line0 = "Loading bricks. Please wait.";
+         lineTime = "4000";
+         size = "1000";
+         textObj = "4098";
+         maxLines = "6";
+         time0 = "435455";
+   };
+   new ParticleEmitterNode(Particle1) {
+      position = "-315.664 -67.6528 132.667";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GenericEmitterNode";
+      emitter = "BurnEmitterB";
+      velocity = "1";
+   };
+   new ParticleEmitterNode(Particle1) {
+      position = "-413.012 -67.8743 132.206";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GenericEmitterNode";
+      emitter = "BurnEmitterB";
+      velocity = "1";
+   };
+   new fxLight(Cand1) {
+      position = "-364.102 -139.526 121.406";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "OrangeLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+   new fxLight(Cand1) {
+      position = "-363.9 -186.065 120.806";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "OrangeLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+   new fxLight(Cand1) {
+      position = "-363.242 -226.712 121.1";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "OrangeLight";
+      Enable = "1";
+      IconSize = "1";
+   };
+};
+//--- OBJECT WRITE END ---

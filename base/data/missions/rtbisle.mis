@@ -1,0 +1,130 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         saveName = "RTB Isles";
+         desc0 = "Name: RTB Isles";
+         name = "RTB Isles";
+         desc1 = "Author: Mocheeze http://returntoblockland.com";
+         previewImage = "base/data/missions/rtbisle";
+         descLines = "2";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-448 -592 976 1040";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      materialList = "~/data/skies/Twightlight/resource.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "900";
+      fogDistance = "600";
+      fogColor = "0.700000 0.680000 0.730000 1.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      useSkyTextures = "1";
+      renderBottomTexture = "0";
+      noRenderBans = "0";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "240";
+      elevation = "30";
+      color = "0.550000 0.500000 0.500000 1.000000";
+      ambient = "0.600000 0.600000 0.600000 1.000000";
+         scale = "1 1 1";
+         locked = "true";
+         direction = "0.57735 0.57735 -0.57735";
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+   };
+   new TerrainBlock(Terrain) {
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      terrainFile = "./rtbisle.ter";
+      squareSize = "8";
+      bumpScale = "0.0001";
+      bumpOffset = "0";
+      zeroBumpScale = "0";
+         locked = "true";
+         position = "-1024 -1024 0";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "108.59 -64.6601 288.487";
+         rotation = "0 0 1 130.062";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "15";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            lockCount = "0";
+            homingCount = "0";
+      };
+   };
+   new WaterBlock(Water) {
+      position = "-856 -312 35.473";
+      rotation = "1 0 0 0";
+      scale = "2048 2048 190";
+      UseDepthMask = "1";
+      surfaceTexture = "~/data/water/water1.png";
+      ShoreTexture = "~/data/water/water1.png";
+      envMapOverTexture = "~/data/skies/Twightlight/7";
+      liquidType = "OceanWater";
+      density = "1";
+      viscosity = "40";
+      waveMagnitude = "3";
+      surfaceOpacity = "0.75";
+      envMapIntensity = "0.7";
+      TessSurface = "30";
+      TessShore = "30";
+      SurfaceParallax = "2";
+      FlowAngle = "110";
+      FlowRate = "0.01";
+      DistortGridScale = "0.01";
+      DistortMag = "0.5";
+      DistortTime = "10";
+      ShoreDepth = "2";
+      DepthGradient = "0";
+      MinAlpha = "1";
+      MaxAlpha = "0.5";
+      removeWetEdges = "0";
+      specularColor = "0.000000 0.000000 0.000000 0.000000";
+      specularPower = "100";
+         params1 = "0.63 -2.41 0.33 0.21";
+         floodFill = "1";
+         envMapTexture = "rtb/data/skies/Twightlight/7";
+         params0 = "0.32 -0.67 0.066 0.5";
+         params3 = "1.21 -0.61 0.13 -0.33";
+         textureSize = "64 64";
+         extent = "256 256 1";
+         seedPoints = "0 0 1 0 1 1 0 1";
+         params2 = "0.39 0.39 0.2 0.133";
+   };
+   new FileObject() {
+   };
+};
+//--- OBJECT WRITE END ---

@@ -1,0 +1,216 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         saveName = "Corp. Office";
+         descLines = "2";
+         name = "Corp. Office";
+         desc0 = "It\'s an office! Go nuts. \nMade by KINEX. \nDownload at www.scatteredspace.com/forum or the Blockland Official Forums.";
+         previewImage = "base/data/missions/officefinal";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      materialList = "~/data/skies/Sky_Blue2/resource.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "400";
+      fogDistance = "300";
+      fogColor = "0.600000 0.700000 0.900000 1.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      useSkyTextures = "1";
+      renderBottomTexture = "0";
+      noRenderBans = "0";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "0";
+      elevation = "35";
+      color = "0.900000 0.900000 0.800000 1.000000";
+      ambient = "0.550000 0.550000 0.550000 1.000000";
+         locked = "true";
+         direction = "0.57735 0.57735 -0.57735";
+         scale = "1 1 1";
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+   };
+   new TerrainBlock(Terrain) {
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      terrainFile = "./officefter.ter";
+      squareSize = "8";
+      bumpScale = "1";
+      bumpOffset = "0.01";
+      zeroBumpScale = "8";
+         locked = "true";
+         position = "-1024 -1024 0";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "110.376 -147.662 105.815";
+         rotation = "0 0 1 130.062";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "20";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            lockCount = "0";
+            homingCount = "0";
+      };
+   };
+   new InteriorInstance() {
+      position = "84.1401 -113.78 103.8";
+      rotation = "0 0 1 90.0002";
+      scale = "10 10 15";
+      interiorFile = "~/data/interiors/officefinal/officefinal.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+         EulerRotation = "0 0 -90";
+   };
+   new StaticShape() {
+      position = "83.809 -37.2172 130";
+      rotation = "1 0 0 0";
+      scale = "40 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "29.2162 -37.4692 130";
+      rotation = "1 0 0 0";
+      scale = "43 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "138.69 -37.3138 130";
+      rotation = "1 0 0 0";
+      scale = "43 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "282.561 -144.898 142";
+      rotation = "1 0 0 0";
+      scale = "120 100 55";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "124.757 -592.558 137.708";
+      rotation = "1 0 0 0";
+      scale = "40 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "243.052 -592.78 131.01";
+      rotation = "1 0 0 0";
+      scale = "40 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "68.6736 -592.625 139.763";
+      rotation = "1 0 0 0";
+      scale = "40 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "21.5167 -592.766 142.308";
+      rotation = "1 0 0 0";
+      scale = "40 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-14.7975 -560.691 140.902";
+      rotation = "0 0 -1 89.9544";
+      scale = "40 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-14.7016 -514.824 140.746";
+      rotation = "0 0 -1 89.9544";
+      scale = "40 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-15.005 -468.094 136.96";
+      rotation = "0 0 -1 89.9544";
+      scale = "40 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-14.5936 -376.241 140.106";
+      rotation = "0 0 -1 89.9544";
+      scale = "85 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "57.9165 -414.474 139.276";
+      rotation = "0 0 -1 89.9544";
+      scale = "35 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "58.181 -333.509 135.636";
+      rotation = "0 0 -1 89.9544";
+      scale = "35 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "110.831 -345.431 139.528";
+      rotation = "0 0 -1 89.9544";
+      scale = "50 32 40.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-19.4833 -241.473 151.543";
+      rotation = "1 0 0 180.482";
+      scale = "3 3 3";
+      dataBlock = "lightBulbA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-13.5158 -123.066 145.4";
+      rotation = "0 0 -1 89.9544";
+      scale = "80 32 70.6979";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+};
+//--- OBJECT WRITE END ---

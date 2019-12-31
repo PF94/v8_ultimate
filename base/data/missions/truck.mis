@@ -1,0 +1,205 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         previewImage = "base/data/missions/truck";
+         desc0 = "Name: Semi Truck";
+         desc1 = "Author: Scattered Space Mapping Team";
+         name = "Semi Truck";
+         saveName = "Semi Truck";
+         descLines = "2";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-1488 -1360 2848 3040";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      materialList = "~/data/skies/Sky_Blue2/resource.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "900";
+      fogDistance = "500";
+      fogColor = "0.950000 0.950000 1.000000 1.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "0 0 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      useSkyTextures = "1";
+      renderBottomTexture = "0";
+      noRenderBans = "0";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "250";
+      elevation = "35";
+      color = "0.700000 0.700000 0.700000 1.000000";
+      ambient = "0.400000 0.400000 0.300000 1.000000";
+         scale = "1 1 1";
+         locked = "true";
+         position = "0 0 0";
+         direction = "0.57735 0.57735 -0.57735";
+         rotation = "1 0 0 0";
+   };
+   new TerrainBlock(Terrain) {
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      detailTexture = "~/data/terrains/greenhills/TTgrass01";
+      terrainFile = "./truck.ter";
+      bumpTexture = "~/data/terrains/greenhills/TTgrass01";
+      squareSize = "16";
+      bumpScale = "14";
+      bumpOffset = "0.1";
+      zeroBumpScale = "5";
+         locked = "true";
+         position = "-1024 -1024 0";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "-163.091 155.285 48.415";
+         rotation = "0 0 1 130.062";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "20";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            lockCount = "0";
+      };
+   };
+   new SimGroup(none) {
+   };
+   new SimGroup(clock) {
+   };
+   new StaticShape() {
+      position = "-0.967249 -195.019 351.757";
+      rotation = "-0.104797 -0.0137857 0.994398 165.095";
+      scale = "1.5 1 1.5";
+      dataBlock = "LCDColon";
+      canSetIFLs = "0";
+   };
+   new InteriorInstance() {
+      position = "12.8698 135.593 42.7296";
+      rotation = "1 0 0 0";
+      scale = "10 10 10";
+      interiorFile = "~/data/interiors/Truck/truck2.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new ParticleEmitterNode(Smoke) {
+      position = "-256.838 167.267 166.064";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GenericEmitterNode";
+      emitter = "spearExplosionEmitter";
+      velocity = "1";
+   };
+   new ParticleEmitterNode(Smoke) {
+      position = "-257.606 103.193 165.619";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GenericEmitterNode";
+      emitter = "spearExplosionEmitter";
+      velocity = "1";
+   };
+   new ParticleEmitterNode(Smoke) {
+      position = "-257.898 166.245 169.796";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GenericEmitterNode";
+      emitter = "spearExplosionEmitter";
+      velocity = "1";
+   };
+   new ParticleEmitterNode(Smoke) {
+      position = "-256.538 103.369 170.396";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GenericEmitterNode";
+      emitter = "spearExplosionEmitter";
+      velocity = "1";
+   };
+   new ParticleEmitterNode(Smoke) {
+      position = "-257.12 102.443 175.307";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GenericEmitterNode";
+      emitter = "spearExplosionEmitter";
+      velocity = "1";
+   };
+   new ParticleEmitterNode(Smoke) {
+      position = "-258.183 165.829 173.68";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GenericEmitterNode";
+      emitter = "spearExplosionEmitter";
+      velocity = "1";
+   };
+   new StaticShape() {
+      position = "-348.287 172.535 100.019";
+      rotation = "1 0 0 0";
+      scale = "40 10 30";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-301.621 172.491 101.706";
+      rotation = "1 0 0 0";
+      scale = "40 10 30";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-301.317 98.6471 102.169";
+      rotation = "1 0 0 0";
+      scale = "40 10 30";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-347.37 98.691 100.606";
+      rotation = "1 0 0 0";
+      scale = "40 10 30";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-371.263 153.968 99.4597";
+      rotation = "0.000152234 -0.0101477 -0.999949 89.9545";
+      scale = "35 10 30";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+   new ScriptObject() {
+      class = "BuildMacroSO";
+         numEvents = "1";
+         event0 = "Server\tUseSprayCan\t27";
+   };
+   new StaticShape() {
+      position = "-371.385 118.552 100.188";
+      rotation = "0.00500392 -0.00499993 -0.999975 89.9558";
+      scale = "35 10 30";
+      dataBlock = "glassA";
+      canSetIFLs = "0";
+   };
+};
+//--- OBJECT WRITE END ---

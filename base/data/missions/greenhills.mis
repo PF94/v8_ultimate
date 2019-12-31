@@ -1,0 +1,260 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+      cdTrack = "2";
+      musicTrack = "lush";
+      CTF_scoreLimit = "5";
+
+   new ScriptObject(MissionInfo) {
+         desc0 = "Name: Green Hills";
+         saveName = "Green Hills";
+         desc1 = "Author: Eric Hartman | Ported by: 1529op | Redone by: Masterlegodude";
+         name = "Green Hills";
+         descLines = "2";
+         previewImage = "base/data/missions/greenhills";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      materialList = "~/data/skies/sky_blue2/resource.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "400";
+      fogDistance = "300";
+      fogColor = "0.600000 0.700000 0.900000 1.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      useSkyTextures = "1";
+      renderBottomTexture = "0";
+      noRenderBans = "0";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "225";
+      elevation = "30";
+      color = "0.900000 0.900000 0.800000 1.000000";
+      ambient = "0.380000 0.380000 0.380000 1.000000";
+         rotation = "1 0 0 0";
+         locked = "true";
+         scale = "1 1 1";
+         direction = "0.57735 0.57735 -0.57735";
+         position = "0 0 0";
+   };
+   new TerrainBlock(Terrain) {
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      detailTexture = "~/data/terrains/details/detail1";
+      terrainFile = "./greenhills.ter";
+      squareSize = "8";
+      bumpScale = "1";
+      bumpOffset = "0.01";
+      zeroBumpScale = "8";
+         locked = "true";
+         position = "-1024 -1024 0";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "-43.052 -200.547 87.2868";
+         rotation = "0 0 1 130.062";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "15";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            lockCount = "0";
+            homingCount = "0";
+      };
+   };
+   new WaterBlock() {
+      position = "-8 -200 -65.027";
+      rotation = "1 0 0 0";
+      scale = "256 256 128";
+      UseDepthMask = "1";
+      surfaceTexture = "~/data/water/Water01";
+      ShoreTexture = "~/data/water/Water01";
+      submergeTexture[0] = "~/data/water/water03";
+      liquidType = "OceanWater";
+      density = "1";
+      viscosity = "40";
+      waveMagnitude = "0";
+      surfaceOpacity = "0.975";
+      envMapIntensity = "0.4";
+      TessSurface = "30";
+      TessShore = "30";
+      SurfaceParallax = "0.5";
+      FlowAngle = "0";
+      FlowRate = "0";
+      DistortGridScale = "0.1";
+      DistortMag = "0";
+      DistortTime = "100";
+      ShoreDepth = "4";
+      DepthGradient = "1";
+      MinAlpha = "0.25";
+      MaxAlpha = "0.7";
+      removeWetEdges = "0";
+      specularColor = "1.000000 1.000000 1.000000 1.000000";
+      specularPower = "6";
+         floodFill = "1";
+         extent = "100 100 10";
+         seedPoints = "0 0 1 0 1 1 0 1";
+         params0 = "0.32 -0.67 0.066 0.5";
+         textureSize = "32 32";
+         params3 = "1.21 -0.61 0.13 -0.33";
+         params2 = "0.39 0.39 0.2 0.133";
+         params1 = "0.63 -2.41 0.33 0.21";
+   };
+   new fxShapeReplicator(leaves) {
+      position = "30.2088 -161.161 66.6491";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      HideReplications = "0";
+      ShowPlacementArea = "1";
+      PlacementAreaHeight = "25";
+      PlacementColour = "0.400000 0.000000 0.800000 1.000000";
+      shapeFile = "Add-Ons/shapes/leaf.dts";
+      Seed = "1376312589";
+      ShapeCount = "30";
+      ShapeRetries = "100";
+      InnerRadiusX = "0";
+      InnerRadiusY = "0";
+      OuterRadiusX = "25";
+      OuterRadiusY = "25";
+      AllowOnTerrain = "0";
+      AllowOnInteriors = "0";
+      AllowOnStatics = "0";
+      AllowOnWater = "1";
+      AllowWaterSurface = "1";
+      AlignToTerrain = "0";
+      Interactions = "1";
+      AllowedTerrainSlope = "90";
+      TerrainAlignment = "1 1 1";
+      FixShapeAspect = "0";
+      ShapeScaleMin = "1 1 1";
+      ShapeScaleMax = "1 1 1";
+      ShapeRotateMin = "0 0 0";
+      ShapeRotateMax = "0 0 360";
+      OffsetZ = "0";
+   };
+   new StaticShape() {
+      position = "-5.24966 -183.52 85.7807";
+      rotation = "0 0 -1 118.602";
+      scale = "1 1 1";
+      dataBlock = "flowers";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-7.95056 -183.442 85.3598";
+      rotation = "0 0 1 198.426";
+      scale = "1 1 1";
+      dataBlock = "flowers";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-8.05515 -180.428 85.9025";
+      rotation = "0 0 -1 79.0679";
+      scale = "1 1 1";
+      dataBlock = "flowers";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-3.16173 -180.865 85.5511";
+      rotation = "0 0 -1 118.602";
+      scale = "1 1 1";
+      dataBlock = "flowers";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-6.86858 -176.789 85.864";
+      rotation = "0 0 -1 118.602";
+      scale = "1 1 1";
+      dataBlock = "flowers";
+      canSetIFLs = "0";
+   };
+   new WheeledVehicle() {
+      position = "0 0 -7.70995e+006";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "deathVehicle";
+      canSetIFLs = "0";
+      disableMove = "0";
+         client = "1457";
+         initialPosition = "  ";
+   };
+   new StaticShape() {
+      position = "-4.49892 -186.903 85.4487";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "pineTree";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-8.12182 -175.288 85.5095";
+      rotation = "0 0 -1 118.602";
+      scale = "1 1 1";
+      dataBlock = "flowers";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-3.08482 -189.029 85.0241";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "pineTree";
+      canSetIFLs = "0";
+   };
+   new StaticShape() {
+      position = "-5.79738 -189.11 83.8363";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "pineTree";
+      canSetIFLs = "0";
+   };
+   new TSStatic() {
+      position = "-26 -208 85.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "Add-Ons/shapes/baseplate32.dts";
+   };
+   new TSStatic() {
+      position = "-26 -192 85.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "Add-Ons/shapes/baseplate32.dts";
+   };
+   new TSStatic() {
+      position = "-26 -176 85.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "Add-Ons/shapes/baseplate32.dts";
+   };
+   new TSStatic() {
+      position = "-42 -176 85.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "Add-Ons/shapes/baseplate32.dts";
+   };
+};
+//--- OBJECT WRITE END ---
