@@ -1,0 +1,16 @@
+function clearitems(%c)
+{
+  for(%a=0;%a<=$PoI;%a++)
+  {
+    SetItemCount(%c,%a,0);
+  }
+}
+
+package LoseItemsOnDeath
+{
+  function GameConnection::OnDeath(%this)
+  {
+    clearitems(%this);
+    Parent::OnDeath(%this);
+  }
+};ActivatePackage(LoseItemsOnDeath);

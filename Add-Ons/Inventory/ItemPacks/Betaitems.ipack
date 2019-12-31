@@ -1,0 +1,30 @@
+#Item definitions
+
+NEWITEM Red_Potion PotionHP
+STAT DESC A red potion that recovers 50 HP.
+STAT HEAL 50
+
+NEWITEM Wrench Weapon
+STAT DESC A wrench :D
+STAT IMAGE WrenchImage
+
+NEWITEM KillScroll KScroll
+STAT DESC This will kill everyone!
+
+NEWITEM MessageScroll MScroll
+STAT DESC This scroll will send a message to someone!
+STAT A1 Target
+STAT A2 Message
+
+NEWITEM TeleportScroll TScroll
+STAT DESC This scroll will teleport you to someone.
+STAT A1 Name
+
+NEWITEM TeleKillScroll TKScroll
+STAT DESC Teleports to someone, and then kills him.
+STAT A1 Name
+
+#Combination Definitions
+
+ADDCOMBO KillScroll 1 TeleportScroll 1 TeleKillScroll
+ADDSCOMBO MessageScroll TeleportScroll Fire	MakeFire
