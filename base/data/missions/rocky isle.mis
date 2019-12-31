@@ -1,0 +1,269 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         descLines = "2";
+         saveName = "rockyisle";
+         desc0 = "Name:Rocky Isle";
+         desc1 = "Author:Dr.Block.";
+         name = "Rocky Isle";
+         previewImage = "base/data/missions/rock";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-1048 -1064 2096 2128";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "312 96 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      materialList = "~/data/skies/Sky_Blue2/resource.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "1500";
+      fogDistance = "1000";
+      fogColor = "0.900000 0.900000 0.900000 1.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "0.25 0.25 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      useSkyTextures = "1";
+      renderBottomTexture = "0";
+      noRenderBans = "0";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "251";
+      elevation = "30";
+      color = "0.900000 0.900000 0.900000 1.000000";
+      ambient = "0.900000 0.900000 0.900000 1.000000";
+         position = "15 55 85";
+         rotation = "1 20 20 0";
+         scale = "1 1 1";
+         locked = "false";
+         direction = "0.57735 0.257735 -0.257735";
+   };
+   new TerrainBlock(Terrain) {
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      terrainFile = "./rocky isle.ter";
+      bumpTexture = "~/data/terrains/snow/TTicefrosty1";
+      squareSize = "8";
+      bumpScale = "7";
+      bumpOffset = "0.01";
+      zeroBumpScale = "6";
+         position = "-1024 -1024 0";
+         locked = "true";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "226.434 617.296 117.171";
+         rotation = "0 0 1 130.062";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "2";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            homingCount = "0";
+            locked = "false";
+            lockCount = "0";
+      };
+   };
+   new WaterBlock(water) {
+      position = "-872 -944 -38.0086";
+      rotation = "1 0 0 0";
+      scale = "2048 2048 128";
+      UseDepthMask = "1";
+      surfaceTexture = "~/data/water/TSwater1";
+      ShoreTexture = "~/data/water/TSwater1";
+      submergeTexture[0] = "~/data/water/TSwater1";
+      submergeTexture[1] = "~/data/water/TSwater1";
+      liquidType = "OceanWater";
+      density = "1";
+      viscosity = "40";
+      waveMagnitude = "0";
+      surfaceOpacity = "0.15";
+      envMapIntensity = "0.4";
+      TessSurface = "30";
+      TessShore = "30";
+      SurfaceParallax = "0.5";
+      FlowAngle = "80";
+      FlowRate = "0";
+      DistortGridScale = "0.1";
+      DistortMag = "0.015";
+      DistortTime = "0.5";
+      ShoreDepth = "10";
+      DepthGradient = "60";
+      MinAlpha = "0.03";
+      MaxAlpha = "0.5";
+      removeWetEdges = "0";
+      specularColor = "1.000000 1.000000 1.000000 1.000000";
+      specularPower = "12";
+         textureSize = "32 32";
+         envMapTexture = "base/data/skies/sunset_0007";
+         extent = "100 100 10";
+         params3 = "1.21 -0.61 0.13 -0.33";
+         params0 = "0.32 -0.67 0.066 0.5";
+         params1 = "0.63 -2.41 0.33 0.21";
+         params2 = "0.39 0.39 0.2 0.133";
+         seedPoints = "0 0 1 0 1 1 0 1";
+         floodFill = "1";
+   };
+   new TSStatic() {
+      position = "165.748 587.339 91.5442";
+      rotation = "0.0209952 -0.0444843 0.998789 109.993";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm02.dts";
+   };
+   new TSStatic() {
+      position = "187.607 616.766 93.3295";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm04.dts";
+   };
+   new TSStatic() {
+      position = "207.773 654.336 93.7897";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm02.dts";
+   };
+   new TSStatic() {
+      position = "191.314 683.998 93.9124";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm04.dts";
+   };
+   new TSStatic() {
+      position = "160.325 713.495 93.9351";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm05.dts";
+   };
+   new TSStatic() {
+      position = "128.129 710.33 95.2439";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm05.dts";
+   };
+   new TSStatic() {
+      position = "88.3044 694.782 97.7103";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm04.dts";
+   };
+   new TSStatic() {
+      position = "177.689 643.785 94.865";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Scrub_Pines/Sharp_ScrubPine09.dts";
+   };
+   new TSStatic() {
+      position = "174.079 661.034 95.5435";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Scrub_Pines/Sharp_ScrubPine04.dts";
+   };
+   new TSStatic() {
+      position = "160.249 679.428 94.7026";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Scrub_Pines/Sharp_ScrubPine09.dts";
+   };
+   new TSStatic() {
+      position = "121.046 666.357 96.7963";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Scrub_Pines/Sharp_ScrubPine04.dts";
+   };
+   new TSStatic() {
+      position = "91.1796 624.832 102.385";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Scrub_Pines/Sharp_ScrubPine09.dts";
+   };
+   new TSStatic() {
+      position = "111.738 650.222 103.87";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Scrub_Pines/Sharp_ScrubPine09.dts";
+   };
+   new TSStatic() {
+      position = "142.746 679.822 98.6129";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Scrub_Pines/Sharp_ScrubPine04.dts";
+   };
+   new StaticShape(tenMinutes) {
+      position = "108.017 622.924 116.326";
+      rotation = "0 -1 0 28.0749";
+      scale = "1 1 1";
+      dataBlock = "LCD";
+      canSetIFLs = "0";
+         skinName = "blue";
+         maxTime = "10";
+         time = "0";
+         paintable = "true";
+         delay = "60000";
+   };
+   new StaticShape(hours) {
+      position = "107.873 625.757 116.267";
+      rotation = "0 -1 0 28.0749";
+      scale = "1 1 1";
+      dataBlock = "LCD";
+      canSetIFLs = "0";
+         skinName = "blue";
+         time = "0";
+         paintable = "true";
+         delay = "60000";
+   };
+   new StaticShape(minutes) {
+      position = "107.83 621.106 116.335";
+      rotation = "0 -1 0 28.074";
+      scale = "1 1 1";
+      dataBlock = "LCD";
+      canSetIFLs = "0";
+         skinName = "blue";
+         time = "4";
+         paintable = "true";
+         delay = "60000";
+   };
+   new StaticShape(colon) {
+      position = "108.003 624.428 116.372";
+      rotation = "0 -1 0 28.0749";
+      scale = "1 1 1";
+      dataBlock = "LCDColon";
+      canSetIFLs = "0";
+         skinName = "rainbow";
+         paintable = "true";
+   };
+   new StaticShape(tenHours) {
+      position = "107.992 627.616 116.238";
+      rotation = "0 -1 0 28.0749";
+      scale = "1 1 1";
+      dataBlock = "LCD";
+      canSetIFLs = "0";
+         skinName = "blue";
+         maxTime = "10";
+         time = "0";
+         paintable = "true";
+         delay = "60000";
+   };
+};
+//--- OBJECT WRITE END ---
