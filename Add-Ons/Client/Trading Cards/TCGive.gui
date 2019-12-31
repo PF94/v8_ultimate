@@ -1,0 +1,102 @@
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(TCGive) {
+   profile = "GuiDefaultProfile";
+   horizSizing = "right";
+   vertSizing = "bottom";
+   position = "0 0";
+   extent = "640 480";
+   minExtent = "8 2";
+   visible = "1";
+
+   new GuiWindowCtrl() {
+      profile = "GuiWindowProfile";
+      horizSizing = "right";
+      vertSizing = "bottom";
+      position = "66 38";
+      extent = "516 357";
+      minExtent = "8 2";
+      visible = "1";
+      text = "Card Gifting";
+      maxLength = "255";
+      resizeWidth = "1";
+      resizeHeight = "1";
+      canMove = "1";
+      canClose = "1";
+      canMinimize = "1";
+      canMaximize = "1";
+      minSize = "50 50";
+      closeCommand = "canvas.popDialog(TCGive);";
+
+      new GuiScrollCtrl() {
+         profile = "ColorScrollProfile";
+         horizSizing = "width";
+         vertSizing = "height";
+         position = "17 35";
+         extent = "284 306";
+         minExtent = "8 2";
+         visible = "1";
+         altCommand = "SelectCard();";
+         accelerator = "enter";
+         willFirstRespond = "1";
+         hScrollBar = "alwaysOff";
+         vScrollBar = "alwaysOn";
+         constantThumbHeight = "0";
+         childMargin = "0 0";
+         rowHeight = "10";
+         columnWidth = "30";
+
+         new GuiTextListCtrl(CardGiveList) {
+            profile = "GuiTextListProfile";
+            horizSizing = "left";
+            vertSizing = "height";
+            position = "0 0";
+            extent = "172 70";
+            minExtent = "8 2";
+            visible = "1";
+            altCommand = "SelectCard();";
+            accelerator = "enter";
+            enumerate = "0";
+            resizeCell = "0";
+            columns = "0 140";
+            fitParentWidth = "1";
+            clipColumnText = "0";
+               helpTag = "0";
+         };
+      };
+      new GuiBitmapCtrl(CardGivePic) {
+         profile = "GuiDefaultProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "312 36";
+         extent = "190 257";
+         minExtent = "8 2";
+         visible = "1";
+         wrap = "0";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         overflowImage = "0";
+         keepCached = "0";
+      };
+      new GuiBitmapButtonCtrl(GiftCardButton) {
+         profile = "BlockButtonProfile";
+         horizSizing = "left";
+         vertSizing = "bottom";
+         position = "313 302";
+         extent = "188 29";
+         minExtent = "8 2";
+         visible = "1";
+         command = "GiftCard();";
+         text = "Accept";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         bitmap = "base/client/ui/button1";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         overflowImage = "0";
+         mKeepCached = "1";
+         mColor = "255 255 255 255";
+            wrap = "0";
+      };
+   };
+};
+//--- OBJECT WRITE END ---

@@ -1,0 +1,146 @@
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(TCTrading) {
+   profile = "GuiDefaultProfile";
+   horizSizing = "right";
+   vertSizing = "bottom";
+   position = "0 0";
+   extent = "640 480";
+   minExtent = "8 2";
+   visible = "1";
+
+   new GuiWindowCtrl() {
+      profile = "GuiWindowProfile";
+      horizSizing = "right";
+      vertSizing = "bottom";
+      position = "85 124";
+      extent = "536 315";
+      minExtent = "8 2";
+      visible = "1";
+      text = "Trading...";
+      maxLength = "255";
+      resizeWidth = "1";
+      resizeHeight = "1";
+      canMove = "1";
+      canClose = "0";
+      canMinimize = "0";
+      canMaximize = "0";
+      minSize = "50 50";
+
+      new GuiBitmapCtrl(TraderCard) {
+         profile = "GuiDefaultProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "352 30";
+         extent = "176 252";
+         minExtent = "8 2";
+         visible = "1";
+         wrap = "0";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         overflowImage = "0";
+         keepCached = "0";
+      };
+      new GuiTextCtrl(TraderName) {
+         profile = "GuiTextProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "365 287";
+         extent = "156 18";
+         minExtent = "8 2";
+         visible = "1";
+         text = "View cards closer in LIST mode!";
+         maxLength = "255";
+      };
+      new GuiBitmapButtonCtrl(CancelTradeButton) {
+         profile = "BlockButtonProfile";
+         horizSizing = "left";
+         vertSizing = "bottom";
+         position = "209 283";
+         extent = "96 24";
+         minExtent = "8 2";
+         visible = "1";
+         command = "commandtoserver(\'declinetrade\');";
+         text = "Cancel";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         bitmap = "base/client/ui/button1";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         overflowImage = "0";
+         mKeepCached = "1";
+         mColor = "0 255 0 255";
+            wrap = "0";
+      };
+      new GuiBitmapCtrl(myCard) {
+         profile = "GuiDefaultProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "170 30";
+         extent = "176 252";
+         minExtent = "8 2";
+         visible = "1";
+         wrap = "0";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         overflowImage = "0";
+         keepCached = "0";
+      };
+      new GuiScrollCtrl() {
+         profile = "ColorScrollProfile";
+         horizSizing = "width";
+         vertSizing = "height";
+         position = "14 33";
+         extent = "150 245";
+         minExtent = "8 2";
+         visible = "1";
+         altCommand = "SelectCard();";
+         accelerator = "enter";
+         willFirstRespond = "1";
+         hScrollBar = "alwaysOff";
+         vScrollBar = "alwaysOn";
+         constantThumbHeight = "0";
+         childMargin = "0 0";
+         rowHeight = "10";
+         columnWidth = "30";
+
+         new GuiTextListCtrl(TradeCardList) {
+            profile = "GuiTextListProfile";
+            horizSizing = "left";
+            vertSizing = "height";
+            position = "0 0";
+            extent = "138 416";
+            minExtent = "8 2";
+            visible = "1";
+            altCommand = "SelectCard();";
+            accelerator = "enter";
+            enumerate = "0";
+            resizeCell = "0";
+            columns = "0 140";
+            fitParentWidth = "1";
+            clipColumnText = "0";
+               helpTag = "0";
+         };
+      };
+      new GuiBitmapButtonCtrl(SelectTradeCardButton) {
+         profile = "BlockButtonProfile";
+         horizSizing = "left";
+         vertSizing = "bottom";
+         position = "27 283";
+         extent = "108 24";
+         minExtent = "8 2";
+         visible = "1";
+         command = "SelectTradeCard();";
+         text = "Accept";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         bitmap = "base/client/ui/button1";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         overflowImage = "0";
+         mKeepCached = "1";
+         mColor = "0 0 255 255";
+            wrap = "0";
+      };
+   };
+};
+//--- OBJECT WRITE END ---
