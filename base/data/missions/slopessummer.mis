@@ -1,0 +1,383 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         desc2 = "Textures by dansegal96";
+         previewImage = "base/data/missions/slopessummer";
+         desc0 = "Name: The Slopes- Summer";
+         desc1 = "Author: Eric Hartman";
+         saveName = "Slopes";
+         descLines = "3";
+         name = "The Slopes- Summer";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-1048 -1064 2096 2128";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "312 96 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      materialList = "~/data/skies/sky_blue2/resource.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "1500";
+      fogDistance = "1000";
+      fogColor = "1.000000 1.000000 1.000000 1.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "0.25 0.25 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "0.100000 0.100000 0.100000 1.000000";
+      useSkyTextures = "1";
+      renderBottomTexture = "0";
+      noRenderBans = "0";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "0";
+      elevation = "35";
+      color = "1.000000 1.000000 1.000000 1.000000";
+      ambient = "0.500000 0.500000 0.500000 1.000000";
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         locked = "true";
+         scale = "1 1 1";
+         direction = "0.57735 0.57735 -0.57735";
+   };
+   new TerrainBlock(Terrain) {
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      terrainFile = "./slopessummer.ter";
+      bumpTexture = "~/data/terrains/greenhills/TTgrass1";
+      squareSize = "8";
+      bumpScale = "7";
+      bumpOffset = "0.01";
+      zeroBumpScale = "6";
+         position = "-1024 -1024 0";
+         locked = "true";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "187.013 640.549 571.371";
+         rotation = "0 0 1 130.062";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "10";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            lockCount = "0";
+            homingCount = "0";
+      };
+   };
+   new WaterBlock(Water) {
+      position = "-776 -968 -37.8098";
+      rotation = "1 0 0 0";
+      scale = "1024 1024 128";
+      UseDepthMask = "1";
+      surfaceTexture = "~/data/water/TSwater1";
+      ShoreTexture = "~/data/water/TSwater1";
+      submergeTexture[0] = "~/data/water/TSwater1";
+      submergeTexture[1] = "~/data/water/TSwater1";
+      liquidType = "OceanWater";
+      density = "1";
+      viscosity = "40";
+      waveMagnitude = "5";
+      surfaceOpacity = "2";
+      envMapIntensity = "0.4";
+      TessSurface = "20";
+      TessShore = "30";
+      SurfaceParallax = "0.5";
+      FlowAngle = "90";
+      FlowRate = "0.05";
+      DistortGridScale = "0.2";
+      DistortMag = "0.015";
+      DistortTime = "0.5";
+      ShoreDepth = "20";
+      DepthGradient = "1";
+      MinAlpha = "0.03";
+      MaxAlpha = "0.5";
+      removeWetEdges = "0";
+      specularColor = "1.000000 1.000000 1.000000 1.000000";
+      specularPower = "6";
+         params2 = "0.39 0.39 0.2 0.133";
+         seedPoints = "0 0 1 0 1 1 0 1";
+         floodFill = "1";
+         extent = "100 100 10";
+         textureSize = "32 32";
+         envMapTexture = "base/data/skies/sunset_0007";
+         params1 = "0.63 -2.41 0.33 0.21";
+         params3 = "1.21 -0.61 0.13 -0.33";
+         params0 = "0.32 -0.67 0.066 0.5";
+   };
+   new TSStatic() {
+      position = "-253.259 1350.8 91.9902";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-202.959 1301.86 101.63";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-182.54 1233.07 96.7167";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-178.659 1195.1 93.3902";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-178.423 1157.85 93.4353";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-290.366 1397.11 104.52";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-324.386 1441.1 109.123";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-390.406 1483.96 103.982";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-411.644 1498.77 103.338";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-458.876 1524.07 95.7439";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-487.769 1560.21 100.856";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-496.047 1638.12 122.037";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-561.739 1672.11 94.5848";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-603.413 1698.22 91.3902";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-647.494 1735.83 85.5813";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-682.048 1750.5 92.8226";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-735.738 1759.71 95.6949";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-761.499 1739.93 99.4053";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-789.779 1717.22 97.321";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-796.837 1625.58 99.5756";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-756.752 1574.34 96.5193";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-699.48 1535.03 88.8946";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-721.611 1450.53 91.0898";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-714.343 1368.5 89.1543";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-712.664 1328.57 97.3794";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-700.165 1240.55 104.498";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-623.19 1188.26 95.1095";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-668.53 1117.04 90.0065";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-604.878 1101.63 112.266";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-535.22 1136.35 106.183";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-433.321 1116.36 112.502";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-475.271 1124.37 109.057";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-400.973 1108.75 119.933";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-335.644 1099.18 123.86";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-313.253 1102.58 117.477";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-274.854 1096.05 121.806";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-195.985 1129.46 93.4619";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new TSStatic() {
+      position = "-227.019 1101.52 119.897";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm09.dts";
+   };
+   new AudioEmitter() {
+      position = "-478.506 1418.36 90.1902";
+      rotation = "1 0 0 0";
+      scale = "300 300 20";
+      profile = "exitWaterSound";
+      useProfileDescription = "0";
+      description = "AudioMusicLooping3d";
+      fileName = "0";
+      type = "2";
+      volume = "10";
+      outsideAmbient = "1";
+      referenceDistance = "5";
+      maxDistance = "35";
+      isLooping = "1";
+      loopCount = "-1";
+      minLoopGap = "0";
+      maxLoopGap = "0";
+      enableVisualFeedback = "1";
+      is3D = "1";
+      coneInsideAngle = "90";
+      coneOutsideAngle = "120";
+      coneOutsideVolume = "0.25";
+      coneVector = "0 1 0";
+   };
+};
+//--- OBJECT WRITE END ---
