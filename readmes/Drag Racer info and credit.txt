@@ -1,0 +1,11 @@
+New vehicle by me.
+Made in Blender.
+
+The vehicle is very fast and controls like a drag racer.
+
+The vehicle is also very stable, doesn't crash the game and 
+it is very hard to dig into the terain.
+
+Run's great in big open maps.
+
+	-=REDco=-Captain
