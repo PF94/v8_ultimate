@@ -1,1 +1,1 @@
-gource --title "V8 ULTIMATE" --highlight-users --user-scale 1.5 -e 0.01 --highlight-dirs --dir-font-size 12 -key -s 1250 --max-file-lag 0.1
+gource --title "V8 ULTIMATE" --highlight-users --user-scale 1.5 -e 0.025 --highlight-dirs --file-font-size 12 -key -s 2500 --max-file-lag 15000 --max-user-speed 5000 --dir-name-depth 100 --user-friction 0.25 --bloom-multiplier 0.75 --dir-font-size 10 --filename-time 2
