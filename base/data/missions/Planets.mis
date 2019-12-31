@@ -1,0 +1,276 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         saveName = "planets";
+         desc0 = "Skybox: Laremere";
+         name = "Planets";
+         desc1 = "Triggers: Nitramtj";
+         previewImage = "base/data/missions/planets";
+         descLines = "2";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      materialList = "~/data/skies/laremere_stars/resource.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "7000";
+      fogDistance = "6500";
+      fogColor = "0.010000 0.010000 0.010000 0.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "1.000000 1.000000 1.000000 1.000000";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      noRenderBans = "1";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "275";
+      elevation = "58";
+      color = "1.000000 1.000000 1.000000 1.000000";
+      ambient = "0.800000 0.750000 0.600000 1.000000";
+         scale = "1 1 1";
+         locked = "true";
+         direction = "0.57735 0.57735 -0.57735";
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "307.778 4722.17 243.6";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "5";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            homingCount = "0";
+            locked = "false";
+            lockCount = "0";
+      };
+   };
+   new InteriorInstance(Buildpad) {
+      position = "137.363 4478.15 367.12";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Buildpad.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance(earthbase) {
+      position = "270.182 4770.16 198.2";
+      rotation = "1 0 0 0";
+      scale = "20 20 20";
+      interiorFile = "~/data/interiors/Earth.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic(Earthmega) {
+      position = "289.955 4769.6 254.425";
+      rotation = "1 0 0 0";
+      scale = "92 92 92";
+      shapeName = "~/data/shapes/earthmega.dts";
+   };
+   new TSStatic(earthinside) {
+      position = "274.17 4769.35 258.48";
+      rotation = "1 0 0 0";
+      scale = "36 36 36";
+      shapeName = "~/data/shapes/earthinside.dts";
+   };
+   new InteriorInstance(moonbase) {
+      position = "-239.641 4874.83 368.2";
+      rotation = "1 0 0 0";
+      scale = "15 15 15";
+      interiorFile = "~/data/interiors/Moon.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+
+   };
+   new TSStatic(satrings) {
+      position = "4073.59 -1104.69 722.084";
+      rotation = "1 0 0 20";
+      scale = "300 300 100";
+      shapeName = "~/data/shapes/juprings.dts";
+   };
+   new InteriorInstance(marsbase) {
+      position = "2094.87 -3215.56 820";
+      rotation = "1 0 0 0";
+      scale = "20 20 20";
+      interiorFile = "~/data/interiors/Mars.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic(Moon) {
+      position = "-239.532 4874.85 397.425";
+      rotation = "1 0 0 0";
+      scale = "12 12 12";
+      shapeName = "~/data/shapes/moonmega.dts";
+   };
+   new TSStatic(marsinside) {
+      position = "2093.78 -3217.53 868.551";
+      rotation = "1 0 0 0";
+      scale = "36 36 36";
+      shapeName = "~/data/shapes/marsinside.dts";
+   };
+   new PhysicalZone(Spacezone) {
+      position = "-6383.49 6400.76 -1200.7";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      velocityMod = "1";
+      gravityMod = "0";
+      appliedForce = "0 0 0";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new ScriptObject() {
+         textObj = "4213";
+         id0 = "4892";
+         count = "0";
+   };
+   new ScriptObject() {
+      class = "WhoTalkSO";
+         textObj = "4213";
+         id0 = "4894";
+         count = "0";
+ 
+   };
+   new TSStatic(saturn) {
+      position = "4072.14 -1111.68 710.275";
+      rotation = "1 0 0 20";
+      scale = "180 180 180";
+      shapeName = "~/data/shapes/Saturnmega.dts";
+   };
+   new TSStatic(Marsmega) {
+      position = "2100.9 -3217.24 860.025";
+      rotation = "1 0 0 0";
+      scale = "90 90 90";
+      shapeName = "~/data/shapes/marsmega.dts";
+   };
+   new TSStatic(sunmodel) {
+      position = "0 0 200";
+      rotation = "1 0 0 0";
+      scale = "120 120 120";
+      shapeName = "~/data/shapes/sun.dts";
+   };
+   new TSStatic(Mercury) {
+      position = "-875.774 1708.2 50.625";
+      rotation = "1 0 0 0";
+      scale = "17 17 17";
+      shapeName = "~/data/shapes/mercurymega.dts";
+   };
+   new InteriorInstance(Mercury) {
+      position = "-874.35 1706.32 10.0381";
+      rotation = "1 0 0 0";
+      scale = "20 20 20";
+      interiorFile = "~/data/interiors/Moon.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic(Venus) {
+      position = "-2640.99 1628.7 87.863";
+      rotation = "1 0 0 0";
+      scale = "42 42 42";
+      shapeName = "~/data/shapes/venusmega.dts";
+   };
+   new InteriorInstance(Venus) {
+      position = "-2642.57 1628.15 71.5425";
+      rotation = "1 0 0 0";
+      scale = "10 10 10";
+      interiorFile = "~/data/interiors/Mars.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic(jupiter) {
+      position = "-4658.84 -2937.59 103.968";
+      rotation = "1 0 0 9.99997";
+      scale = "180 180 180";
+      shapeName = "~/data/shapes/Jupitermega.dts";
+   };
+   new TSStatic(Pluto) {
+      position = "-2001.41 -7411.33 187.368";
+      rotation = "1 0 0 0";
+      scale = "5 5 5";
+      shapeName = "~/data/shapes/neptunemega.dts";
+   };
+   new Trigger(sundeathtrigger) {
+      position = "-972.467 1001.09 -617.8";
+      rotation = "1 0 0 0";
+      scale = "2000 2000 2000";
+      dataBlock = "KillTickTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         damageType = "sundamage";
+         damagePercent = "50";
+   };
+   new Trigger(Spacedeathtrigger) {
+      position = "-6399.07 6343.39 2126.7";
+      rotation = "1 0 0 0";
+      scale = "15000 15000 100";
+      dataBlock = "KillTickTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         damageType = "spacedamage";
+         damagePercent = "100";
+   };
+   new ScriptObject() {
+      class = "WhoTalkSO";
+         textObj = "4099";
+         id0 = "6794";
+         count = "0";
+   };
+   new InteriorInstance(buildpad2) {
+      position = "511.344 4469.16 367.12";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Buildpad.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "2010.89 -2866.58 957.72";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Buildpad.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-4099.54 -3097.01 390.418";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Buildpad.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-2494.65 1680.84 147.328";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/Buildpad.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+};
+//--- OBJECT WRITE END ---
