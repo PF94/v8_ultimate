@@ -1,0 +1,9 @@
+//Some weapons for SpaceBots are not detected right or cannot be used by bots.
+function weapondef()
+{
+ pgunimage.botweapontype = "unusable";
+ grgunimage.botweapontype = "unusable";
+ wrenchImage.botweapontype = "unusable";
+ autoLaserImage.botweapontype = "bow";
+}
+schedule(1000,0,weapondef);
