@@ -1,0 +1,102 @@
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(EquipGui) {
+   profile = "GuiDefaultProfile";
+   horizSizing = "right";
+   vertSizing = "bottom";
+   position = "0 0";
+   extent = "640 480";
+   minExtent = "8 2";
+   visible = "1";
+
+   new GuiWindowCtrl() {
+      profile = "GuiWindowProfile";
+      horizSizing = "right";
+      vertSizing = "bottom";
+      position = "122 100";
+      extent = "200 300";
+      minExtent = "8 2";
+      visible = "1";
+      text = "Equipments";
+      maxLength = "255";
+      resizeWidth = "0";
+      resizeHeight = "0";
+      canMove = "1";
+      canClose = "0";
+      canMinimize = "0";
+      canMaximize = "0";
+      minSize = "50 50";
+
+      new GuiBitmapButtonCtrl() {
+         profile = "BlockButtonProfile";
+         horizSizing = "right";
+         vertSizing = "top";
+         position = "5 273";
+         extent = "60 20";
+         minExtent = "8 2";
+         visible = "1";
+         command = "canvas.popDialog(EquipGui);";
+         accelerator = "escape";
+         text = "Back";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         bitmap = "base/client/ui/button2";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         overflowImage = "0";
+         mKeepCached = "0";
+         mColor = "255 0 0 255";
+      };
+      new GuiScrollCtrl(IS_EQ_Scroll1) {
+         profile = "GuiScrollProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "5 30";
+         extent = "190 240";
+         minExtent = "8 2";
+         visible = "1";
+         willFirstRespond = "1";
+         hScrollBar = "dynamic";
+         vScrollBar = "alwaysOn";
+         constantThumbHeight = "0";
+         childMargin = "0 0";
+         rowHeight = "40";
+         columnWidth = "30";
+
+         new GuiTextListCtrl(IS_EQ_TL1) {
+            profile = "GuiTextListProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "1 1";
+            extent = "173 128";
+            minExtent = "8 2";
+            visible = "1";
+            enumerate = "0";
+            resizeCell = "1";
+            columns = "0 75";
+            fitParentWidth = "1";
+            clipColumnText = "0";
+         };
+      };
+      new GuiBitmapButtonCtrl() {
+         profile = "BlockButtonProfile";
+         horizSizing = "right";
+         vertSizing = "top";
+         position = "135 273";
+         extent = "60 21";
+         minExtent = "8 2";
+         visible = "1";
+         command = "IS_EQ_Unequip();";
+         accelerator = "escape";
+         text = "Unequip";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         bitmap = "base/client/ui/button2";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         overflowImage = "0";
+         mKeepCached = "0";
+         mColor = "0 255 0 255";
+      };
+   };
+};
+//--- OBJECT WRITE END ---

@@ -1,0 +1,423 @@
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(Inventorygui) {
+   profile = "GuiDefaultProfile";
+   horizSizing = "right";
+   vertSizing = "bottom";
+   position = "0 0";
+   extent = "640 480";
+   minExtent = "8 2";
+   visible = "1";
+
+   new GuiWindowCtrl(IS_Wnd) {
+      profile = "GuiWindowProfile";
+      horizSizing = "right";
+      vertSizing = "bottom";
+      position = "178 43";
+      extent = "350 450";
+      minExtent = "8 2";
+      visible = "1";
+      text = "Inventory System 2";
+      maxLength = "255";
+      resizeWidth = "0";
+      resizeHeight = "0";
+      canMove = "1";
+      canClose = "1";
+      canMinimize = "0";
+      canMaximize = "0";
+      minSize = "50 50";
+      closeCommand = "canvas.popdialog(InventoryGui);";
+
+      new GuiScrollCtrl(IS_Scroll1) {
+         profile = "GuiScrollProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "10 30";
+         extent = "160 410";
+         minExtent = "8 2";
+         visible = "1";
+         willFirstRespond = "1";
+         hScrollBar = "dynamic";
+         vScrollBar = "dynamic";
+         constantThumbHeight = "0";
+         childMargin = "0 0";
+         rowHeight = "40";
+         columnWidth = "30";
+
+         new GuiTextListCtrl(IS_TL1) {
+            profile = "GuiTextListProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "1 1";
+            extent = "158 64";
+            minExtent = "8 2";
+            visible = "1";
+            command = "IS_TL1Selected(IS_TL1.getselectedID());";
+            enumerate = "0";
+            resizeCell = "1";
+            columns = "0 105";
+            fitParentWidth = "1";
+            clipColumnText = "0";
+         };
+      };
+      new GuiSwatchCtrl(IS_InfoPanel) {
+         profile = "GuiDefaultProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "175 30";
+         extent = "170 180";
+         minExtent = "8 2";
+         visible = "0";
+         color = "0 0 0 0";
+
+         new GuiTextCtrl() {
+            profile = "GuiTextProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "0 0";
+            extent = "33 18";
+            minExtent = "8 2";
+            visible = "1";
+            text = "Name :";
+            maxLength = "255";
+         };
+         new GuiTextCtrl() {
+            profile = "GuiTextProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "0 20";
+            extent = "30 18";
+            minExtent = "8 2";
+            visible = "1";
+            text = "Type :";
+            maxLength = "255";
+         };
+         new GuiMLTextCtrl(IS_Desc) {
+            profile = "GuiMLTextProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "0 60";
+            extent = "155 14";
+            minExtent = "8 2";
+            visible = "1";
+            lineSpacing = "2";
+            allowColorChars = "1";
+            maxChars = "-1";
+            text = "<color:FF0000><Desc>";
+            maxBitmapHeight = "-1";
+         };
+         new GuiTextCtrl() {
+            profile = "GuiTextProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "0 40";
+            extent = "60 18";
+            minExtent = "8 2";
+            visible = "1";
+            text = "Description :";
+            maxLength = "255";
+         };
+         new GuiTextCtrl(IS_Name) {
+            profile = "GuiTextProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "35 0";
+            extent = "28 18";
+            minExtent = "8 2";
+            visible = "1";
+            text = "<Name>";
+            maxLength = "255";
+         };
+         new GuiTextCtrl(IS_Type) {
+            profile = "GuiTextProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "35 20";
+            extent = "37 18";
+            minExtent = "8 2";
+            visible = "1";
+            text = "<Type>";
+            maxLength = "255";
+         };
+         new GuiBitmapButtonCtrl() {
+            profile = "BlockButtonProfile";
+            horizSizing = "center";
+            vertSizing = "bottom";
+            position = "35 150";
+            extent = "100 20";
+            minExtent = "8 2";
+            visible = "1";
+            command = "IS_Use();";
+            text = "Use";
+            groupNum = "-1";
+            buttonType = "PushButton";
+            bitmap = "base/client/ui/button1";
+            lockAspectRatio = "0";
+            alignLeft = "0";
+            overflowImage = "0";
+            mKeepCached = "0";
+            mColor = "255 100 0 255";
+         };
+      };
+      new GuiBitmapButtonCtrl() {
+         profile = "BlockButtonProfile";
+         horizSizing = "right";
+         vertSizing = "top";
+         position = "245 415";
+         extent = "100 30";
+         minExtent = "8 2";
+         visible = "1";
+         command = "canvas.popdialog(InventoryGui);";
+         text = "Exit";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         bitmap = "base/client/ui/button2";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         overflowImage = "0";
+         mKeepCached = "0";
+         mColor = "255 0 0 255";
+      };
+      new GuiSwatchCtrl(IS_A1Panel) {
+         profile = "GuiDefaultProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "175 210";
+         extent = "170 30";
+         minExtent = "8 2";
+         visible = "0";
+         color = "8 48 0 0";
+
+         new GuiTextCtrl(IS_A1Text) {
+            profile = "GuiTextProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "5 5";
+            extent = "21 18";
+            minExtent = "8 2";
+            visible = "1";
+            maxLength = "255";
+         };
+         new GuiTextEditCtrl(IS_A1Edit) {
+            profile = "GuiTextEditProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "45 5";
+            extent = "120 18";
+            minExtent = "8 2";
+            visible = "1";
+            maxLength = "255";
+            historySize = "0";
+            password = "0";
+            tabComplete = "0";
+            sinkAllKeyEvents = "0";
+         };
+      };
+      new GuiSwatchCtrl(IS_A2Panel) {
+         profile = "GuiDefaultProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "175 235";
+         extent = "170 30";
+         minExtent = "8 2";
+         visible = "0";
+         color = "8 48 0 0";
+
+         new GuiTextCtrl(IS_A2Text) {
+            profile = "GuiTextProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "5 5";
+            extent = "8 18";
+            minExtent = "8 2";
+            visible = "1";
+            maxLength = "255";
+         };
+         new GuiTextEditCtrl(IS_A2Edit) {
+            profile = "GuiTextEditProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "45 5";
+            extent = "120 18";
+            minExtent = "8 2";
+            visible = "1";
+            maxLength = "255";
+            historySize = "0";
+            password = "0";
+            tabComplete = "0";
+            sinkAllKeyEvents = "0";
+         };
+      };
+      new GuiSwatchCtrl(IS_A3Panel) {
+         profile = "GuiDefaultProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "175 260";
+         extent = "170 30";
+         minExtent = "8 2";
+         visible = "0";
+         color = "8 48 0 0";
+
+         new GuiTextCtrl(IS_A3Text) {
+            profile = "GuiTextProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "5 5";
+            extent = "8 18";
+            minExtent = "8 2";
+            visible = "1";
+            maxLength = "255";
+         };
+         new GuiTextEditCtrl(IS_A3Edit) {
+            profile = "GuiTextEditProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "45 5";
+            extent = "120 18";
+            minExtent = "8 2";
+            visible = "1";
+            maxLength = "255";
+            historySize = "0";
+            password = "0";
+            tabComplete = "0";
+            sinkAllKeyEvents = "0";
+         };
+      };
+      new GuiSwatchCtrl(IS_A4Panel) {
+         profile = "GuiDefaultProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "175 285";
+         extent = "170 30";
+         minExtent = "8 2";
+         visible = "0";
+         color = "8 48 0 0";
+
+         new GuiTextCtrl(IS_A4Text) {
+            profile = "GuiTextProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "5 5";
+            extent = "8 18";
+            minExtent = "8 2";
+            visible = "1";
+            maxLength = "255";
+         };
+         new GuiTextEditCtrl(IS_A4Edit) {
+            profile = "GuiTextEditProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "45 5";
+            extent = "120 18";
+            minExtent = "8 2";
+            visible = "1";
+            maxLength = "255";
+            historySize = "0";
+            password = "0";
+            tabComplete = "0";
+            sinkAllKeyEvents = "0";
+         };
+      };
+      new GuiBitmapButtonCtrl() {
+         profile = "BlockButtonProfile";
+         horizSizing = "right";
+         vertSizing = "top";
+         position = "245 380";
+         extent = "100 30";
+         minExtent = "8 2";
+         visible = "1";
+         command = "canvas.pushdialog(EquipGui);";
+         text = "Equipments";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         bitmap = "base/client/ui/button2";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         overflowImage = "0";
+         mKeepCached = "0";
+         mColor = "0 0 255 255";
+      };
+      new GuiBitmapButtonCtrl() {
+         profile = "BlockButtonProfile";
+         horizSizing = "right";
+         vertSizing = "top";
+         position = "245 345";
+         extent = "100 30";
+         minExtent = "8 2";
+         visible = "1";
+         command = "canvas.pushdialog(ComboGui);";
+         text = "Combinations";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         bitmap = "base/client/ui/button2";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         overflowImage = "0";
+         mKeepCached = "0";
+         mColor = "255 99 0 255";
+      };
+      new GuiBitmapButtonCtrl() {
+         profile = "BlockButtonProfile";
+         horizSizing = "right";
+         vertSizing = "top";
+         position = "295 3";
+         extent = "30 18";
+         minExtent = "8 2";
+         visible = "1";
+         command = "canvas.pushdialog(GlobalShopGui);";
+         text = "S";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         bitmap = "base/client/ui/button2";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         overflowImage = "0";
+         mKeepCached = "0";
+         mColor = "0 255 255 255";
+      };
+      new GuiSwatchCtrl(IS_DropPanel) {
+         profile = "GuiDefaultProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "175 315";
+         extent = "170 25";
+         minExtent = "8 2";
+         visible = "1";
+         color = "0 0 0 0";
+
+         new GuiBitmapButtonCtrl() {
+            profile = "BlockButtonProfile";
+            horizSizing = "right";
+            vertSizing = "top";
+            position = "0 0";
+            extent = "60 20";
+            minExtent = "8 2";
+            visible = "1";
+            command = "IS_CL_DropItem();";
+            text = "Drop";
+            groupNum = "-1";
+            buttonType = "PushButton";
+            bitmap = "base/client/ui/button2";
+            lockAspectRatio = "0";
+            alignLeft = "0";
+            overflowImage = "0";
+            mKeepCached = "0";
+            mColor = "0 255 0 255";
+         };
+         new GuiTextEditCtrl(IS_CL_Amount) {
+            profile = "GuiTextEditProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "60 1";
+            extent = "105 18";
+            minExtent = "8 2";
+            visible = "1";
+            maxLength = "255";
+            historySize = "0";
+            password = "0";
+            tabComplete = "0";
+            sinkAllKeyEvents = "0";
+         };
+      };
+   };
+};
+//--- OBJECT WRITE END ---
