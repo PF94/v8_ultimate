@@ -1,0 +1,45 @@
+C:/Users/KEVIN/Desktop/US/base/data/interiors/basebot.dif
+
+
+
+Constructor Version: 1.0.3
+
+
+
+Date: 2008/02/04 16:55:05
+
+
+Detail Level 0
+
+
+
+  Zones:         1
+
+  Points:        68
+
+  Surfaces:      39
+
+  Null Surfaces: 0
+
+  BSP Nodes:     35
+
+
+
+  Textures From Brushes:
+
+
+
+    CEMENT
+
+    WALL2
+
+
+
+  Static Meshes and Textures:
+
+
+
+    -- None --
+
+
+

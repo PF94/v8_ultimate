@@ -1,0 +1,463 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         desc1 = "Author: Builder";
+         saveName = "Blood Gulch";
+         descLines = "2";
+         desc0 = "Name: Blood Gulch";
+         name = "Blood Gulch";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-1376 -1664 3744 3328";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "0 0 1 90";
+      scale = "1 1 1";
+      materialList = "~/data/skies/sunset/resource.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "600";
+      fogDistance = "500";
+      fogColor = "0.580000 0.680000 0.940000 1.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      SkySolidColor = "0.600000 0.100000 0.600000 1.000000";
+      useSkyTextures = "1";
+      renderBottomTexture = "0";
+      noRenderBans = "0";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "290";
+      elevation = "35";
+      color = "0.900000 0.900000 0.900000 1.000000";
+      ambient = "0.600000 0.500000 0.400000 1.000000";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         locked = "true";
+         direction = "0.57735 0.57735 -0.57735";
+         position = "0 0 0";
+   };
+   new TerrainBlock(Terrain) {
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      terrainFile = "./crapcrap.ter";
+      bumpTexture = "~/data/terrains/greenhills/sand1";
+      squareSize = "16";
+      bumpScale = "5";
+      bumpOffset = "0.0051";
+      zeroBumpScale = "5";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere() {
+         position = "-1035.46 64.5281 150.205";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "40";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            lockCount = "0";
+      };
+   };
+   new InteriorInstance() {
+      position = "-1035.86 64.5281 83.0047";
+      rotation = "0 0 1 180";
+      scale = "0.8 0.8 0.8";
+      interiorFile = "~/data/interiors/basestairs.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-1035.46 64.5281 83.0047";
+      rotation = "1 0 0 0";
+      scale = "0.8 0.8 0.8";
+      interiorFile = "~/data/interiors/deco.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-1035.46 64.5281 83.0047";
+      rotation = "1 0 0 0";
+      scale = "0.8 0.8 0.8";
+      interiorFile = "~/data/interiors/basestairs.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-1035.46 64.5281 83.0047";
+      rotation = "1 0 0 0";
+      scale = "0.8 0.8 0.8";
+      interiorFile = "~/data/interiors/basebot.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "-998.646 -108.502 90.5693";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm06.dts";
+   };
+   new InteriorInstance() {
+      position = "-1032.28 -377.473 60.291";
+      rotation = "1 0 0 0";
+      scale = "0.8 0.8 0.8";
+      interiorFile = "~/data/interiors/basestairs.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "-1065.34 -40.6818 76.338";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock1.dts";
+   };
+   new TSStatic() {
+      position = "-917.134 -238.081 84.9088";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock1.dts";
+   };
+   new TSStatic() {
+      position = "-976.97 -188.737 83.2509";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock2.dts";
+   };
+   new TSStatic() {
+      position = "-1232.64 -141.155 48.4722";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-952.223 -229.243 82.5963";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Yellow_Pine/Sharp_Yellowpine01.dts";
+   };
+   new ScriptObject() {
+      class = "WhoTalkSO";
+         count = "0";
+         id0 = "3306";
+         textObj = "2855";
+   };
+   new StaticShape(tenHours) {
+      position = "-483.144 -246.558 175.657";
+      rotation = "-0.159318 -6.96664e-009 0.987227 180";
+      scale = "1 1 1";
+      dataBlock = "LCD";
+      canSetIFLs = "0";
+         skinName = "green";
+         time = "0";
+         delay = "60000";
+   };
+   new StaticShape() {
+      position = "-483.12 -243.458 175.576";
+      rotation = "-0.159318 -6.96664e-009 0.987227 180";
+      scale = "0.8 0.8 0.8";
+      dataBlock = "LCDColon";
+      canSetIFLs = "0";
+         skinName = "green";
+   };
+   new TSStatic() {
+      position = "-1083.14 -127.091 87.6013";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm05.dts";
+   };
+   new TSStatic() {
+      position = "-1133.76 -504.046 66.5976";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm06.dts";
+   };
+   new TSStatic() {
+      position = "-937.771 -16.395 91.8946";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm06.dts";
+   };
+   new InteriorInstance() {
+      position = "-1032.68 -377.473 60.291";
+      rotation = "0 0 1 180";
+      scale = "0.8 0.8 0.8";
+      interiorFile = "~/data/interiors/basestairs.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "-1110.51 -461.983 57.8024";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock2.dts";
+   };
+   new InteriorInstance() {
+      position = "-1032.28 -377.473 60.291";
+      rotation = "1 0 0 0";
+      scale = "0.8 0.8 0.8";
+      interiorFile = "~/data/interiors/deco.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "-1042.95 -11.9569 80.4006";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm06.dts";
+   };
+   new TSStatic() {
+      position = "-1085.03 -209.406 76.5845";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm06.dts";
+   };
+   new TSStatic() {
+      position = "-1062.18 165.694 93.5046";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Palm/Sharp_Palm06.dts";
+   };
+   new InteriorInstance() {
+      position = "-1032.28 -377.473 60.291";
+      rotation = "1 0 0 0";
+      scale = "0.8 0.8 0.8";
+      interiorFile = "~/data/interiors/basebot.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "-1073.72 -159.606 84.0021";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock1.dts";
+   };
+   new TSStatic() {
+      position = "-1134.08 127.113 86.5041";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock1.dts";
+   };
+   new TSStatic() {
+      position = "-999.596 -469.917 56.8217";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-974.863 -319.513 59.7939";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Yellow_Pine/Sharp_Yellowpine01.dts";
+   };
+   new TSStatic() {
+      position = "-926.1 -260.829 78.2661";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Yellow_Pine/Sharp_Yellowpine01.dts";
+   };
+   new TSStatic() {
+      position = "-947.611 -280.701 66.8031";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Yellow_Pine/Sharp_Yellowpine01.dts";
+   };
+   new TSStatic() {
+      position = "-1006.89 -316.57 56.2452";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Yellow_Pine/Sharp_Yellowpine01.dts";
+   };
+   new TSStatic() {
+      position = "-992.208 -287.573 61.1679";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Yellow_Pine/Sharp_Yellowpine01.dts";
+   };
+   new TSStatic() {
+      position = "-973.436 -250.911 76.1031";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Yellow_Pine/Sharp_Yellowpine01.dts";
+   };
+   new TSStatic() {
+      position = "-965.825 -270.523 59.0118";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-1204.22 -121.168 67.5855";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock1.dts";
+   };
+   new TSStatic() {
+      position = "-1194.06 -95.4156 68.4891";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock2.dts";
+   };
+   new TSStatic() {
+      position = "-1205.17 -142.324 54.8201";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-1193.05 -131.871 67.6308";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock1.dts";
+   };
+   new TSStatic() {
+      position = "-1225.94 -105.697 58.6633";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-1199.74 -163.929 51.9922";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-1167.64 -131.164 67.99";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock2.dts";
+   };
+   new TSStatic() {
+      position = "-1172.17 -153.729 58.5142";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-1156.1 -187.902 64.4519";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock1.dts";
+   };
+   new TSStatic() {
+      position = "-1148.73 -150.191 62.9319";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-1193.95 -236.627 52.437";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock2.dts";
+   };
+   new TSStatic() {
+      position = "-1191.07 -212.207 50.0965";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-1164.79 -167.093 62.7587";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock2.dts";
+   };
+   new TSStatic() {
+      position = "-1165.63 -207.492 54.4154";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-1171.54 -114.952 68.7604";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock2.dts";
+   };
+   new TSStatic() {
+      position = "-1148.46 -109.039 65.0192";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-1146.92 -124.736 74.4507";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock1.dts";
+   };
+   new TSStatic() {
+      position = "-1143.72 -171.928 60.6131";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-1162.01 -231.289 59.0855";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock2.dts";
+   };
+   new TSStatic() {
+      position = "-1162.51 -97.7392 73.4817";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock1.dts";
+   };
+   new TSStatic() {
+      position = "-1190.39 -187.682 59.5685";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock2.dts";
+   };
+   new TSStatic() {
+      position = "-1248.34 -123.773 44.0812";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-1033.49 17.1393 69.165";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock3.dts";
+   };
+   new TSStatic() {
+      position = "-1028.97 12.3974 79.1426";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/rocks/rock1.dts";
+   };
+   new TSStatic() {
+      position = "-1084.57 -7.47198 79.5001";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/Sharp_Trees/Trees/Scrub_Pines/Sharp_ScrubPine09.dts";
+   };
+};
+//--- OBJECT WRITE END ---
