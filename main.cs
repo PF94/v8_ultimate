@@ -6,7 +6,7 @@
 $defaultGame = "Add-Ons";
 $displayHelp = false;
 
-$Version = "8";
+$Version = "8 Ultimate";
 
 //-----------------------------------------------------------------------------
 // Support functions used to manage the mod string
